@@ -3,8 +3,8 @@ package dnd
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"github.com/brittonhayes/dnd/models"
+	"io/ioutil"
 	"net/http"
 	"strings"
 )
