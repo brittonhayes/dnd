@@ -1,0 +1,3 @@
+package dnd
+
+//go:generate gomarkdoc ./...

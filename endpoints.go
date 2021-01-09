@@ -1,0 +1,28 @@
+package dnd
+
+const (
+	BaseURL                = "https://www.dnd5eapi.co/api"
+	AbilityScoresURL       = "/ability-scores"
+	ClassesURL             = "/classes"
+	ConditionsURL          = "/conditions"
+	DamageTypesURL         = "/damage-types"
+	EquipmentCategoriesURL = "/equipment-categories"
+	EquipmentURL           = "/equipment"
+	FeaturesURL            = "/features"
+	LanguagesURL           = "/languages"
+	MagicItemsURL          = "/magic-items"
+	MonstersURL            = "/monsters"
+	MagicSchoolsURL        = "/magic-schools"
+	ProficienciesURL       = "/proficiencies"
+	RacesURL               = "/races"
+	RulesURL               = "/rules"
+	RuleSectionsURL        = "/rule-sections"
+	SkillsURL              = "/skills"
+	SpellcastingURL        = "/spellcasting"
+	SpellsURL              = "/spells"
+	StartingEquipmentURL   = "/starting-equipment"
+	SubClassesURL          = "/subclasses"
+	SubracesURL            = "/subraces"
+	TraitsURL              = "/traits"
+	WeaponPropertiesURL    = "/weapon-properties"
+)
