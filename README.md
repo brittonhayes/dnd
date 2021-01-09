@@ -165,6 +165,34 @@ func (r *RulesService) FindRule(name string) (*models.Rules, error)
 
 FindRule allows you to search for specific rules based on their name
 
+<details><summary>Example</summary>
+<p>
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/brittonhayes/dnd"
+)
+
+func main() {
+	// Create a client
+	c := dnd.NewClient()
+
+	// Search for a rule
+	r, _ := c.Rules.FindRule("adventuring")
+
+	// Read the results of that rule as JSON
+	j, _ := json.MarshalIndent(&r, "", "\t")
+	fmt.Println(string(j))
+}
+```
+
+</p>
+</details>
+
 ### func \(\*RulesService\) FindSection
 
 ```go

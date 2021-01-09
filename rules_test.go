@@ -1,11 +1,25 @@
 package dnd_test
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/brittonhayes/dnd"
 	"github.com/brittonhayes/dnd/models"
 	"reflect"
 	"testing"
 )
+
+func ExampleRulesService_FindRule() {
+	// Create a client
+	c := dnd.NewClient()
+
+	// Search for a rule
+	r, _ := c.Rules.FindRule("adventuring")
+
+	// Read the results of that rule as JSON
+	j, _ := json.MarshalIndent(&r, "", "\t")
+	fmt.Println(string(j))
+}
 
 func TestRulesService_FindRule(t *testing.T) {
 	type args struct {
@@ -17,20 +31,19 @@ func TestRulesService_FindRule(t *testing.T) {
 		want    *models.Rules
 		wantErr bool
 	}{
-		{"Find rule", args{name: "adventuring"}, &models.Rules{
+		{name: "Find rule", args: args{name: "adventuring"}, want: &models.Rules{
 			Name:  "Adventuring",
 			Index: "adventuring",
 			Desc:  "# Adventuring\n",
 			Subsections: []models.RulesSubsection{
-				{"Time", "time", "/api/rule-sections/time"},
-				{"Movement", "movement", "/api/rule-sections/movement"},
-				{"The Environment", "the-environment", "/api/rule-sections/the-environment"},
-				{"Resting", "resting", "/api/rule-sections/resting"},
-				{"Between Adventures", "between-adventures", "/api/rule-sections/between-adventures"},
+				{Name: "Time", Index: "time", URL: "/api/rule-sections/time"},
+				{Name: "Movement", Index: "movement", URL: "/api/rule-sections/movement"},
+				{Name: "The Environment", Index: "the-environment", URL: "/api/rule-sections/the-environment"},
+				{Name: "Resting", Index: "resting", URL: "/api/rule-sections/resting"},
+				{Name: "Between Adventures", Index: "between-adventures", URL: "/api/rule-sections/between-adventures"},
 			},
 			URL: "/api/rules/adventuring",
-		},
-			false},
+		}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
