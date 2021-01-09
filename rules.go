@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var _ Rules = &rulesService{}
+var _ Rules = &RulesService{}
 
 // The Rules interface shows all of the
 // available methods for the rules endpoint
@@ -20,10 +20,10 @@ type Rules interface {
 	FindSection(name string) (*models.RulesSubsection, error)
 }
 
-type rulesService struct{}
+type RulesService struct{}
 
 // ListRules lists the available DnD 5e rules in the API
-func (r *rulesService) ListRules() (*models.APIReference, error) {
+func (r *RulesService) ListRules() (*models.APIReference, error) {
 	url := BaseURL + RulesURL
 	method := "GET"
 
@@ -53,7 +53,7 @@ func (r *rulesService) ListRules() (*models.APIReference, error) {
 }
 
 // ListSections lists the available DnD 5e rule subsections in the API
-func (r *rulesService) ListSections() (*models.APIReference, error) {
+func (r *RulesService) ListSections() (*models.APIReference, error) {
 	url := BaseURL + RuleSectionsURL
 	method := "GET"
 
@@ -83,7 +83,7 @@ func (r *rulesService) ListSections() (*models.APIReference, error) {
 }
 
 // FindRule allows you to search for specific rules based on their name
-func (r *rulesService) FindRule(name string) (*models.Rules, error) {
+func (r *RulesService) FindRule(name string) (*models.Rules, error) {
 	if name == "" {
 		return nil, fmt.Errorf("missing name argument")
 	}
@@ -118,7 +118,7 @@ func (r *rulesService) FindRule(name string) (*models.Rules, error) {
 }
 
 // FindSection allows you to search for a specific ruleset subsection based on its name
-func (r *rulesService) FindSection(name string) (*models.RulesSubsection, error) {
+func (r *RulesService) FindSection(name string) (*models.RulesSubsection, error) {
 	if name == "" {
 		return nil, fmt.Errorf("missing name argument")
 	}

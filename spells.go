@@ -2,7 +2,7 @@ package dnd
 
 import "github.com/brittonhayes/dnd/models"
 
-var _ Spells = &spellsService{}
+var _ Spells = &SpellsService{}
 
 // The Spells interface shows all of the
 // available methods for the spells endpoint
@@ -11,14 +11,14 @@ type Spells interface {
 	FindSpell(name string) (*models.Spells, error)
 }
 
-type spellsService struct{}
+type SpellsService struct{}
 
 // ListSpells lists the available spells endpoints
-func (s *spellsService) ListSpells() (*models.APIReference, error) {
+func (s *SpellsService) ListSpells() (*models.APIReference, error) {
 	panic("implement me")
 }
 
 // FindSpell searches a specific spell by name
-func (s *spellsService) FindSpell(name string) (*models.Spells, error) {
+func (s *SpellsService) FindSpell(name string) (*models.Spells, error) {
 	panic("implement me")
 }

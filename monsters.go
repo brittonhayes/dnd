@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var _ Monsters = &monstersService{}
+var _ Monsters = &MonstersService{}
 
 // The Monsters interface shows all of the
 // available methods for the monsters endpoint
@@ -18,10 +18,10 @@ type Monsters interface {
 	FindMonster(name string) (*models.Monster, error)
 }
 
-type monstersService struct{}
+type MonstersService struct{}
 
 // ListMonsters available in the API
-func (s *monstersService) ListMonsters() (*models.APIReference, error) {
+func (s *MonstersService) ListMonsters() (*models.APIReference, error) {
 	url := BaseURL + MonstersURL
 	method := "GET"
 
@@ -51,7 +51,7 @@ func (s *monstersService) ListMonsters() (*models.APIReference, error) {
 }
 
 // FindMonster fetches a monster's details by name
-func (s *monstersService) FindMonster(name string) (*models.Monster, error) {
+func (s *MonstersService) FindMonster(name string) (*models.Monster, error) {
 	if name == "" {
 		return nil, fmt.Errorf("missing name argument")
 	}
