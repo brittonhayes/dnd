@@ -2,8 +2,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/go,osx,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=go,osx,windows
 
-go-dnd/.idea
-
 ### Go ###
 # Binaries for programs and plugins
 *.exe
