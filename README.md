@@ -32,7 +32,6 @@ func main() {
 
 	// Print out the rule description
 	fmt.Println("Description", r.Desc)
-
 }
 ```
 
@@ -42,8 +41,19 @@ func main() {
 - [type Client](<#type-client>)
   - [func NewClient() *Client](<#func-newclient>)
 - [type Monsters](<#type-monsters>)
+- [type MonstersService](<#type-monstersservice>)
+  - [func (s *MonstersService) FindMonster(name string) (*models.Monster, error)](<#func-monstersservice-findmonster>)
+  - [func (s *MonstersService) ListMonsters() (*models.APIReference, error)](<#func-monstersservice-listmonsters>)
 - [type Rules](<#type-rules>)
+- [type RulesService](<#type-rulesservice>)
+  - [func (r *RulesService) FindRule(name string) (*models.Rules, error)](<#func-rulesservice-findrule>)
+  - [func (r *RulesService) FindSection(name string) (*models.RulesSubsection, error)](<#func-rulesservice-findsection>)
+  - [func (r *RulesService) ListRules() (*models.APIReference, error)](<#func-rulesservice-listrules>)
+  - [func (r *RulesService) ListSections() (*models.APIReference, error)](<#func-rulesservice-listsections>)
 - [type Spells](<#type-spells>)
+- [type SpellsService](<#type-spellsservice>)
+  - [func (s *SpellsService) FindSpell(name string) (*models.Spells, error)](<#func-spellsservice-findspell>)
+  - [func (s *SpellsService) ListSpells() (*models.APIReference, error)](<#func-spellsservice-listspells>)
 
 
 ## Constants
@@ -81,9 +91,9 @@ const (
 
 ```go
 type Client struct {
-    Rules    *rulesService
-    Spells   *spellsService
-    Monsters *monstersService
+    Rules    *RulesService
+    Spells   *SpellsService
+    Monsters *MonstersService
 }
 ```
 
@@ -106,6 +116,28 @@ type Monsters interface {
 }
 ```
 
+## type MonstersService
+
+```go
+type MonstersService struct{}
+```
+
+### func \(\*MonstersService\) FindMonster
+
+```go
+func (s *MonstersService) FindMonster(name string) (*models.Monster, error)
+```
+
+FindMonster fetches a monster's details by name
+
+### func \(\*MonstersService\) ListMonsters
+
+```go
+func (s *MonstersService) ListMonsters() (*models.APIReference, error)
+```
+
+ListMonsters available in the API
+
 ## type Rules
 
 The Rules interface shows all of the available methods for the rules endpoint
@@ -119,6 +151,44 @@ type Rules interface {
 }
 ```
 
+## type RulesService
+
+```go
+type RulesService struct{}
+```
+
+### func \(\*RulesService\) FindRule
+
+```go
+func (r *RulesService) FindRule(name string) (*models.Rules, error)
+```
+
+FindRule allows you to search for specific rules based on their name
+
+### func \(\*RulesService\) FindSection
+
+```go
+func (r *RulesService) FindSection(name string) (*models.RulesSubsection, error)
+```
+
+FindSection allows you to search for a specific ruleset subsection based on its name
+
+### func \(\*RulesService\) ListRules
+
+```go
+func (r *RulesService) ListRules() (*models.APIReference, error)
+```
+
+ListRules lists the available DnD 5e rules in the API
+
+### func \(\*RulesService\) ListSections
+
+```go
+func (r *RulesService) ListSections() (*models.APIReference, error)
+```
+
+ListSections lists the available DnD 5e rule subsections in the API
+
 ## type Spells
 
 The Spells interface shows all of the available methods for the spells endpoint
@@ -129,6 +199,28 @@ type Spells interface {
     FindSpell(name string) (*models.Spells, error)
 }
 ```
+
+## type SpellsService
+
+```go
+type SpellsService struct{}
+```
+
+### func \(\*SpellsService\) FindSpell
+
+```go
+func (s *SpellsService) FindSpell(name string) (*models.Spells, error)
+```
+
+FindSpell searches a specific spell by name
+
+### func \(\*SpellsService\) ListSpells
+
+```go
+func (s *SpellsService) ListSpells() (*models.APIReference, error)
+```
+
+ListSpells lists the available spells endpoints
 
 
 
