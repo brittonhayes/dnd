@@ -53,3 +53,9 @@ type AbilityBonus struct {
 	// AbilityScore for this bonus.
 	AbilityScore []APIReference `json:"ability_score"`
 }
+
+type DamageType struct {
+	Index string `json:"index"`
+	Name  string `json:"name"`
+	URL   string `json:"url"`
+}

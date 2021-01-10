@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/brittonhayes/dnd/models"
+	"github.com/google/go-querystring/query"
+	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -18,12 +20,26 @@ type Monsters interface {
 	FindMonster(name string) (*models.Monster, error)
 }
 
-type MonstersService struct{}
+type MonstersService struct {
+	Options *MonstersParams
+}
+
+type MonstersParams struct {
+	ChallengeRating string `url="challenge_rating"`
+}
 
 // ListMonsters available in the API
 func (s *MonstersService) ListMonsters() (*models.APIReference, error) {
+
+	q, _ := query.Values(s.Options)
 	url := BaseURL + MonstersURL
 	method := "GET"
+
+	if s.Options.ChallengeRating != "" {
+		url = fmt.Sprintf("%s?%s", url, q.Encode())
+	}
+
+	logrus.Debug(url)
 
 	client := &http.Client{}
 	req, err := http.NewRequest(method, url, nil)
@@ -57,8 +73,14 @@ func (s *MonstersService) FindMonster(name string) (*models.Monster, error) {
 	}
 
 	n := strings.TrimSpace(name)
+	q, _ := query.Values(s.Options)
 	url := BaseURL + MonstersURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
 	method := "GET"
+	if s.Options.ChallengeRating != "" {
+		url = fmt.Sprintf("%s?%s", url, q.Encode())
+	}
+
+	logrus.Debug(url)
 
 	client := &http.Client{}
 	req, err := http.NewRequest(method, url, nil)

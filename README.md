@@ -10,7 +10,11 @@ package dnd is a Go Client for the DnD 5e REST API
 
 ### Installation
 
-Install with the go get command go get github\.com/brittonhayes/dnd
+Install with the go get command
+
+```
+go get github.com/brittonhayes/dnd
+```
 
 ### Documentation
 

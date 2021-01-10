@@ -4,7 +4,7 @@ type Spells struct {
 	Index         string   `json:"index"`
 	Name          string   `json:"name"`
 	Desc          []string `json:"desc"`
-	HigherLevel   []string `json:"higher_level"`
+	HigherLevel   []string `json:"higher_level,omitempty"`
 	Range         string   `json:"range"`
 	Components    []string `json:"components"`
 	Material      string   `json:"material"`
