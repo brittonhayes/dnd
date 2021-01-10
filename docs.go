@@ -4,7 +4,8 @@
 // Installation
 //
 // Install with the go get command
-//  go get github.com/brittonhayes/dnd
+//
+//	go get github.com/brittonhayes/dnd
 //
 // Documentation
 //

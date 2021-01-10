@@ -12,4 +12,5 @@ type RulesSubsection struct {
 	Name  string `json:"name"`
 	Index string `json:"index"`
 	URL   string `json:"url"`
+	Desc  string `json:"desc,omitempty"`
 }

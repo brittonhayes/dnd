@@ -1,6 +1,15 @@
 package dnd
 
-import "github.com/brittonhayes/dnd/models"
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/brittonhayes/dnd/models"
+	"github.com/google/go-querystring/query"
+	"github.com/sirupsen/logrus"
+	"io/ioutil"
+	"net/http"
+	"strings"
+)
 
 var _ Spells = &SpellsService{}
 
@@ -11,14 +20,82 @@ type Spells interface {
 	FindSpell(name string) (*models.Spells, error)
 }
 
-type SpellsService struct{}
+type SpellsService struct {
+	Options SpellParams
+}
+
+type SpellParams struct {
+	Level  string `url:"level"`
+	School string `url:"school"`
+}
 
 // ListSpells lists the available spells endpoints
 func (s *SpellsService) ListSpells() (*models.APIReference, error) {
-	panic("implement me")
+
+	q, _ := query.Values(s.Options)
+	url := BaseURL + SpellsURL
+	method := "GET"
+	if s.Options.Level != "" || s.Options.School != "" {
+		url = fmt.Sprintf("%s?%s", url, q.Encode())
+	}
+
+	logrus.Debug(url)
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	spells := new(models.APIReference)
+	if err := json.Unmarshal(body, &spells); err != nil {
+		return nil, err
+	}
+
+	return spells, nil
 }
 
 // FindSpell searches a specific spell by name
 func (s *SpellsService) FindSpell(name string) (*models.Spells, error) {
-	panic("implement me")
+	if name == "" {
+		return nil, fmt.Errorf("missing name argument")
+	}
+
+	n := strings.TrimSpace(name)
+	url := BaseURL + SpellsURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
+	method := "GET"
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	res, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	spell := new(models.Spells)
+	if err := json.Unmarshal(body, &spell); err != nil {
+		return nil, err
+	}
+
+	return spell, nil
 }
