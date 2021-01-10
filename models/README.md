@@ -6,6 +6,9 @@
 import "github.com/brittonhayes/dnd/models"
 ```
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/brittonhayes/dnd)](https://goreportcard.com/report/github.com/brittonhayes/dnd)
+![Test](https://github.com/brittonhayes/dnd/workflows/Test/badge.svg)models defines data types available in the dnd package
+
 ## Index
 
 - [type APIReference](<#type-apireference>)
@@ -25,46 +28,64 @@ import "github.com/brittonhayes/dnd/models"
 - [type Spells](<#type-spells>)
 
 
-## type APIReference
+## type [APIReference](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L8-L17>)
 
 ```go
 type APIReference struct {
+    // Index is the resource index for shorthand searching.
     Index string `json:"index"`
-    Name  string `json:"name"`
-    URL   string `json:"url"`
+
+    // Name is the name of the referenced resource.
+    Name string `json:"name"`
+
+    // URL of the referenced resource.
+    URL string `json:"url"`
 }
 ```
 
-## type AbilityBonus
+## type [AbilityBonus](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L49-L55>)
 
 ```go
 type AbilityBonus struct {
-    Bonus        int            `json:"bonus"`
+    // Bonus amount for this ability score.
+    Bonus int `json:"bonus"`
+
+    // AbilityScore for this bonus.
     AbilityScore []APIReference `json:"ability_score"`
 }
 ```
 
-## type Choice
+## type [Choice](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L30-L39>)
 
 ```go
 type Choice struct {
-    Choose int            `json:"choose"`
-    Type   string         `json:"type"`
-    From   []APIReference `json:"from"`
+    // Choose is the number of items to pick from the list.
+    Choose int `json:"choose"`
+
+    // Type of the resources to choose from.
+    Type string `json:"type"`
+
+    // From is a list of resources to choose from.
+    From []APIReference `json:"from"`
 }
 ```
 
-## type ClassAPIResource
+## type [ClassAPIResource](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L19-L28>)
 
 ```go
 type ClassAPIResource struct {
+    // Index is the resource index for shorthand searching.
     Index string `json:"index"`
+
+    // Class of whom the resource belongs to.
     Class string `json:"class"`
-    URL   string `json:"url"`
+
+    // URL of the referenced resource.
+    URL string `json:"url"`
 }
 ```
 
-## type Conditions
+## type [Conditions](<https://github.com/brittonhayes/dnd/blob/main/models/mechanics.go#L3-L8>)
 
 ```go
 type Conditions struct {
@@ -75,16 +96,19 @@ type Conditions struct {
 }
 ```
 
-## type Cost
+## type [Cost](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L41-L47>)
 
 ```go
 type Cost struct {
-    Quantity int    `json:"quantity"`
-    Unit     string `json:"unit"`
+    // Quantity is the numerical amount of coins.
+    Quantity int `json:"quantity"`
+
+    // Unit of coinage
+    Unit string `json:"unit"`
 }
 ```
 
-## type Equipment
+## type [Equipment](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L3-L11>)
 
 ```go
 type Equipment struct {
@@ -98,7 +122,7 @@ type Equipment struct {
 }
 ```
 
-## type EquipmentCategory
+## type [EquipmentCategory](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L13-L17>)
 
 ```go
 type EquipmentCategory struct {
@@ -108,7 +132,7 @@ type EquipmentCategory struct {
 }
 ```
 
-## type GearCategory
+## type [GearCategory](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L19-L23>)
 
 ```go
 type GearCategory struct {
@@ -118,7 +142,7 @@ type GearCategory struct {
 }
 ```
 
-## type MagicItems
+## type [MagicItems](<https://github.com/brittonhayes/dnd/blob/main/models/magic.go#L3-L9>)
 
 ```go
 type MagicItems struct {
@@ -130,7 +154,7 @@ type MagicItems struct {
 }
 ```
 
-## type Monster
+## type [Monster](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L3-L96>)
 
 ```go
 type Monster struct {
@@ -229,7 +253,7 @@ type Monster struct {
 }
 ```
 
-## type Resource
+## type [Resource](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L3-L6>)
 
 ```go
 type Resource struct {
@@ -238,7 +262,7 @@ type Resource struct {
 }
 ```
 
-## type Rules
+## type [Rules](<https://github.com/brittonhayes/dnd/blob/main/models/rules.go#L3-L9>)
 
 ```go
 type Rules struct {
@@ -250,7 +274,7 @@ type Rules struct {
 }
 ```
 
-## type RulesSubsection
+## type [RulesSubsection](<https://github.com/brittonhayes/dnd/blob/main/models/rules.go#L11-L15>)
 
 ```go
 type RulesSubsection struct {
@@ -260,7 +284,7 @@ type RulesSubsection struct {
 }
 ```
 
-## type Spells
+## type [Spells](<https://github.com/brittonhayes/dnd/blob/main/models/spells.go#L3-L41>)
 
 ```go
 type Spells struct {
