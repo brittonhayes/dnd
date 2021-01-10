@@ -1,9 +1,8 @@
-package dnd_test
+package dnd
 
 import (
 	"encoding/json"
 	"fmt"
-	pkg2 "github.com/brittonhayes/dnd"
 	"github.com/brittonhayes/dnd/mocks"
 	"github.com/brittonhayes/dnd/models"
 	"github.com/jarcoal/httpmock"
@@ -16,7 +15,7 @@ import (
 // Basic example of printing a rule as JSON
 func ExampleRulesService_FindRule() {
 	// Create a client
-	c := pkg2.NewClient()
+	c := NewClient()
 
 	// Search for a rule
 	r, _ := c.Rules.FindRule("adventuring")
@@ -46,7 +45,7 @@ func TestRulesService_FindRule(t *testing.T) {
 	for _, tt := range tests {
 		httpmock.RegisterResponder("GET", fmt.Sprintf("%s/%s", BaseURL+RulesURL, tt.want.Index), httpmock.NewStringResponder(200, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			c := &pkg2.Client{}
+			c := &Client{}
 			got, err := c.Rules.FindRule(tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("FindRule() error = %v, wantErr %v", err, tt.wantErr)
@@ -72,7 +71,7 @@ func TestRulesService_FindRule(t *testing.T) {
 // Basic example of printing a rules section as JSON
 func ExampleRulesService_FindSection() {
 	// Create a client
-	c := pkg2.NewClient()
+	c := NewClient()
 
 	// Search for a rule
 	r, _ := c.Rules.FindSection("ability-checks")
@@ -101,7 +100,7 @@ func TestRulesService_FindSection(t *testing.T) {
 	for _, tt := range tests {
 		httpmock.RegisterResponder("GET", fmt.Sprintf("%s/%s", BaseURL+RuleSectionsURL, tt.args.name), httpmock.NewStringResponder(200, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			c := &pkg2.Client{}
+			c := &Client{}
 			got, err := c.Rules.FindSection(tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("FindSection() error = %v, wantErr %v", err, tt.wantErr)
@@ -137,7 +136,7 @@ func TestRulesService_ListRules(t *testing.T) {
 	for _, tt := range tests {
 		httpmock.RegisterResponder("GET", BaseURL+RulesURL, httpmock.NewStringResponder(200, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			c := &pkg2.Client{}
+			c := &Client{}
 			got, err := c.Rules.ListRules()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ListRules() error = %v, wantErr %v", err, tt.wantErr)
@@ -168,7 +167,7 @@ func TestRulesService_ListSections(t *testing.T) {
 	for _, tt := range tests {
 		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s", BaseURL, RuleSectionsURL), httpmock.NewStringResponder(200, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			c := &pkg2.Client{}
+			c := &Client{}
 			got, err := c.Rules.ListSections()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ListSections() error = %v, wantErr %v", err, tt.wantErr)

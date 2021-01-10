@@ -25,7 +25,7 @@ type MonstersService struct {
 }
 
 type MonstersParams struct {
-	ChallengeRating string `url="challenge_rating"`
+	ChallengeRating string `url:"challenge_rating"`
 }
 
 // ListMonsters available in the API
