@@ -1,11 +1,20 @@
 // package dnd is a Go Client for the DnD 5e REST API
 //
+//
 // Installation
 //
-//	go get github.com/brittonhayes/dnd
+// Install with the go get command
+//  go get github.com/brittonhayes/dnd
+//
+// Documentation
+//
+// View the docs on pkg.go.dev https://pkg.go.dev/github.com/brittonhayes/dnd
 //
 // Usage
 //
+// Using the package is as easy as create client, pick the endpoint, and run the method.
+// This applies across every data type so it is consistent across the board.
+// Here's a simple example of how to fetch a rule from the DnD 5e ruleset.
 //	func main() {
 //		// Create a dnd client
 //		c := dnd.NewClient()

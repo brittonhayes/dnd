@@ -10,18 +10,18 @@ package dnd is a Go Client for the DnD 5e REST API
 
 ### Installation
 
-```
-go get github.com/brittonhayes/dnd
-```
+Install with the go get command go get github\.com/brittonhayes/dnd
+
+### Documentation
+
+View the docs on pkg\.go\.dev https://pkg.go.dev/github.com/brittonhayes/dnd
 
 ### Usage
 
-```
-func main() {
-	// Create a dnd client
-	c := dnd.NewClient()
+Using the package is as easy as create client\, pick the endpoint\, and run the method\. This applies across every data type so it is consistent across the board\. Here's a simple example of how to fetch a rule from the DnD 5e ruleset\. func main\(\) \{ // Create a dnd client c := dnd\.NewClient\(\)
 
-	// Fetch DnD rules about adventuring
+```
+// Fetch DnD rules about adventuring
 	r, err := c.Rules.FindRule("adventuring")
 	if err != nil {
 		panic(err)
@@ -34,6 +34,17 @@ func main() {
 	fmt.Println("Description", r.Desc)
 }
 ```
+
+## Tests
+
+Go Report Card
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/brittonhayes/dnd)](https://goreportcard.com/report/github.com/brittonhayes/dnd)
+
+Package Tests
+
+![Test](https://github.com/brittonhayes/dnd/workflows/Test/badge.svg)
+
 
 ## Index
 
@@ -87,7 +98,7 @@ const (
 )
 ```
 
-## type Client
+## type [Client](<https://github.com/brittonhayes/dnd/blob/main/client.go#L3-L7>)
 
 ```go
 type Client struct {
@@ -97,7 +108,7 @@ type Client struct {
 }
 ```
 
-### func NewClient
+### func [NewClient](<https://github.com/brittonhayes/dnd/blob/main/client.go#L11>)
 
 ```go
 func NewClient() *Client
@@ -105,7 +116,7 @@ func NewClient() *Client
 
 NewClient creates a new instance of the DnD REST API client
 
-## type Monsters
+## type [Monsters](<https://github.com/brittonhayes/dnd/blob/main/monsters.go#L16-L19>)
 
 The Monsters interface shows all of the available methods for the monsters endpoint
 
@@ -116,13 +127,13 @@ type Monsters interface {
 }
 ```
 
-## type MonstersService
+## type [MonstersService](<https://github.com/brittonhayes/dnd/blob/main/monsters.go#L21>)
 
 ```go
 type MonstersService struct{}
 ```
 
-### func \(\*MonstersService\) FindMonster
+### func \(\*MonstersService\) [FindMonster](<https://github.com/brittonhayes/dnd/blob/main/monsters.go#L54>)
 
 ```go
 func (s *MonstersService) FindMonster(name string) (*models.Monster, error)
@@ -130,7 +141,7 @@ func (s *MonstersService) FindMonster(name string) (*models.Monster, error)
 
 FindMonster fetches a monster's details by name
 
-### func \(\*MonstersService\) ListMonsters
+### func \(\*MonstersService\) [ListMonsters](<https://github.com/brittonhayes/dnd/blob/main/monsters.go#L24>)
 
 ```go
 func (s *MonstersService) ListMonsters() (*models.APIReference, error)
@@ -138,7 +149,7 @@ func (s *MonstersService) ListMonsters() (*models.APIReference, error)
 
 ListMonsters available in the API
 
-## type Rules
+## type [Rules](<https://github.com/brittonhayes/dnd/blob/main/rules.go#L16-L21>)
 
 The Rules interface shows all of the available methods for the rules endpoint
 
@@ -151,13 +162,13 @@ type Rules interface {
 }
 ```
 
-## type RulesService
+## type [RulesService](<https://github.com/brittonhayes/dnd/blob/main/rules.go#L23>)
 
 ```go
 type RulesService struct{}
 ```
 
-### func \(\*RulesService\) FindRule
+### func \(\*RulesService\) [FindRule](<https://github.com/brittonhayes/dnd/blob/main/rules.go#L86>)
 
 ```go
 func (r *RulesService) FindRule(name string) (*models.Rules, error)
@@ -167,6 +178,8 @@ FindRule allows you to search for specific rules based on their name
 
 <details><summary>Example</summary>
 <p>
+
+Basic example of printing a rule as JSON
 
 ```go
 package main
@@ -193,7 +206,7 @@ func main() {
 </p>
 </details>
 
-### func \(\*RulesService\) FindSection
+### func \(\*RulesService\) [FindSection](<https://github.com/brittonhayes/dnd/blob/main/rules.go#L121>)
 
 ```go
 func (r *RulesService) FindSection(name string) (*models.RulesSubsection, error)
@@ -201,7 +214,37 @@ func (r *RulesService) FindSection(name string) (*models.RulesSubsection, error)
 
 FindSection allows you to search for a specific ruleset subsection based on its name
 
-### func \(\*RulesService\) ListRules
+<details><summary>Example</summary>
+<p>
+
+Basic example of printing a rules section as JSON
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/brittonhayes/dnd"
+)
+
+func main() {
+	// Create a client
+	c := dnd.NewClient()
+
+	// Search for a rule
+	r, _ := c.Rules.FindSection("ability-checks")
+
+	// Read the results of that rule section as JSON
+	j, _ := json.MarshalIndent(&r, "", "\t")
+	fmt.Println(string(j))
+}
+```
+
+</p>
+</details>
+
+### func \(\*RulesService\) [ListRules](<https://github.com/brittonhayes/dnd/blob/main/rules.go#L26>)
 
 ```go
 func (r *RulesService) ListRules() (*models.APIReference, error)
@@ -209,7 +252,7 @@ func (r *RulesService) ListRules() (*models.APIReference, error)
 
 ListRules lists the available DnD 5e rules in the API
 
-### func \(\*RulesService\) ListSections
+### func \(\*RulesService\) [ListSections](<https://github.com/brittonhayes/dnd/blob/main/rules.go#L56>)
 
 ```go
 func (r *RulesService) ListSections() (*models.APIReference, error)
@@ -217,7 +260,7 @@ func (r *RulesService) ListSections() (*models.APIReference, error)
 
 ListSections lists the available DnD 5e rule subsections in the API
 
-## type Spells
+## type [Spells](<https://github.com/brittonhayes/dnd/blob/main/spells.go#L9-L12>)
 
 The Spells interface shows all of the available methods for the spells endpoint
 
@@ -228,13 +271,13 @@ type Spells interface {
 }
 ```
 
-## type SpellsService
+## type [SpellsService](<https://github.com/brittonhayes/dnd/blob/main/spells.go#L14>)
 
 ```go
 type SpellsService struct{}
 ```
 
-### func \(\*SpellsService\) FindSpell
+### func \(\*SpellsService\) [FindSpell](<https://github.com/brittonhayes/dnd/blob/main/spells.go#L22>)
 
 ```go
 func (s *SpellsService) FindSpell(name string) (*models.Spells, error)
@@ -242,7 +285,7 @@ func (s *SpellsService) FindSpell(name string) (*models.Spells, error)
 
 FindSpell searches a specific spell by name
 
-### func \(\*SpellsService\) ListSpells
+### func \(\*SpellsService\) [ListSpells](<https://github.com/brittonhayes/dnd/blob/main/spells.go#L17>)
 
 ```go
 func (s *SpellsService) ListSpells() (*models.APIReference, error)
