@@ -34,4 +34,6 @@
 //		fmt.Println("Description", r.Desc)
 //	}
 //
+// Social image by Ashley Mcnamara https://twitter.com/ashleymcnamara 💖
+//
 package dnd
