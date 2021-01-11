@@ -43,6 +43,8 @@ func main() {
 }
 ```
 
+Social image by Ashley Mcnamara https://twitter.com/ashleymcnamara 💖
+
 ## Tests
 
 Go Report Card
