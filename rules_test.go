@@ -182,3 +182,39 @@ func TestRulesService_ListSections(t *testing.T) {
 	info := httpmock.GetCallCountInfo()
 	logrus.Info(info)
 }
+
+func TestNewRulesService(t *testing.T) {
+	tests := []struct {
+		name string
+		want *RulesService
+	}{
+		{"Create custom rules service", &RulesService{URL: BaseURL}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NewRulesService(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewRulesService() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestNewCustomRulesService(t *testing.T) {
+	type args struct {
+		url string
+	}
+	tests := []struct {
+		name string
+		args args
+		want *RulesService
+	}{
+		{"Create custom rules service", args{url: BaseURL}, &RulesService{URL: BaseURL}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NewCustomRulesService(tt.args.url); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewCustomRulesService() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

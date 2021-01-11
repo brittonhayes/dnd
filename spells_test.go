@@ -85,3 +85,40 @@ func TestSpellsService_ListSpells(t *testing.T) {
 	info := httpmock.GetCallCountInfo()
 	logrus.Info(info)
 }
+
+func TestNewSpellsService(t *testing.T) {
+	tests := []struct {
+		name string
+		want *SpellsService
+	}{
+		{"Create spell service", &SpellsService{URL: BaseURL, Options: nil}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NewSpellsService(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewSpellsService() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestNewCustomSpellsService(t *testing.T) {
+	type args struct {
+		url    string
+		params *SpellParams
+	}
+	tests := []struct {
+		name string
+		args args
+		want *SpellsService
+	}{
+		{"Create custom spell service", args{url: BaseURL, params: &SpellParams{Level: "1", School: "example"}}, &SpellsService{URL: BaseURL, Options: &SpellParams{Level: "1", School: "example"}}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NewCustomSpellsService(tt.args.url, tt.args.params); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewCustomSpellsService() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
