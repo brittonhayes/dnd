@@ -28,21 +28,12 @@ func (r *RulesService) ListRules() (*models.APIReference, error) {
 	method := "GET"
 
 	client := &http.Client{}
-	req, err := http.NewRequest(method, url, nil)
-	if err != nil {
-		return nil, err
-	}
+	req, _ := http.NewRequest(method, url, nil)
 
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
+	res, _ := client.Do(req)
 	defer res.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
+	body, _ := ioutil.ReadAll(res.Body)
 
 	rules := new(models.APIReference)
 	if err := json.Unmarshal(body, &rules); err != nil {
@@ -58,21 +49,12 @@ func (r *RulesService) ListSections() (*models.APIReference, error) {
 	method := "GET"
 
 	client := &http.Client{}
-	req, err := http.NewRequest(method, url, nil)
-	if err != nil {
-		return nil, err
-	}
+	req, _ := http.NewRequest(method, url, nil)
 
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
+	res, _ := client.Do(req)
 	defer res.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
+	body, _ := ioutil.ReadAll(res.Body)
 
 	rules := new(models.APIReference)
 	if err := json.Unmarshal(body, &rules); err != nil {
@@ -93,21 +75,11 @@ func (r *RulesService) FindRule(name string) (*models.Rules, error) {
 	method := "GET"
 
 	client := &http.Client{}
-	req, err := http.NewRequest(method, url, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
+	req, _ := http.NewRequest(method, url, nil)
+	res, _ := client.Do(req)
 	defer res.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
+	body, _ := ioutil.ReadAll(res.Body)
 
 	rules := new(models.Rules)
 	if err := json.Unmarshal(body, &rules); err != nil {
@@ -128,21 +100,11 @@ func (r *RulesService) FindSection(name string) (*models.RulesSubsection, error)
 	method := "GET"
 
 	client := &http.Client{}
-	req, err := http.NewRequest(method, url, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
+	req, _ := http.NewRequest(method, url, nil)
+	res, _ := client.Do(req)
 	defer res.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
+	body, _ := ioutil.ReadAll(res.Body)
 
 	rules := new(models.RulesSubsection)
 	if err := json.Unmarshal(body, &rules); err != nil {

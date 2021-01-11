@@ -53,6 +53,9 @@ Package Tests
 
 ![Test](https://github.com/brittonhayes/dnd/workflows/Test/badge.svg)
 
+Coverage
+
+[![codecov](https://codecov.io/gh/brittonhayes/dnd/branch/main/graph/badge.svg?token=VN11FU4LBW)](https://codecov.io/gh/brittonhayes/dnd)
 
 ## Index
 
@@ -108,7 +111,7 @@ const (
 )
 ```
 
-## type [Client](<https://github.com/brittonhayes/dnd/blob/main/client.go#L3-L7>)
+## type Client
 
 ```go
 type Client struct {
@@ -118,7 +121,7 @@ type Client struct {
 }
 ```
 
-### func [NewClient](<https://github.com/brittonhayes/dnd/blob/main/client.go#L11>)
+### func NewClient
 
 ```go
 func NewClient() *Client
@@ -126,7 +129,7 @@ func NewClient() *Client
 
 NewClient creates a new instance of the DnD REST API client
 
-## type [Monsters](<https://github.com/brittonhayes/dnd/blob/main/monsters.go#L18-L21>)
+## type Monsters
 
 The Monsters interface shows all of the available methods for the monsters endpoint
 
@@ -137,7 +140,7 @@ type Monsters interface {
 }
 ```
 
-## type [MonstersParams](<https://github.com/brittonhayes/dnd/blob/main/monsters.go#L27-L29>)
+## type MonstersParams
 
 ```go
 type MonstersParams struct {
@@ -145,7 +148,7 @@ type MonstersParams struct {
 }
 ```
 
-## type [MonstersService](<https://github.com/brittonhayes/dnd/blob/main/monsters.go#L23-L25>)
+## type MonstersService
 
 ```go
 type MonstersService struct {
@@ -153,7 +156,7 @@ type MonstersService struct {
 }
 ```
 
-### func \(\*MonstersService\) [FindMonster](<https://github.com/brittonhayes/dnd/blob/main/monsters.go#L70>)
+### func \(\*MonstersService\) FindMonster
 
 ```go
 func (s *MonstersService) FindMonster(name string) (*models.Monster, error)
@@ -161,7 +164,7 @@ func (s *MonstersService) FindMonster(name string) (*models.Monster, error)
 
 FindMonster fetches a monster's details by name
 
-### func \(\*MonstersService\) [ListMonsters](<https://github.com/brittonhayes/dnd/blob/main/monsters.go#L32>)
+### func \(\*MonstersService\) ListMonsters
 
 ```go
 func (s *MonstersService) ListMonsters() (*models.APIReference, error)
@@ -169,7 +172,7 @@ func (s *MonstersService) ListMonsters() (*models.APIReference, error)
 
 ListMonsters available in the API
 
-## type [Rules](<https://github.com/brittonhayes/dnd/blob/main/rules.go#L16-L21>)
+## type Rules
 
 The Rules interface shows all of the available methods for the rules endpoint
 
@@ -182,13 +185,13 @@ type Rules interface {
 }
 ```
 
-## type [RulesService](<https://github.com/brittonhayes/dnd/blob/main/rules.go#L23>)
+## type RulesService
 
 ```go
 type RulesService struct{}
 ```
 
-### func \(\*RulesService\) [FindRule](<https://github.com/brittonhayes/dnd/blob/main/rules.go#L86>)
+### func \(\*RulesService\) FindRule
 
 ```go
 func (r *RulesService) FindRule(name string) (*models.Rules, error)
@@ -216,7 +219,7 @@ Basic example of printing a rule as JSON
 </p>
 </details>
 
-### func \(\*RulesService\) [FindSection](<https://github.com/brittonhayes/dnd/blob/main/rules.go#L121>)
+### func \(\*RulesService\) FindSection
 
 ```go
 func (r *RulesService) FindSection(name string) (*models.RulesSubsection, error)
@@ -244,7 +247,7 @@ Basic example of printing a rules section as JSON
 </p>
 </details>
 
-### func \(\*RulesService\) [ListRules](<https://github.com/brittonhayes/dnd/blob/main/rules.go#L26>)
+### func \(\*RulesService\) ListRules
 
 ```go
 func (r *RulesService) ListRules() (*models.APIReference, error)
@@ -252,7 +255,7 @@ func (r *RulesService) ListRules() (*models.APIReference, error)
 
 ListRules lists the available DnD 5e rules in the API
 
-### func \(\*RulesService\) [ListSections](<https://github.com/brittonhayes/dnd/blob/main/rules.go#L56>)
+### func \(\*RulesService\) ListSections
 
 ```go
 func (r *RulesService) ListSections() (*models.APIReference, error)
@@ -260,7 +263,7 @@ func (r *RulesService) ListSections() (*models.APIReference, error)
 
 ListSections lists the available DnD 5e rule subsections in the API
 
-## type [SpellParams](<https://github.com/brittonhayes/dnd/blob/main/spells.go#L27-L30>)
+## type SpellParams
 
 ```go
 type SpellParams struct {
@@ -269,7 +272,7 @@ type SpellParams struct {
 }
 ```
 
-## type [Spells](<https://github.com/brittonhayes/dnd/blob/main/spells.go#L18-L21>)
+## type Spells
 
 The Spells interface shows all of the available methods for the spells endpoint
 
@@ -280,7 +283,7 @@ type Spells interface {
 }
 ```
 
-## type [SpellsService](<https://github.com/brittonhayes/dnd/blob/main/spells.go#L23-L25>)
+## type SpellsService
 
 ```go
 type SpellsService struct {
@@ -288,7 +291,7 @@ type SpellsService struct {
 }
 ```
 
-### func \(\*SpellsService\) [FindSpell](<https://github.com/brittonhayes/dnd/blob/main/spells.go#L69>)
+### func \(\*SpellsService\) FindSpell
 
 ```go
 func (s *SpellsService) FindSpell(name string) (*models.Spells, error)
@@ -296,7 +299,7 @@ func (s *SpellsService) FindSpell(name string) (*models.Spells, error)
 
 FindSpell searches a specific spell by name
 
-### func \(\*SpellsService\) [ListSpells](<https://github.com/brittonhayes/dnd/blob/main/spells.go#L33>)
+### func \(\*SpellsService\) ListSpells
 
 ```go
 func (s *SpellsService) ListSpells() (*models.APIReference, error)

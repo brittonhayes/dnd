@@ -42,22 +42,11 @@ func (s *MonstersService) ListMonsters() (*models.APIReference, error) {
 	logrus.Debug(url)
 
 	client := &http.Client{}
-	req, err := http.NewRequest(method, url, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
+	req, _ := http.NewRequest(method, url, nil)
+	res, _ := client.Do(req)
 	defer res.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
-
+	body, _ := ioutil.ReadAll(res.Body)
 	monsters := new(models.APIReference)
 	if err := json.Unmarshal(body, &monsters); err != nil {
 		return nil, err
@@ -83,22 +72,11 @@ func (s *MonstersService) FindMonster(name string) (*models.Monster, error) {
 	logrus.Debug(url)
 
 	client := &http.Client{}
-	req, err := http.NewRequest(method, url, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
+	req, _ := http.NewRequest(method, url, nil)
+	res, _ := client.Do(req)
 	defer res.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
-
+	body, _ := ioutil.ReadAll(res.Body)
 	monster := new(models.Monster)
 	if err := json.Unmarshal(body, &monster); err != nil {
 		return nil, err
