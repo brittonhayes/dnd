@@ -26,4 +26,4 @@ jobs:
           bash <(curl -s https://codecov.io/bash)
 
       - name: Coverage
-        run: go tool cover -func coverage.out
+        run: go tool cover -func coverage.txt
