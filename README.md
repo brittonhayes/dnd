@@ -18,7 +18,7 @@ go get github.com/brittonhayes/dnd
 
 ### Documentation
 
-View the docs on pkg\.go\.dev https://pkg.go.dev/github.com/brittonhayes/dnd
+View the full docs on pkg\.go\.dev https://pkg.go.dev/github.com/brittonhayes/dnd
 
 ### Usage
 
