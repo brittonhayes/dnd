@@ -18,12 +18,12 @@ func TestSpellsService_FindSpell(t *testing.T) {
 		name    string
 		args    args
 		url     string
-		params  SpellParams
+		params  *SpellParams
 		mock    mocks.Mock
 		status  int
 		wantErr bool
 	}{
-		{"Find spells", args{"acid-arrow"}, fmt.Sprintf("%s%s/", BaseURL, SpellsURL), SpellParams{"", ""}, mocks.SpellsAcidArrowMock, 200, false},
+		{"Find spells", args{"acid-arrow"}, fmt.Sprintf("%s%s/", BaseURL, SpellsURL), &SpellParams{"", ""}, mocks.SpellsAcidArrowMock, 200, false},
 	}
 
 	httpmock.Activate()
@@ -58,14 +58,14 @@ func TestSpellsService_ListSpells(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		params  SpellParams
+		params  *SpellParams
 		url     string
 		mock    mocks.Mock
 		status  int
 		wantErr bool
 	}{
-		{"List spells", SpellParams{"", ""}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListMock, 200, false},
-		{"List spells filtered", SpellParams{"1", "evo"}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListFilterMock, 200, false},
+		{"List spells", &SpellParams{"", ""}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListMock, 200, false},
+		{"List spells filtered", &SpellParams{"1", "evo"}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListFilterMock, 200, false},
 	}
 
 	httpmock.Activate()

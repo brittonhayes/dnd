@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/brittonhayes/dnd/models"
+	"gopkg.in/mcuadros/go-defaults.v1"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -20,7 +21,24 @@ type Rules interface {
 	FindSection(name string) (*models.RulesSubsection, error)
 }
 
-type RulesService struct{}
+// NewCustomRulesService allows your to create a rules service
+// with a custom base url
+func NewCustomRulesService(url string) *RulesService {
+	return &RulesService{URL: url}
+}
+
+// NewRulesService creates a default instance of the
+// rules service
+func NewRulesService() *RulesService {
+	rs := new(RulesService)
+	defaults.SetDefaults(rs)
+	return rs
+}
+
+type RulesService struct {
+	// URL is the base URL of the service
+	URL string `default:"https://www.dnd5eapi.co/api"`
+}
 
 // ListRules lists the available DnD 5e rules in the API
 func (r *RulesService) ListRules() (*models.APIReference, error) {
@@ -30,7 +48,10 @@ func (r *RulesService) ListRules() (*models.APIReference, error) {
 	client := &http.Client{}
 	req, _ := http.NewRequest(method, url, nil)
 
-	res, _ := client.Do(req)
+	res, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
 	defer res.Body.Close()
 
 	body, _ := ioutil.ReadAll(res.Body)
@@ -51,7 +72,10 @@ func (r *RulesService) ListSections() (*models.APIReference, error) {
 	client := &http.Client{}
 	req, _ := http.NewRequest(method, url, nil)
 
-	res, _ := client.Do(req)
+	res, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
 	defer res.Body.Close()
 
 	body, _ := ioutil.ReadAll(res.Body)
@@ -76,7 +100,10 @@ func (r *RulesService) FindRule(name string) (*models.Rules, error) {
 
 	client := &http.Client{}
 	req, _ := http.NewRequest(method, url, nil)
-	res, _ := client.Do(req)
+	res, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
 	defer res.Body.Close()
 
 	body, _ := ioutil.ReadAll(res.Body)
@@ -101,7 +128,10 @@ func (r *RulesService) FindSection(name string) (*models.RulesSubsection, error)
 
 	client := &http.Client{}
 	req, _ := http.NewRequest(method, url, nil)
-	res, _ := client.Do(req)
+	res, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
 	defer res.Body.Close()
 
 	body, _ := ioutil.ReadAll(res.Body)

@@ -6,6 +6,7 @@ import (
 	"github.com/brittonhayes/dnd/models"
 	"github.com/google/go-querystring/query"
 	"github.com/sirupsen/logrus"
+	"gopkg.in/mcuadros/go-defaults.v1"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -21,7 +22,23 @@ type Monsters interface {
 }
 
 type MonstersService struct {
+	// URL is the base URL of the service
+	URL     string `default:"https://www.dnd5eapi.co/api"`
 	Options *MonstersParams
+}
+
+// NewMonstersService creates a new instance of the
+// monsters service
+func NewMonstersService() *MonstersService {
+	m := new(MonstersService)
+	defaults.SetDefaults(m)
+	return m
+}
+
+// NewMonstersService creates a custom instance of the
+// monsters service
+func NewCustomMonstersService(url string, params *MonstersParams) *MonstersService {
+	return &MonstersService{URL: url, Options: params}
 }
 
 type MonstersParams struct {
@@ -43,7 +60,11 @@ func (s *MonstersService) ListMonsters() (*models.APIReference, error) {
 
 	client := &http.Client{}
 	req, _ := http.NewRequest(method, url, nil)
-	res, _ := client.Do(req)
+	res, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
 	defer res.Body.Close()
 
 	body, _ := ioutil.ReadAll(res.Body)
@@ -73,7 +94,10 @@ func (s *MonstersService) FindMonster(name string) (*models.Monster, error) {
 
 	client := &http.Client{}
 	req, _ := http.NewRequest(method, url, nil)
-	res, _ := client.Do(req)
+	res, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
 	defer res.Body.Close()
 
 	body, _ := ioutil.ReadAll(res.Body)

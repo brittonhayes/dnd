@@ -45,32 +45,23 @@ func main() {
 
 Social image by Ashley Mcnamara https://twitter.com/ashleymcnamara 💖
 
-## Tests
-
-Go Report Card
-
-[![Go Report Card](https://goreportcard.com/badge/github.com/brittonhayes/dnd)](https://goreportcard.com/report/github.com/brittonhayes/dnd)
-
-Package Tests
-
-![Test](https://github.com/brittonhayes/dnd/workflows/Test/badge.svg)
-
-Coverage
-
-[![codecov](https://codecov.io/gh/brittonhayes/dnd/branch/main/graph/badge.svg?token=VN11FU4LBW)](https://codecov.io/gh/brittonhayes/dnd)
-
 ## Index
 
 - [Constants](<#constants>)
 - [type Client](<#type-client>)
   - [func NewClient() *Client](<#func-newclient>)
+  - [func NewCustomClient(url string) *Client](<#func-newcustomclient>)
 - [type Monsters](<#type-monsters>)
 - [type MonstersParams](<#type-monstersparams>)
 - [type MonstersService](<#type-monstersservice>)
+  - [func NewCustomMonstersService(url string, params *MonstersParams) *MonstersService](<#func-newcustommonstersservice>)
+  - [func NewMonstersService() *MonstersService](<#func-newmonstersservice>)
   - [func (s *MonstersService) FindMonster(name string) (*models.Monster, error)](<#func-monstersservice-findmonster>)
   - [func (s *MonstersService) ListMonsters() (*models.APIReference, error)](<#func-monstersservice-listmonsters>)
 - [type Rules](<#type-rules>)
 - [type RulesService](<#type-rulesservice>)
+  - [func NewCustomRulesService(url string) *RulesService](<#func-newcustomrulesservice>)
+  - [func NewRulesService() *RulesService](<#func-newrulesservice>)
   - [func (r *RulesService) FindRule(name string) (*models.Rules, error)](<#func-rulesservice-findrule>)
   - [func (r *RulesService) FindSection(name string) (*models.RulesSubsection, error)](<#func-rulesservice-findsection>)
   - [func (r *RulesService) ListRules() (*models.APIReference, error)](<#func-rulesservice-listrules>)
@@ -78,6 +69,8 @@ Coverage
 - [type SpellParams](<#type-spellparams>)
 - [type Spells](<#type-spells>)
 - [type SpellsService](<#type-spellsservice>)
+  - [func NewCustomSpellsService(url string, params *SpellParams) *SpellsService](<#func-newcustomspellsservice>)
+  - [func NewSpellsService() *SpellsService](<#func-newspellsservice>)
   - [func (s *SpellsService) FindSpell(name string) (*models.Spells, error)](<#func-spellsservice-findspell>)
   - [func (s *SpellsService) ListSpells() (*models.APIReference, error)](<#func-spellsservice-listspells>)
 
@@ -131,6 +124,14 @@ func NewClient() *Client
 
 NewClient creates a new instance of the DnD REST API client
 
+### func NewCustomClient
+
+```go
+func NewCustomClient(url string) *Client
+```
+
+NewCustomClient creates a new instance of the DnD REST API client
+
 ## type Monsters
 
 The Monsters interface shows all of the available methods for the monsters endpoint
@@ -154,9 +155,27 @@ type MonstersParams struct {
 
 ```go
 type MonstersService struct {
+    // URL is the base URL of the service
+    URL     string `default:"https://www.dnd5eapi.co/api"`
     Options *MonstersParams
 }
 ```
+
+### func NewCustomMonstersService
+
+```go
+func NewCustomMonstersService(url string, params *MonstersParams) *MonstersService
+```
+
+NewMonstersService creates a custom instance of the monsters service
+
+### func NewMonstersService
+
+```go
+func NewMonstersService() *MonstersService
+```
+
+NewMonstersService creates a new instance of the monsters service
 
 ### func \(\*MonstersService\) FindMonster
 
@@ -190,8 +209,27 @@ type Rules interface {
 ## type RulesService
 
 ```go
-type RulesService struct{}
+type RulesService struct {
+    // URL is the base URL of the service
+    URL string `default:"https://www.dnd5eapi.co/api"`
+}
 ```
+
+### func NewCustomRulesService
+
+```go
+func NewCustomRulesService(url string) *RulesService
+```
+
+NewCustomRulesService allows your to create a rules service with a custom base url
+
+### func NewRulesService
+
+```go
+func NewRulesService() *RulesService
+```
+
+NewRulesService creates a default instance of the rules service
 
 ### func \(\*RulesService\) FindRule
 
@@ -289,9 +327,27 @@ type Spells interface {
 
 ```go
 type SpellsService struct {
-    Options SpellParams
+    // URL is the base URL of the service
+    URL     string `default:"https://www.dnd5eapi.co/api"`
+    Options *SpellParams
 }
 ```
+
+### func NewCustomSpellsService
+
+```go
+func NewCustomSpellsService(url string, params *SpellParams) *SpellsService
+```
+
+NewSpellsService creates a custom instance of the spells service
+
+### func NewSpellsService
+
+```go
+func NewSpellsService() *SpellsService
+```
+
+NewSpellsService creates a default instance of the spells service
 
 ### func \(\*SpellsService\) FindSpell
 
@@ -309,6 +365,12 @@ func (s *SpellsService) ListSpells() (*models.APIReference, error)
 
 ListSpells lists the available spells endpoints
 
+## Stats
+
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/brittonhayes/dnd?color=blue&label=Latest%20Version&sort=semver)
+[![Go Report Card](https://goreportcard.com/badge/github.com/brittonhayes/dnd)](https://goreportcard.com/report/github.com/brittonhayes/dnd)
+![Test](https://github.com/brittonhayes/dnd/workflows/Test/badge.svg)
+[![codecov](https://codecov.io/gh/brittonhayes/dnd/branch/main/graph/badge.svg?token=VN11FU4LBW)](https://codecov.io/gh/brittonhayes/dnd)
 
 
 Generated by [gomarkdoc](<https://github.com/princjef/gomarkdoc>)

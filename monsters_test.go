@@ -8,6 +8,7 @@ import (
 	"github.com/jarcoal/httpmock"
 	"github.com/kinbiko/jsonassert"
 	"github.com/sirupsen/logrus"
+	"reflect"
 	"testing"
 )
 
@@ -84,10 +85,10 @@ func TestMonstersService_FindMonster(t *testing.T) {
 				return
 			}
 
-			if s.Options.ChallengeRating != ""  {
+			if s.Options.ChallengeRating != "" {
 				q, _ := query.Values(s.Options)
 				u := fmt.Sprintf("%s/%s?challenge_rating=%s", tt.url, tt.args.name, tt.params.ChallengeRating)
-				p := tt.url+"/"+tt.args.name+"?"+q.Encode()
+				p := tt.url + "/" + tt.args.name + "?" + q.Encode()
 				if u != p {
 					t.Errorf("FindMonster() query params are not valid, %s != %s", q, p)
 				}
@@ -106,4 +107,55 @@ func TestMonstersService_FindMonster(t *testing.T) {
 	}
 
 	logrus.Info(httpmock.GetCallCountInfo())
+}
+
+func TestNewCustomMonstersService(t *testing.T) {
+	type args struct {
+		url    string
+		params *MonstersParams
+	}
+	tests := []struct {
+		name string
+		args args
+		want *MonstersService
+	}{
+		{"Create monster service with default url", args{url: BaseURL, params: nil},
+			&MonstersService{
+				URL:     BaseURL,
+				Options: nil,
+			},
+		},
+		{"Create monster service with custom url", args{url: "exampleurl", params: &MonstersParams{ChallengeRating: "5"}},
+			&MonstersService{
+				URL:     "exampleurl",
+				Options: &MonstersParams{ChallengeRating: "5"},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NewCustomMonstersService(tt.args.url, tt.args.params); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewCustomMonstersService() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestNewMonstersService(t *testing.T) {
+	tests := []struct {
+		name string
+		want *MonstersService
+	}{
+		{"Create monster service with default url", &MonstersService{
+			URL:     BaseURL,
+			Options: nil,
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NewMonstersService(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewMonstersService() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }

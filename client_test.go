@@ -1,7 +1,6 @@
-package dnd_test
+package dnd
 
 import (
-	"github.com/brittonhayes/dnd"
 	"reflect"
 	"testing"
 )
@@ -9,18 +8,47 @@ import (
 func TestNewClient(t *testing.T) {
 	tests := []struct {
 		name string
-		want *dnd.Client
+		want *Client
 	}{
-		{"Create client", &dnd.Client{
-			Spells:   &dnd.SpellsService{},
-			Monsters: &dnd.MonstersService{},
-			Rules:    &dnd.RulesService{},
+		{"Create client", &Client{
+			Spells:   NewSpellsService(),
+			Monsters: NewMonstersService(),
+			Rules:    NewRulesService(),
 		}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := dnd.NewClient(); !reflect.DeepEqual(got, tt.want) {
+			if got := NewClient(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("NewClient() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestNewCustomClient(t *testing.T) {
+	type args struct {
+		url string
+	}
+	tests := []struct {
+		name string
+		args args
+		want *Client
+	}{
+		{"Create custom client", args{url: BaseURL}, &Client{
+			Spells:   NewSpellsService(),
+			Monsters: NewMonstersService(),
+			Rules:    NewRulesService(),
+		}},
+		{"Create custom client and custom services", args{url: BaseURL}, &Client{
+			Spells:   NewCustomSpellsService(BaseURL, nil),
+			Monsters: NewCustomMonstersService(BaseURL, nil),
+			Rules:    NewCustomRulesService(BaseURL),
+		}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NewCustomClient(tt.args.url); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewCustomClient() = %v, want %v", got, tt.want)
 			}
 		})
 	}

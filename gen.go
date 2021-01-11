@@ -1,4 +1,4 @@
 package dnd
 
-//go:generate gomarkdoc --template-file package=custom-package.gotxt .
-//go:generate gomarkdoc --template-file package=custom-package.gotxt ./models/...
+//go:generate gomarkdoc --template-file package=custom-package.tmpl .
+//go:generate gomarkdoc --template-file package=custom-package.tmpl ./models/...

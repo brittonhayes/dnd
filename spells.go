@@ -6,6 +6,7 @@ import (
 	"github.com/brittonhayes/dnd/models"
 	"github.com/google/go-querystring/query"
 	"github.com/sirupsen/logrus"
+	"gopkg.in/mcuadros/go-defaults.v1"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -21,7 +22,23 @@ type Spells interface {
 }
 
 type SpellsService struct {
-	Options SpellParams
+	// URL is the base URL of the service
+	URL     string `default:"https://www.dnd5eapi.co/api"`
+	Options *SpellParams
+}
+
+// NewSpellsService creates a custom instance of the
+// spells service
+func NewCustomSpellsService(url string, params *SpellParams) *SpellsService {
+	return &SpellsService{URL: url, Options: params}
+}
+
+// NewSpellsService creates a default instance of the
+// spells service
+func NewSpellsService() *SpellsService {
+	s := new(SpellsService)
+	defaults.SetDefaults(s)
+	return s
 }
 
 type SpellParams struct {
@@ -41,7 +58,10 @@ func (s *SpellsService) ListSpells() (*models.APIReference, error) {
 	logrus.Debug(url)
 	client := &http.Client{}
 	req, _ := http.NewRequest(method, url, nil)
-	res, _ := client.Do(req)
+	res, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
 	defer res.Body.Close()
 
 	body, _ := ioutil.ReadAll(res.Body)
@@ -66,7 +86,10 @@ func (s *SpellsService) FindSpell(name string) (*models.Spells, error) {
 	client := &http.Client{}
 	req, _ := http.NewRequest(method, url, nil)
 
-	res, _ := client.Do(req)
+	res, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
 	defer res.Body.Close()
 
 	body, _ := ioutil.ReadAll(res.Body)
