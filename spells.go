@@ -38,25 +38,13 @@ func (s *SpellsService) ListSpells() (*models.APIReference, error) {
 	if s.Options.Level != "" || s.Options.School != "" {
 		url = fmt.Sprintf("%s?%s", url, q.Encode())
 	}
-
 	logrus.Debug(url)
 	client := &http.Client{}
-	req, err := http.NewRequest(method, url, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
+	req, _ := http.NewRequest(method, url, nil)
+	res, _ := client.Do(req)
 	defer res.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
-
+	body, _ := ioutil.ReadAll(res.Body)
 	spells := new(models.APIReference)
 	if err := json.Unmarshal(body, &spells); err != nil {
 		return nil, err
@@ -76,21 +64,12 @@ func (s *SpellsService) FindSpell(name string) (*models.Spells, error) {
 	method := "GET"
 
 	client := &http.Client{}
-	req, err := http.NewRequest(method, url, nil)
-	if err != nil {
-		return nil, err
-	}
+	req, _ := http.NewRequest(method, url, nil)
 
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
+	res, _ := client.Do(req)
 	defer res.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
+	body, _ := ioutil.ReadAll(res.Body)
 
 	spell := new(models.Spells)
 	if err := json.Unmarshal(body, &spell); err != nil {

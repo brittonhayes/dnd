@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/brittonhayes/dnd/mocks"
+	"github.com/google/go-querystring/query"
 	"github.com/jarcoal/httpmock"
 	"github.com/kinbiko/jsonassert"
 	"github.com/sirupsen/logrus"
@@ -62,15 +63,10 @@ func TestMonstersService_FindMonster(t *testing.T) {
 		status  int
 		wantErr bool
 	}{
-		{
-			"Find monster",
-			args{"aboleth"},
-			fmt.Sprintf("%s%s", BaseURL, MonstersURL),
-			&MonstersParams{""},
-			mocks.MonstersFindAbolethMock,
-			200,
-			false,
-		},
+		{"Find monster", args{"aboleth"}, fmt.Sprintf("%s%s", BaseURL, MonstersURL), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, false},
+		{"Missing name", args{""}, fmt.Sprintf("%s%s", BaseURL, MonstersURL), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, true},
+		{"Bad URL name", args{""}, fmt.Sprintf("%s%s", BaseURL, "thisdoesntexist"), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, true},
+		{"Bad query param", args{""}, fmt.Sprintf("%s%s", BaseURL, MonstersURL), &MonstersParams{"4"}, mocks.MonstersFindAbolethMock, 200, true},
 	}
 
 	httpmock.Activate()
@@ -88,13 +84,24 @@ func TestMonstersService_FindMonster(t *testing.T) {
 				return
 			}
 
-			j, err := json.Marshal(&got)
-			if err != nil {
-				t.Errorf("failed to marshall json, %v", err)
+			if s.Options.ChallengeRating != ""  {
+				q, _ := query.Values(s.Options)
+				u := fmt.Sprintf("%s/%s?challenge_rating=%s", tt.url, tt.args.name, tt.params.ChallengeRating)
+				p := tt.url+"/"+tt.args.name+"?"+q.Encode()
+				if u != p {
+					t.Errorf("FindMonster() query params are not valid, %s != %s", q, p)
+				}
 			}
 
-			ja := jsonassert.New(t)
-			ja.Assertf(string(j), string(tt.mock))
+			if tt.args.name != "" {
+				j, err := json.Marshal(&got)
+				if err != nil {
+					t.Errorf("failed to marshall json, %v", err)
+				}
+
+				ja := jsonassert.New(t)
+				ja.Assertf(string(j), string(tt.mock))
+			}
 		})
 	}
 
