@@ -1,0 +1,71 @@
+### Ability Scores
+GET https://www.dnd5eapi.co/api/ability-scores
+Accept: application/json
+
+### Classes
+GET https://www.dnd5eapi.co/api/classes
+Accept: application/json
+
+### Conditions
+GET https://www.dnd5eapi.co/api/conditions
+Accept: application/json
+
+### Damage Types
+GET https://www.dnd5eapi.co/api/damage-types
+Accept: application/json
+
+### Equipment Categories
+GET https://www.dnd5eapi.co/api/equipment
+Accept: application/json
+
+### Features
+GET https://www.dnd5eapi.co/api/features
+Accept: application/json
+
+### Languages
+GET https://www.dnd5eapi.co/api/languages
+Accept: application/json
+
+### Magic Schools
+GET https://www.dnd5eapi.co/api/magic-schools
+Accept: application/json
+
+### Monsters
+GET https://www.dnd5eapi.co/api/monsters
+Accept: application/json
+
+### Proficiencies
+GET https://www.dnd5eapi.co/api/proficiencies
+Accept: application/json
+
+### Races
+GET https://www.dnd5eapi.co/api/races
+Accept: application/json
+
+### Skills
+GET https://www.dnd5eapi.co/api/skills
+Accept: application/json
+
+### Spells
+GET https://www.dnd5eapi.co/api/spells
+Accept: application/json
+
+### Starting Equipment
+GET https://www.dnd5eapi.co/api/starting-equipment
+Accept: application/json
+
+### Subclasses
+GET https://www.dnd5eapi.co/api/subclasses
+Accept: application/json
+
+### Subraces
+GET https://www.dnd5eapi.co/api/subraces
+Accept: application/json
+
+### Traits
+GET https://www.dnd5eapi.co/api/traits
+Accept: application/json
+
+### Weapon Properties
+GET https://www.dnd5eapi.co/api/weapon-properties
+Accept: application/json

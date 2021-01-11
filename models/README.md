@@ -6,29 +6,70 @@
 import "github.com/brittonhayes/dnd/models"
 ```
 
+models defines data types available in the dnd package
+
+## Tests
+
+Go Report Card
+
 [![Go Report Card](https://goreportcard.com/badge/github.com/brittonhayes/dnd)](https://goreportcard.com/report/github.com/brittonhayes/dnd)
-![Test](https://github.com/brittonhayes/dnd/workflows/Test/badge.svg)models defines data types available in the dnd package
+
+Package Tests
+
+![Test](https://github.com/brittonhayes/dnd/workflows/Test/badge.svg)
+
 
 ## Index
 
 - [type APIReference](<#type-apireference>)
 - [type AbilityBonus](<#type-abilitybonus>)
+- [type AbilityScore](<#type-abilityscore>)
+- [type Action](<#type-action>)
+- [type ActionDamage](<#type-actiondamage>)
+- [type AdventuringGear](<#type-adventuringgear>)
+- [type Armor](<#type-armor>)
+- [type ArmorClass](<#type-armorclass>)
 - [type Choice](<#type-choice>)
+- [type Class](<#type-class>)
 - [type ClassAPIResource](<#type-classapiresource>)
 - [type Conditions](<#type-conditions>)
 - [type Cost](<#type-cost>)
-- [type Equipment](<#type-equipment>)
-- [type EquipmentCategory](<#type-equipmentcategory>)
-- [type GearCategory](<#type-gearcategory>)
-- [type MagicItems](<#type-magicitems>)
+- [type DC](<#type-dc>)
+- [type DamageType](<#type-damagetype>)
+- [type EquipmentPack](<#type-equipmentpack>)
+- [type Features](<#type-features>)
+- [type Language](<#type-language>)
+- [type LegendaryAction](<#type-legendaryaction>)
+- [type MagicItem](<#type-magicitem>)
+- [type MagicSchool](<#type-magicschool>)
 - [type Monster](<#type-monster>)
+- [type MonsterProficiency](<#type-monsterproficiency>)
+- [type Options](<#type-options>)
+- [type PackContents](<#type-packcontents>)
+- [type Proficiency](<#type-proficiency>)
+- [type Race](<#type-race>)
+- [type Range](<#type-range>)
+- [type Reaction](<#type-reaction>)
 - [type Resource](<#type-resource>)
 - [type Rules](<#type-rules>)
 - [type RulesSubsection](<#type-rulessubsection>)
+- [type Sense](<#type-sense>)
+- [type Skill](<#type-skill>)
+- [type SpecialAbility](<#type-specialability>)
+- [type Speed](<#type-speed>)
 - [type Spells](<#type-spells>)
+- [type StartingEquipment](<#type-startingequipment>)
+- [type StartingEquipmentItem](<#type-startingequipmentitem>)
+- [type SubRace](<#type-subrace>)
+- [type Subclass](<#type-subclass>)
+- [type Traits](<#type-traits>)
+- [type Weapon](<#type-weapon>)
+- [type WeaponProperties](<#type-weaponproperties>)
 
 
-## type [APIReference](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L8-L17>)
+## type APIReference
+
+APIReference is the basic structure that defines where this resource resides and what it is called
 
 ```go
 type APIReference struct {
@@ -43,7 +84,9 @@ type APIReference struct {
 }
 ```
 
-## type [AbilityBonus](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L49-L55>)
+## type AbilityBonus
+
+AbilityBonus is the bonus modifier for an ability and its associated references
 
 ```go
 type AbilityBonus struct {
@@ -55,7 +98,139 @@ type AbilityBonus struct {
 }
 ```
 
-## type [Choice](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L30-L39>)
+## type AbilityScore
+
+AbilityScore is a number that defines the magnitude of each creature’s abilities\. An ability score is not just a measure of innate capabilities\, but also encompasses a creature’s training and competence in activities related to that ability\.
+
+```go
+type AbilityScore struct {
+    // Index is the ability score index for
+    // shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the abbreviated name for
+    // this ability score.
+    Name string `json:"name"`
+
+    // FullName for this ability score.
+    FullName string `json:"full_name"`
+
+    // Desc is A brief description of this
+    // ability score and its uses.
+    Desc []string `json:"desc"`
+
+    // Skills is a list of skills that
+    // use this ability score.
+    Skills []APIReference `json:"skills"`
+
+    // The URL of the referenced resource
+    URL string `json:"url"`
+}
+```
+
+## type Action
+
+```go
+type Action struct {
+    AttackBonus int             `json:"attack_bonus"`
+    Damage      []*ActionDamage `json:"damage"`
+    Options     *Options        `json:"options,omitempty"`
+    Desc        string          `json:"desc"`
+    Name        string          `json:"name"`
+}
+```
+
+## type ActionDamage
+
+```go
+type ActionDamage struct {
+    DamageDice string        `json:"damage_dice"`
+    DamageType *APIReference `json:"damage_type"`
+}
+```
+
+## type AdventuringGear
+
+AdventuringGear is the structure for adventuring gear obtained in the dungeons you explore\.
+
+```go
+type AdventuringGear struct {
+    // Index is the damage type index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the name for this equipment resource
+    Name string `json:"name"`
+
+    // EquipmentCategory is the category of equipment this falls into
+    EquipmentCategory APIReference `json:"equipment_category"`
+
+    // GearCategory is the category of gear this falls into
+    GearCategory APIReference `json:"gear_category"`
+
+    // Cost is the financial worth of this equipment
+    Cost Cost `json:"cost"`
+
+    // Weight is the numerical weight of this item
+    Weight int `json:"weight"`
+
+    // URL is the URL reference of this resource
+    URL string `json:"url"`
+}
+```
+
+## type Armor
+
+Armor is the structure for armor obtained in the dungeons you explore\.
+
+```go
+type Armor struct {
+    // Index is the damage type index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the name for this equipment resource
+    Name string `json:"name"`
+
+    // EquipmentCategory is the category of equipment this falls into
+    EquipmentCategory APIReference `json:"equipment_category"`
+
+    // ArmorCategory is the category of armor this falls into
+    ArmorCategory APIReference `json:"armor_category"`
+
+    // ArmorCategory is the details on how to calculate armor class.
+    ArmorClass ArmorClass `json:"armor_class"`
+
+    // StrengthMinumum is Minimum STR required to use this armor.
+    StrengthMinimum int `json:"str_minimum"`
+
+    // StealthDisadvantage is Whether the armor gives disadvantage for Stealth.
+    StealthDisadvantage bool `json:"stealth_disadvantage"`
+
+    // Weight is the numerical weight of this item
+    Weight int `json:"weight"`
+
+    // Cost is the financial worth of this equipment
+    Cost Cost `json:"cost"`
+
+    // URL is the URL reference of this resource
+    URL string `json:"url"`
+}
+```
+
+## type ArmorClass
+
+ArmorClass is the details on how to calculate armor class\.
+
+```go
+type ArmorClass struct {
+    Base     int  `json:"base"`
+    DexBonus bool `json:"dex_bonus"`
+    MaxBonus bool `json:"max_bonus"`
+}
+```
+
+## type Choice
+
+Choice provides a set of options related to a resource
 
 ```go
 type Choice struct {
@@ -70,7 +245,51 @@ type Choice struct {
 }
 ```
 
-## type [ClassAPIResource](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L19-L28>)
+## type Class
+
+Class is a fundamental part of the identity and nature of characters in the Dungeons & Dragons role\-playing game\. A character's capabilities\, strengths\, and weaknesses are largely defined by its class\. A character's class affects a character's available skills and abilities\.
+
+```go
+type Class struct {
+    // Index is the class index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the name for this class resource.
+    Name string `json:"name"`
+
+    // HitDie is the hit die of the class. (ex: 12 == 1d12).
+    HitDie int `json:"hit_die"`
+
+    // ProficiencyChoices are starting proficiencies where
+    // the player must choose a certain number from the given list of proficiencies.
+    ProficiencyChoices []Choice `json:"proficiency_choices"`
+
+    // Proficiencies are starting proficiencies all new characters of this class start with.
+    Proficiencies []APIReference `json:"proficiencies"`
+
+    // SavingThrows that the class is proficient in.
+    SavingThrows []APIReference `json:"saving_throws"`
+
+    // StartingEquipment is an object with the possible
+    // choices of equipment for new characters of this class.
+    StartingEquipment string `json:"starting_equipment"`
+
+    // ClassLevels are all possible levels that this
+    // class can obtain (excluding subclass-specific features)
+    ClassLevels string `json:"class_levels"`
+
+    // Spells is the URL of the class's spell Resource List.
+    // Returns a list of all spells that can be learned or cast by the class.
+    Spells []string `json:"spells"`
+
+    // The URL reference of this resource
+    URL string `json:"url"`
+}
+```
+
+## type ClassAPIResource
+
+ClassAPIResource is very similar to APIReference but returns a class name rather than just a name
 
 ```go
 type ClassAPIResource struct {
@@ -85,18 +304,30 @@ type ClassAPIResource struct {
 }
 ```
 
-## type [Conditions](<https://github.com/brittonhayes/dnd/blob/main/models/mechanics.go#L3-L8>)
+## type Conditions
+
+Conditions alter a creature’s capabilities in a variety of ways and can arise as a result of a spell\, a class feature\, a monster’s attack\, or other effect\. Most conditions\, such as blinded\, are impairments\, but a few\, such as invisible\, can be advantageous\.
 
 ```go
 type Conditions struct {
-    Index string   `json:"index"`
-    Name  string   `json:"name"`
-    Desc  []string `json:"desc"`
-    URL   string   `json:"url"`
+    // Index is the condition index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the name for this condition resource.
+    Name string `json:"name"`
+
+    // Desc is a list of brief descriptions
+    // of the condition.
+    Desc []string `json:"desc"`
+
+    // URL of the referenced resource.
+    URL string `json:"url"`
 }
 ```
 
-## type [Cost](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L41-L47>)
+## type Cost
+
+Cost is the basic structure of defining an item's financial worth in D&D
 
 ```go
 type Cost struct {
@@ -108,161 +339,419 @@ type Cost struct {
 }
 ```
 
-## type [Equipment](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L3-L11>)
+## type DC
 
 ```go
-type Equipment struct {
-    Index             string            `json:"index"`
-    Name              string            `json:"name"`
-    EquipmentCategory EquipmentCategory `json:"equipment_category"`
-    GearCategory      GearCategory      `json:"gear_category"`
-    Cost              Cost              `json:"cost"`
-    Weight            int               `json:"weight"`
-    URL               string            `json:"url"`
+type DC struct {
+    DcValue     int           `json:"dc_value"`
+    SuccessType string        `json:"success_type"`
+    DcType      *APIReference `json:"dc_type"`
 }
 ```
 
-## type [EquipmentCategory](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L13-L17>)
+## type DamageType
+
+DamageType defines the unique identifiers for this kind of damage
 
 ```go
-type EquipmentCategory struct {
+type DamageType struct {
     Index string `json:"index"`
     Name  string `json:"name"`
     URL   string `json:"url"`
 }
 ```
 
-## type [GearCategory](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L19-L23>)
+## type EquipmentPack
+
+EquipmentPack is the structure for an equipment pack obtained in the dungeons you explore\.
 
 ```go
-type GearCategory struct {
+type EquipmentPack struct {
+    // Index is the damage type index for shorthand searching.
     Index string `json:"index"`
-    Name  string `json:"name"`
-    URL   string `json:"url"`
-}
-```
 
-## type [MagicItems](<https://github.com/brittonhayes/dnd/blob/main/models/magic.go#L3-L9>)
+    // Name is the name for this equipment resource
+    Name string `json:"name"`
 
-```go
-type MagicItems struct {
-    Index             string            `json:"index"`
-    Name              string            `json:"name"`
-    EquipmentCategory EquipmentCategory `json:"equipment_category"`
-    Desc              []string          `json:"desc"`
-    URL               string            `json:"url"`
-}
-```
+    // EquipmentCategory is the category of equipment this falls into
+    EquipmentCategory APIReference `json:"equipment_category"`
 
-## type [Monster](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L3-L96>)
+    // GearCategory is the category of gear this falls into
+    GearCategory APIReference `json:"gear_category"`
 
-```go
-type Monster struct {
-    Index      string      `json:"index"`
-    Name       string      `json:"name"`
-    Size       string      `json:"size"`
-    Type       string      `json:"type"`
-    Subtype    interface{} `json:"subtype"`
-    Alignment  string      `json:"alignment"`
-    ArmorClass int         `json:"armor_class"`
-    HitPoints  int         `json:"hit_points"`
-    HitDice    string      `json:"hit_dice"`
-    Speed      struct {
-        Walk string `json:"walk"`
-        Swim string `json:"swim"`
-    }   `json:"speed"`
-    Strength      int `json:"strength"`
-    Dexterity     int `json:"dexterity"`
-    Constitution  int `json:"constitution"`
-    Intelligence  int `json:"intelligence"`
-    Wisdom        int `json:"wisdom"`
-    Charisma      int `json:"charisma"`
-    Proficiencies []struct {
-        Value       int `json:"value"`
-        Proficiency struct {
-            Index string `json:"index"`
-            Name  string `json:"name"`
-            URL   string `json:"url"`
-        }   `json:"proficiency"`
-    }   `json:"proficiencies"`
-    DamageVulnerabilities []interface{} `json:"damage_vulnerabilities"`
-    DamageResistances     []interface{} `json:"damage_resistances"`
-    DamageImmunities      []interface{} `json:"damage_immunities"`
-    ConditionImmunities   []interface{} `json:"condition_immunities"`
-    Senses                struct {
-        Darkvision        string `json:"darkvision"`
-        PassivePerception int    `json:"passive_perception"`
-    }   `json:"senses"`
-    Languages        string `json:"languages"`
-    ChallengeRating  int    `json:"challenge_rating"`
-    Xp               int    `json:"xp"`
-    SpecialAbilities []struct {
-        Name string `json:"name"`
-        Desc string `json:"desc"`
-        Dc   struct {
-            DcType struct {
-                Index string `json:"index"`
-                Name  string `json:"name"`
-                URL   string `json:"url"`
-            }   `json:"dc_type"`
-            DcValue     int    `json:"dc_value"`
-            SuccessType string `json:"success_type"`
-        }   `json:"dc,omitempty"`
-    }   `json:"special_abilities"`
-    Actions []struct {
-        Name    string `json:"name"`
-        Desc    string `json:"desc"`
-        Options struct {
-            Choose int `json:"choose"`
-            From   [][]struct {
-                Name  string `json:"name"`
-                Count int    `json:"count"`
-                Type  string `json:"type"`
-            }   `json:"from"`
-        }   `json:"options,omitempty"`
-        Damage      []interface{} `json:"damage"`
-        AttackBonus int           `json:"attack_bonus,omitempty"`
-        Dc          struct {
-            DcType struct {
-                Index string `json:"index"`
-                Name  string `json:"name"`
-                URL   string `json:"url"`
-            }   `json:"dc_type"`
-            DcValue     int    `json:"dc_value"`
-            SuccessType string `json:"success_type"`
-        }   `json:"dc,omitempty"`
-        Usage struct {
-            Type  string `json:"type"`
-            Times int    `json:"times"`
-        }   `json:"usage,omitempty"`
-    }   `json:"actions"`
-    LegendaryActions []struct {
-        Name        string `json:"name"`
-        Desc        string `json:"desc"`
-        AttackBonus int    `json:"attack_bonus,omitempty"`
-        Damage      []struct {
-            DamageType struct {
-                Index string `json:"index"`
-                Name  string `json:"name"`
-                URL   string `json:"url"`
-            }   `json:"damage_type"`
-            DamageDice string `json:"damage_dice"`
-        }   `json:"damage,omitempty"`
-    }   `json:"legendary_actions"`
+    // Contents is the list of items inside the pack
+    Contents []PackContents `json:"contents"`
+
+    // Cost is the financial worth of this equipment
+    Cost Cost `json:"cost"`
+
+    // Weight is the numerical weight of this item
+    Weight int `json:"weight"`
+
+    // URL is the URL reference of this resource
     URL string `json:"url"`
 }
 ```
 
-## type [Resource](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L3-L6>)
+## type Features
+
+Features are the features of a class
+
+```go
+type Features struct {
+    // Index is the feature index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the name for this feature resource.
+    Name string `json:"name"`
+
+    // Level is the level this feature
+    // is gained
+    Level int `json:"level"`
+
+    // Class is the class that gains this feature.
+    Class APIReference `json:"class"`
+
+    // SubClass is the subclass that gains feature resource.
+    SubClass APIReference `json:"sub_class"`
+
+    // Desc is the description of the subclass resource.
+    Desc string `json:"description"`
+
+    // The URL reference of this resource
+    URL string `json:"url"`
+}
+```
+
+## type Language
+
+Language By virtue of your race\, your character can speak\, read\, and write certain languages\.
+
+```go
+type Language struct {
+    // Index is the language index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the name of this language resource.
+    Name string `json:"name"`
+
+    // Type is whether the language is standard or exotic.
+    Type string `json:"type"`
+
+    //TypicalSpeakers are races that tend to speak this language.
+    TypicalSpeakers []string `json:"typical_speakers"`
+
+    // Script is the script used for writing in this language.
+    Script string `json:"script"`
+
+    // URL of the referenced resource.
+    URL string `json:"url"`
+}
+```
+
+## type LegendaryAction
+
+```go
+type LegendaryAction struct {
+    AttackBonus int           `json:"attack_bonus,omitempty"`
+    Desc        string        `json:"desc"`
+    Name        string        `json:"name"`
+    Damage      []interface{} `json:"damage"`
+}
+```
+
+## type MagicItem
+
+MagicItem is the structure for a magic item obtained in the dungeons you explore\.
+
+```go
+type MagicItem struct {
+    // Index is the damage type index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the name for this equipment resource
+    Name string `json:"name"`
+
+    // EquipmentCategory is the category of equipment this falls into
+    EquipmentCategory APIReference `json:"equipment_category"`
+
+    // Desc is a list of descriptors for this item
+    Desc []string `json:"desc"`
+
+    // URL is the URL reference of this resource
+    URL string `json:"url"`
+}
+```
+
+## type MagicSchool
+
+MagicSchool defines the unique identifiers for this kind of damage
+
+```go
+type MagicSchool struct {
+    // Index is the magic school
+    // index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is name for this magic
+    // school resource.
+    Name string `json:"name"`
+
+    // URL of the referenced resource
+    URL string `json:"url"`
+}
+```
+
+## type Monster
+
+```go
+type Monster struct {
+    // Index is the monster index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the name of the monster.
+    Name string `json:"name"`
+
+    // Size is the size of the monster ranging from Tiny to Gargantuan.
+    Size string `json:"size"`
+
+    // Type is the type of monster.
+    Type string `json:"type"`
+
+    // SubType is the subtype of monster.
+    SubType string `json:"subtype"`
+
+    // Alignment is а creature's general moral and personal attitudes.
+    Alignment string `json:"alignment"`
+
+    // ArmorClass is difficulty for a player to successfully deal damage to a monster.
+    ArmorClass int `json:"armor_class"`
+
+    // HitPoints is hit points of a monster determine how much
+    // damage it is able to take before it can be defeated
+    HitPoints int `json:"hit_points"`
+
+    // HitDice of a monster can be used to make a version of the same monster whose hit points are determined by the roll of the die.
+    // For example: A monster with 2d6 would have its hit points determine by rolling a 6 sided die twice.
+    HitDice string `json:"hit_dice"`
+
+    // Forms applicable to Lycanthropes that have multiple forms. This links to the other related monster entries that are the same.
+    Forms []*APIReference `json:"forms,omitempty"`
+
+    // Speed for a monster determines how fast it can move per turn.
+    Speed Speed `json:"speed"`
+
+    // Strength of a monster. How hard a monster can hit a player.
+    Strength int `json:"strength"`
+
+    // Dexterity of a monster. The monster's ability for swift movement or stealth
+    Dexterity int `json:"dexterity"`
+
+    // Constitution of a monster. How sturdy a monster is.
+    Constitution int `json:"constitution"`
+
+    // Intelligence of a monster. The monster's ability to outsmart a player
+    Intelligence int `json:"intelligence"`
+
+    // Wisdom of a monster. A monster's ability to ascertain the player's plan.
+    Wisdom int `json:"wisdom"`
+
+    // Charisma of a monster. A monster's ability to charm or intimidate a player
+    Charisma int `json:"charisma"`
+
+    // Proficiencies is a list of proficiencies of a monster.
+    Proficiencies []*MonsterProficiency `json:"proficiencies"`
+
+    // DamageVulnerabilities is a list of damage types that a monster will take double damage from.
+    DamageVulnerabilities []interface{} `json:"damage_vulnerabilities"`
+
+    // DamageResistances is a list of damage types that a monster will take half damage from.
+    DamageResistances []interface{} `json:"damage_resistances"`
+
+    // DamageImmunities is a list of damage types that a monster will take zero damage from.
+    DamageImmunities []interface{} `json:"damage_immunities"`
+
+    // ConditionImmunities is a list of conditions that a monster is immune to.
+    ConditionImmunities []*APIReference `json:"condition_immunities"`
+
+    // Senses Monsters typically have a passive perception but they might also have other senses to detect players
+    Senses *Sense `json:"senses"`
+
+    // Languages are languages a monster is able to speak
+    Languages string `json:"languages"`
+
+    // ChallengeRating is monster's challenge rating is a guideline number that says when a monster
+    // becomes an appropriate challenge against the party's average level.
+    ChallengeRating int `json:"challenge_rating"`
+
+    // XP is the experience points from defeating this monster
+    XP  int `json:"xp"`
+
+    // SpecialAbilities is a list of the monster's special abilities.
+    SpecialAbilities []*SpecialAbility `json:"special_abilities"`
+
+    // Actions is a list of actions that is available to the monster to take during combat.
+    Actions []*Action `json:"actions"`
+
+    // LegendaryActions is a list of actions that can be used outside of the monster's initiative.
+    LegendaryActions []*LegendaryAction `json:"legendary_actions"`
+
+    // URL of the referenced resource
+    URL string `json:"url"`
+}
+```
+
+## type MonsterProficiency
+
+```go
+type MonsterProficiency struct {
+    Proficiency *APIReference `json:"proficiency"`
+    Value       int           `json:"value,omitempty"`
+}
+```
+
+## type Options
+
+```go
+type Options struct {
+    Choose int             `json:"choose,omitempty"`
+    From   [][]interface{} `json:"from,omitempty"`
+}
+```
+
+## type PackContents
+
+```go
+type PackContents struct {
+    // Item is the of item index details
+    Item APIReference `json:"item"`
+
+    // Quantity is the numerical amount of
+    // this item present
+    Quantity int `json:"quantity"`
+}
+```
+
+## type Proficiency
+
+Proficiency By virtue of your race\, your character can speak\, read\, and write certain Proficiencies\.
+
+```go
+type Proficiency struct {
+    // Index is the proficiency index for shorthand searching.
+    Index string `json:"index"`
+
+    // Type is the general category of the proficiency.
+    Type string `json:"type"`
+
+    // Name is the name of this proficiency resource
+    Name string `json:"name"`
+
+    //Classes that start with this proficiency.
+    Classes []APIReference `json:"classes"`
+
+    // Races that start with this proficiency.
+    Races []APIReference `json:"races"`
+
+    // URL of the referenced resource.
+    URL string `json:"url"`
+
+    // References is a list of references
+    References []APIReference `json:"references"`
+}
+```
+
+## type Race
+
+Race Each race grants your character ability and skill bonuses as well as racial traits\.
+
+```go
+type Race struct {
+
+    // Index is the race index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the name for this race resource.
+    Name string `json:"name"`
+
+    // Speed is the base move speed for this race (in feet per round).
+    Speed int `json:"speed"`
+
+    // AbilityBonuses are racial bonuses to ability scores.
+    AbilityBonuses []AbilityBonus `json:"ability_bonuses"`
+
+    // Alignment is a flavor description of likely alignments this race takes.
+    Alignment string `json:"alignment"`
+
+    // Age is the flavor description of possible ages for this race.
+    Age string `json:"age"`
+
+    // Size is the size class of this race.
+    Size string `json:"size"`
+
+    // SizeDescription is the flavor description
+    // of height and weight for this race.
+    SizeDescription string `json:"size_description"`
+
+    // StartingProficiencies for all new characters of this race.
+    StartingProficiencies []APIReference `json:"starting_proficiencies"`
+
+    // StartingProficiencyOptions are the starting
+    // proficiencies for all new characters of this race
+    StartingProficiencyOptions []Choice `json:"starting_proficiency_options"`
+
+    // Languages are starting languages for all new characters of this race.
+    Languages []APIReference `json:"languages"`
+
+    // LanguageDesc is a flavor description of the languages this race knows.
+    LanguageDesc string `json:"language_desc"`
+
+    // Traits are racial traits that provide benefits to its members.
+    Traits []APIReference `json:"traits"`
+
+    // SubRaces is list of related subraces
+    SubRaces []APIReference `json:"subraces"`
+
+    // The URL of the referenced resource
+    URL string `json:"url"`
+}
+```
+
+## type Range
+
+```go
+type Range struct {
+    Normal int `json:"normal"`
+    Long   int `json:"long"`
+}
+```
+
+## type Reaction
+
+```go
+type Reaction struct {
+    Desc string `json:"desc"`
+    Name string `json:"name"`
+}
+```
+
+## type Resource
+
+Results is used for any API endpoint without a resource index or name\. It return a list of available resources for that API
 
 ```go
 type Resource struct {
-    Count   int            `json:"count"`
+    // Count is the total
+    // number of results returned
+    Count int `json:"count"`
+
+    // Results is the list of API references
+    // return by the request
     Results []APIReference `json:"results"`
 }
 ```
 
-## type [Rules](<https://github.com/brittonhayes/dnd/blob/main/models/rules.go#L3-L9>)
+## type Rules
 
 ```go
 type Rules struct {
@@ -274,56 +763,361 @@ type Rules struct {
 }
 ```
 
-## type [RulesSubsection](<https://github.com/brittonhayes/dnd/blob/main/models/rules.go#L11-L15>)
+## type RulesSubsection
 
 ```go
 type RulesSubsection struct {
     Name  string `json:"name"`
     Index string `json:"index"`
     URL   string `json:"url"`
+    Desc  string `json:"desc,omitempty"`
 }
 ```
 
-## type [Spells](<https://github.com/brittonhayes/dnd/blob/main/models/spells.go#L3-L41>)
+## type Sense
+
+```go
+type Sense struct {
+    BlindSight        string `json:"blindsight,omitempty"`
+    DarkVision        string `json:"darkvision,omitempty"`
+    PassivePerception int    `json:"passive_perception,omitempty"`
+    TremorSense       string `json:"tremorsense,omitempty"`
+    TrueSight         string `json:"truesight,omitempty"`
+}
+```
+
+## type Skill
+
+Skill represents a skill that a character possesses
+
+```go
+type Skill struct {
+    // Index is the skill index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the abbreviated name for this skill.
+    Name string `json:"name"`
+
+    // Desc is a brief description of this skill
+    // and its uses.
+    Desc []string `json:"desc"`
+
+    // AbilityScore is the ability score associated
+    // with this skill.
+    AbilityScore AbilityScore `json:"ability_score"`
+
+    // URL is the URL of the referenced resource
+    URL string `json:"url"`
+}
+```
+
+## type SpecialAbility
+
+```go
+type SpecialAbility struct {
+    Desc string `json:"desc"`
+    Name string `json:"name"`
+    DC   *DC    `json:"dc,omitempty"`
+}
+```
+
+## type Speed
+
+```go
+type Speed struct {
+    Burrow string `json:"burrow,omitempty"`
+    Climb  string `json:"climb,omitempty"`
+    Fly    string `json:"fly,omitempty"`
+    Hover  bool   `json:"hover,omitempty"`
+    Swim   string `json:"swim,omitempty"`
+    Walk   string `json:"walk,omitempty"`
+}
+```
+
+## type Spells
+
+Spells are the spells of D&D
 
 ```go
 type Spells struct {
-    Index         string   `json:"index"`
-    Name          string   `json:"name"`
-    Desc          []string `json:"desc"`
-    HigherLevel   []string `json:"higher_level"`
-    Range         string   `json:"range"`
-    Components    []string `json:"components"`
-    Material      string   `json:"material"`
-    Ritual        bool     `json:"ritual"`
-    Duration      string   `json:"duration"`
-    Concentration bool     `json:"concentration"`
-    CastingTime   string   `json:"casting_time"`
-    Level         int      `json:"level"`
-    AttackType    string   `json:"attack_type"`
-    Damage        struct {
-        DamageType struct {
-            Index string `json:"index"`
-            Name  string `json:"name"`
-            URL   string `json:"url"`
-        }   `json:"damage_type"`
+    // Index of the spell for shorthand searching
+    Index string `json:"index"`
+
+    // Name is the name of the spell
+    Name string `json:"name"`
+
+    // Desc is a description of the spell
+    Desc []string `json:"desc"`
+
+    // HigherLevel is a description for casting
+    // the spell at a higher level
+    HigherLevel []string `json:"higher_level,omitempty"`
+
+    // Range of the spell
+    Range string `json:"range"`
+
+    // Components are the required components for a spell, shorthanded
+    // to V,S, and M which stand for verbal, somatic, and material
+    Components []string `json:"components"`
+
+    // Material component for the spell to be cast
+    Material string `json:"material"`
+
+    // Ritual determines if a spell can be cast in a 10-min(in-game) ritual
+    Ritual bool `json:"ritual"`
+
+    // Duration determines how long the spell effect lasts
+    Duration string `json:"duration"`
+
+    // Concentration determines if a spell needs concentration to persist
+    Concentration bool `json:"concentration"`
+
+    // CastingTime is How long it takes for the spell to activate
+    CastingTime string `json:"casting_time"`
+
+    // Level of the spell
+    Level int `json:"level"`
+
+    // AttackType is the attack type of the spell
+    AttackType string `json:"attack_type"`
+
+    // Damage is the damage type and the damage dice
+    // for the spell at each spell slot level
+    Damage struct {
+        DamageType        DamageType        `json:"damage_type"`
         DamageAtSlotLevel map[string]string `json:"damage_at_slot_level"`
     }   `json:"damage"`
+
+    // School is the magic school this spell
+    // belongs to
     School struct {
         Index string `json:"index"`
         Name  string `json:"name"`
         URL   string `json:"url"`
     }   `json:"school"`
+
+    // Classes that are able to learn this spell
     Classes []struct {
         Index string `json:"index"`
         Name  string `json:"name"`
         URL   string `json:"url"`
     }   `json:"classes"`
+
+    // Subclasses that have access to this spell.
     Subclasses []struct {
         Index string `json:"index"`
         Name  string `json:"name"`
         URL   string `json:"url"`
     }   `json:"subclasses"`
+
+    // URL is the URL reference of this resource
+    URL string `json:"url"`
+}
+```
+
+## type StartingEquipment
+
+StartingEquipment are the starting equipment of a class
+
+```go
+type StartingEquipment struct {
+    // Index is the class index for shorthand searching
+    Index string `json:"index"`
+
+    // Class is the class that gains this equipment.
+    Class APIReference `json:"class"`
+
+    // StartingEquipment is the starting equipment a character automatically gets.
+    StartingEquipment []StartingEquipmentItem `json:"starting_equipment"`
+
+    // StartingEquipmentOptions is the Starting equipment where the player must
+    // choose a certain number from the given list of equipment.
+    StartingEquipmentOptions []Choice `json:"starting_equipment_options"`
+
+    // The URL reference of this resource
+    URL string `json:"url"`
+}
+```
+
+## type StartingEquipmentItem
+
+StartingEquipmentItem is a single item in a list of starting equipment
+
+```go
+type StartingEquipmentItem struct {
+    Equipment APIReference `json:"equipment"`
+    Quantity  int          `json:"quantity"`
+}
+```
+
+## type SubRace
+
+SubRace contains the details for a parent race's associated subrace
+
+```go
+type SubRace struct {
+    // Index is the subrace index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the name for this subrace resource.
+    Name string `json:"name"`
+
+    // Race is the parent race for this subrace.
+    Race string `json:"race"`
+
+    // Desc is a flavor description of this subrace
+    Desc string `json:"name"`
+
+    // AbilityBonuses are ability bonuses granted by this sub race.
+    AbilityBonuses []AbilityBonus `json:"ability_bonuses"`
+
+    // StartingProficiencies for all new characters of this subrace.
+    StartingProficiencies []APIReference `json:"starting_proficiencies"`
+
+    // Languages are starting languages for all new characters of this subrace.
+    Languages []APIReference `json:"languages"`
+
+    // Traits are racial traits that provide benefits to its members.
+    Traits []APIReference `json:"traits"`
+
+    // The URL of the referenced resource
+    URL string `json:"url"`
+}
+```
+
+## type Subclass
+
+Subclass reflects the different paths a class may take as levels are gained
+
+```go
+type Subclass struct {
+    // Index is the class index for shorthand searching.
+    Index string `json:"index"`
+
+    // Class is the parent class for this subclass
+    Class string `json:"index"`
+
+    // Name is the name for this class resource.
+    Name string `json:"name"`
+
+    // SubclassFlavor is the lore-friendly
+    // flavor text for a classes respective subclass.
+    SubclassFlavor string `json:"subclass_flavor"`
+
+    // Desc is the description of the subclass resource.
+    Desc string `json:"description"`
+
+    // SubClassLevels is a resource url that shows the subclass level progression
+    SubClassLevels APIReference `json:"sub_class_levels"`
+
+    // Spells is the URL of the class's spell Resource List.
+    // Returns a list of all spells that can be learned or cast by the class.
+    Spells []string `json:"spells"`
+
+    // The URL reference of this resource
+    URL string `json:"url"`
+}
+```
+
+## type Traits
+
+Traits for races in D&D
+
+```go
+type Traits struct {
+    // Index is the trait index for
+    // shorthand searching.
+    Index string `json:"index"`
+
+    // Races is the list of races that have access
+    // to this trait
+    Races []APIReference `json:"races"`
+
+    // SubRaces is list of related subraces
+    SubRaces []APIReference `json:"subraces"`
+
+    // Name is the name of the trait
+    Name string `json:"name"`
+
+    // Desc is the description of
+    // the trait
+    Desc string `json:"desc"`
+
+    // Proficiencies are Proficiencies
+    // this trait grants.
+    Proficiencies []APIReference `json:"proficiencies"`
+
+    // ProficiencyChoices are choices of proficiencies
+    // this trait grants.
+    ProficiencyChoices []Choice `json:"proficiency_choices"`
+}
+```
+
+## type Weapon
+
+Weapon is the structure for weapons obtained in the dungeons you explore\.
+
+```go
+type Weapon struct {
+    // Index is the damage type index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the name for this equipment resource
+    Name string `json:"name"`
+
+    // EquipmentCategory is the category of equipment this falls into
+    EquipmentCategory APIReference `json:"equipment_category"`
+
+    // WeaponCategory is the category of weapon this falls into
+    WeaponCategory APIReference `json:"weapon_category"`
+
+    // WeaponRange is whether this is a Melee or Ranged weapon.
+    WeaponRange string `json:"weapon_range"`
+
+    // CategoryRange is a combination of weapon_category and weapon_range.
+    CategoryRange string `json:"category_range"`
+
+    // Cost is the financial worth of this equipment
+    Cost Cost `json:"cost"`
+
+    // Damage is the data on dice, bonus, and damage type
+    Damage ActionDamage `json:"damage"`
+
+    // TwoHandedDamage when wielded with two hands.
+    // It includes data on dice, bonus, and damage type.
+    TwoHandedDamage ActionDamage `json:"two_handed_damage"`
+
+    // Range Includes the normal and long range for a weapon,
+    // only pertains to Ranged weapons
+    Range Range `json:"range"`
+
+    // Weight is the numerical weight of this item
+    Weight int `json:"weight"`
+
+    // Properties is a list of properties this weapon has
+    Properties []APIReference `json:"properties"`
+
+    // URL is the URL reference of this resource
+    URL string `json:"url"`
+}
+```
+
+## type WeaponProperties
+
+WeaponProperties is the structure for a weapon's properties
+
+```go
+type WeaponProperties struct {
+    // Index is the damage type index for shorthand searching.
+    Index string `json:"index"`
+
+    // Name is the name for this equipment resource
+    Name string `json:"name"`
+
+    // Desc is a list of descriptors for this item
+    Desc []string `json:"desc"`
+
+    // URL is the URL reference of this resource
     URL string `json:"url"`
 }
 ```

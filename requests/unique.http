@@ -1,0 +1,36 @@
+### Equipment Club
+GET https://www.dnd5eapi.co/api/equipment/club
+Accept: application/json
+
+### Equipment padded armor
+GET https://www.dnd5eapi.co/api/equipment/padded
+Accept: application/json
+
+### Equipment abacus
+GET https://www.dnd5eapi.co/api/equipment/abacus
+Accept: application/json
+
+### Equipment burglars-pack
+GET https://www.dnd5eapi.co/api/equipment/burglars-pack
+Accept: application/json
+
+### Magic items adamantine-armor
+GET https://www.dnd5eapi.co/api/magic-items/adamantine-armor
+Accept: application/json
+
+### Races human
+GET https://www.dnd5eapi.co/api/races/human
+Accept: application/json
+
+### Races dwarf
+GET https://www.dnd5eapi.co/api/races/dwarf
+Accept: application/json
+
+### Bard starting equipment
+GET https://www.dnd5eapi.co/api/classes/bard/starting-equipment
+Accept: application/json
+
+
+### Monster aboleth
+GET https://www.dnd5eapi.co/api/monsters/aboleth
+Accept: application/json

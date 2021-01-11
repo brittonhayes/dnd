@@ -1,9 +1,11 @@
 package dnd
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/brittonhayes/dnd/mocks"
 	"github.com/jarcoal/httpmock"
+	"github.com/kinbiko/jsonassert"
 	"github.com/sirupsen/logrus"
 	"testing"
 )
@@ -80,19 +82,19 @@ func TestMonstersService_FindMonster(t *testing.T) {
 			s := &MonstersService{
 				Options: tt.params,
 			}
-			_, err := s.FindMonster(tt.args.name)
+			got, err := s.FindMonster(tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("FindMonster() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			//
-			//j, err := json.Marshal(&got)
-			//if err != nil {
-			//	t.Errorf("failed to marshall json, %v", err)
-			//}
-			//
-			//ja := jsonassert.New(t)
-			//ja.Assertf(string(j), string(tt.mock))
+
+			j, err := json.Marshal(&got)
+			if err != nil {
+				t.Errorf("failed to marshall json, %v", err)
+			}
+
+			ja := jsonassert.New(t)
+			ja.Assertf(string(j), string(tt.mock))
 		})
 	}
 
