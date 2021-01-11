@@ -53,6 +53,9 @@ Package Tests
 
 ![Test](https://github.com/brittonhayes/dnd/workflows/Test/badge.svg)
 
+Coverage
+
+[![codecov](https://codecov.io/gh/brittonhayes/dnd/branch/main/graph/badge.svg?token=VN11FU4LBW)](https://codecov.io/gh/brittonhayes/dnd)
 
 ## Index
 

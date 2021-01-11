@@ -18,6 +18,9 @@ Package Tests
 
 ![Test](https://github.com/brittonhayes/dnd/workflows/Test/badge.svg)
 
+Coverage
+
+[![codecov](https://codecov.io/gh/brittonhayes/dnd/branch/main/graph/badge.svg?token=VN11FU4LBW)](https://codecov.io/gh/brittonhayes/dnd)
 
 ## Index
 
@@ -519,7 +522,7 @@ type Monster struct {
     Type string `json:"type"`
 
     // SubType is the subtype of monster.
-    SubType string `json:"subtype"`
+    SubType interface{} `json:"subtype"`
 
     // Alignment is а creature's general moral and personal attitudes.
     Alignment string `json:"alignment"`
@@ -591,10 +594,10 @@ type Monster struct {
     SpecialAbilities []*SpecialAbility `json:"special_abilities"`
 
     // Actions is a list of actions that is available to the monster to take during combat.
-    Actions []*Action `json:"actions"`
+    Actions []interface{} `json:"actions"`
 
     // LegendaryActions is a list of actions that can be used outside of the monster's initiative.
-    LegendaryActions []*LegendaryAction `json:"legendary_actions"`
+    LegendaryActions []interface{} `json:"legendary_actions,omitempty"`
 
     // URL of the referenced resource
     URL string `json:"url"`
