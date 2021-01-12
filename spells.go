@@ -48,9 +48,8 @@ type SpellParams struct {
 
 // ListSpells lists the available spells endpoints
 func (s *SpellsService) ListSpells() (*models.APIReference, error) {
-
 	q, _ := query.Values(s.Options)
-	url := BaseURL + SpellsURL
+	url := s.URL + SpellsURL
 	method := "GET"
 	if s.Options.Level != "" || s.Options.School != "" {
 		url = fmt.Sprintf("%s?%s", url, q.Encode())
@@ -80,7 +79,7 @@ func (s *SpellsService) FindSpell(name string) (*models.Spells, error) {
 	}
 
 	n := strings.TrimSpace(name)
-	url := BaseURL + SpellsURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
+	url := s.URL + SpellsURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
 	method := "GET"
 
 	client := &http.Client{}

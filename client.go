@@ -18,10 +18,10 @@ func NewClient() *Client {
 
 // NewCustomClient creates a new instance
 // of the DnD REST API client
-func NewCustomClient(url string) *Client {
+func NewCustomClient(url string, sp *SpellParams, mp *MonstersParams) *Client {
 	r := NewCustomRulesService(url)
-	s := NewCustomSpellsService(url, nil)
-	m := NewCustomMonstersService(url, nil)
+	s := NewCustomSpellsService(url, sp)
+	m := NewCustomMonstersService(url, mp)
 	return &Client{
 		Rules:    r,
 		Spells:   s,

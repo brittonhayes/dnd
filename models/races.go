@@ -29,17 +29,20 @@ type Race struct {
 	SizeDescription string `json:"size_description"`
 
 	// StartingProficiencies for all new characters of this race.
-	StartingProficiencies []APIReference `json:"starting_proficiencies"`
+	StartingProficiencies []*APIReference `json:"starting_proficiencies"`
 
 	// StartingProficiencyOptions are the starting
 	// proficiencies for all new characters of this race
-	StartingProficiencyOptions []Choice `json:"starting_proficiency_options"`
+	StartingProficiencyOptions interface{} `json:"starting_proficiency_options,omitempty"`
 
 	// Languages are starting languages for all new characters of this race.
-	Languages []APIReference `json:"languages"`
+	Languages []*APIReference `json:"languages"`
 
 	// LanguageDesc is a flavor description of the languages this race knows.
 	LanguageDesc string `json:"language_desc"`
+
+	// LanguageOptions is the list of languages available to this race
+	LanguageOptions interface{} `json:"language_options,omitempty"`
 
 	// Traits are racial traits that provide benefits to its members.
 	Traits []APIReference `json:"traits"`
@@ -61,10 +64,10 @@ type SubRace struct {
 	Name string `json:"name"`
 
 	// Race is the parent race for this subrace.
-	Race string `json:"race"`
+	Race interface{} `json:"race"`
 
 	// Desc is a flavor description of this subrace
-	Desc string `json:"name"`
+	Desc string `json:"desc"`
 
 	// AbilityBonuses are ability bonuses granted by this sub race.
 	AbilityBonuses []AbilityBonus `json:"ability_bonuses"`
@@ -75,8 +78,17 @@ type SubRace struct {
 	// Languages are starting languages for all new characters of this subrace.
 	Languages []APIReference `json:"languages"`
 
+	// LanguageOptions is the list of languages available to this race
+	LanguageOptions interface{} `json:"language_options,omitempty"`
+
 	// Traits are racial traits that provide benefits to its members.
-	Traits []APIReference `json:"traits"`
+	Traits []*APIReference `json:"traits,omitempty"`
+
+	// RacialTraits are racial traits that provide benefits to its members.
+	RacialTraits []*APIReference `json:"racial_traits,omitempty"`
+
+	// RacialTraitOptions are racial traits options available to this subrace
+	RacialTraitOptions *Choice `json:"racial_trait_options,omitempty"`
 
 	// The URL of the referenced resource
 	URL string `json:"url"`

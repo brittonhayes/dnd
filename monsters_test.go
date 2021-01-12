@@ -21,25 +21,15 @@ func TestMonstersService_ListMonsters(t *testing.T) {
 		status  int
 		wantErr bool
 	}{
-		{
-			"List monsters",
-			fmt.Sprintf("%s%s", BaseURL, MonstersURL),
-			&MonstersParams{""},
-			mocks.MonstersListMock,
-			200,
-			false,
-		},
+		{"List monsters", fmt.Sprintf("%s%s", BaseURL, MonstersURL), &MonstersParams{""}, mocks.MonstersListMock, 200, false},
 	}
 
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
-
 	for _, tt := range tests {
 		httpmock.RegisterResponder("GET", tt.url, httpmock.NewStringResponder(tt.status, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			s := &MonstersService{
-				Options: tt.params,
-			}
+			s := NewCustomMonstersService(BaseURL, tt.params)
 			_, err := s.ListMonsters()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ListMonsters() error = %v, wantErr %v", err, tt.wantErr)
@@ -66,7 +56,7 @@ func TestMonstersService_FindMonster(t *testing.T) {
 	}{
 		{"Find monster", args{"aboleth"}, fmt.Sprintf("%s%s", BaseURL, MonstersURL), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, false},
 		{"Missing name", args{""}, fmt.Sprintf("%s%s", BaseURL, MonstersURL), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, true},
-		{"Bad URL name", args{""}, fmt.Sprintf("%s%s", BaseURL, "thisdoesntexist"), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, true},
+		{"Bad URL name", args{""}, fmt.Sprintf("%s%s/%s", BaseURL, MonstersURL, "thisdoesntexist"), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, true},
 		{"Bad query param", args{""}, fmt.Sprintf("%s%s", BaseURL, MonstersURL), &MonstersParams{"4"}, mocks.MonstersFindAbolethMock, 200, true},
 	}
 
@@ -74,11 +64,9 @@ func TestMonstersService_FindMonster(t *testing.T) {
 	defer httpmock.DeactivateAndReset()
 
 	for _, tt := range tests {
-		httpmock.RegisterResponder("GET", tt.url+"/"+tt.args.name, httpmock.NewStringResponder(tt.status, string(tt.mock)))
+		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s/%s", BaseURL, MonstersURL, tt.args.name), httpmock.NewStringResponder(tt.status, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			s := &MonstersService{
-				Options: tt.params,
-			}
+			s := NewCustomMonstersService(BaseURL, tt.params)
 			got, err := s.FindMonster(tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("FindMonster() error = %v, wantErr %v", err, tt.wantErr)

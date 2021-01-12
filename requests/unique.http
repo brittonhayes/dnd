@@ -26,6 +26,10 @@ Accept: application/json
 GET https://www.dnd5eapi.co/api/races/dwarf
 Accept: application/json
 
+### subraces dwarf
+GET https://www.dnd5eapi.co/api/subraces/high-elf
+Accept: application/json
+
 ### Bard starting equipment
 GET https://www.dnd5eapi.co/api/classes/bard/starting-equipment
 Accept: application/json

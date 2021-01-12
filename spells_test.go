@@ -28,11 +28,10 @@ func TestSpellsService_FindSpell(t *testing.T) {
 
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
-
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			httpmock.RegisterResponder("GET", tt.url+tt.args.name, httpmock.NewStringResponder(tt.status, string(tt.mock)))
-			s := &SpellsService{Options: tt.params}
+			s := NewCustomSpellsService(BaseURL, tt.params)
 			got, err := s.FindSpell(tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("FindSpell() error = %v, wantErr %v", err, tt.wantErr)
@@ -67,14 +66,12 @@ func TestSpellsService_ListSpells(t *testing.T) {
 		{"List spells", &SpellParams{"", ""}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListMock, 200, false},
 		{"List spells filtered", &SpellParams{"1", "evo"}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListFilterMock, 200, false},
 	}
-
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
-
 	for _, tt := range tests {
 		httpmock.RegisterResponder("GET", tt.url, httpmock.NewStringResponder(tt.status, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			s := &SpellsService{Options: tt.params}
+			s := NewCustomSpellsService(BaseURL, tt.params)
 			_, err := s.ListSpells()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("FindSpell() error = %v, wantErr %v", err, tt.wantErr)
