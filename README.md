@@ -80,7 +80,7 @@ Social image by Ashley Mcnamara https://twitter.com/ashleymcnamara 💖
   - [func NewCustomSpellsService(url string, params *SpellParams) *SpellsService](<#func-newcustomspellsservice>)
   - [func NewSpellsService() *SpellsService](<#func-newspellsservice>)
   - [func (s *SpellsService) FindSpell(name string) (*models.Spells, error)](<#func-spellsservice-findspell>)
-  - [func (s *SpellsService) ListSpells() (*models.APIReference, error)](<#func-spellsservice-listspells>)
+  - [func (s *SpellsService) ListSpells() (*models.Resource, error)](<#func-spellsservice-listspells>)
 
 
 ## Constants
@@ -388,7 +388,7 @@ The Spells interface shows all of the available methods for the spells endpoint
 
 ```go
 type Spells interface {
-    ListSpells() (*models.APIReference, error)
+    ListSpells() (*models.Resource, error)
     FindSpell(name string) (*models.Spells, error)
 }
 ```
@@ -411,6 +411,26 @@ func NewCustomSpellsService(url string, params *SpellParams) *SpellsService
 
 NewSpellsService creates a custom instance of the spells service
 
+<details><summary>Example</summary>
+<p>
+
+Create a new custom spells service
+
+```go
+{
+	s := NewCustomSpellsService(BaseURL, &SpellParams{
+		Level:  "2",
+		School: "",
+	})
+
+	spells, _ := s.ListSpells()
+	fmt.Println("Results: ", spells.Results)
+}
+```
+
+</p>
+</details>
+
 ### func NewSpellsService
 
 ```go
@@ -418,6 +438,24 @@ func NewSpellsService() *SpellsService
 ```
 
 NewSpellsService creates a default instance of the spells service
+
+<details><summary>Example</summary>
+<p>
+
+Create a new spells service and apply custom query params
+
+```go
+{
+	s := NewSpellsService()
+	s.Options = &SpellParams{
+		Level:  "5",
+		School: "",
+	}
+}
+```
+
+</p>
+</details>
 
 ### func \(\*SpellsService\) FindSpell
 
@@ -427,13 +465,50 @@ func (s *SpellsService) FindSpell(name string) (*models.Spells, error)
 
 FindSpell searches a specific spell by name
 
+<details><summary>Example</summary>
+<p>
+
+Find a specific spell
+
+```go
+{
+	c := NewClient()
+	spell, _ := c.Spells.FindSpell("animate-objects")
+	fmt.Printf("The spell %s has a range of %s", spell.Name, spell.Range)
+}
+```
+
+</p>
+</details>
+
 ### func \(\*SpellsService\) ListSpells
 
 ```go
-func (s *SpellsService) ListSpells() (*models.APIReference, error)
+func (s *SpellsService) ListSpells() (*models.Resource, error)
 ```
 
 ListSpells lists the available spells endpoints
+
+<details><summary>Example</summary>
+<p>
+
+Count the number of available spells listed
+
+```go
+{
+	s := NewSpellsService()
+	s.Options = &SpellParams{
+		Level:  "5",
+		School: "",
+	}
+
+	spells, _ := s.ListSpells()
+	fmt.Printf("There are %d spells available", spells.Count)
+}
+```
+
+</p>
+</details>
 
 ## Stats
 

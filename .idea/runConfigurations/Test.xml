@@ -14,7 +14,7 @@
       </ENTRIES>
     </EXTENSION>
     <framework value="gotest" />
-    <kind value="PACKAGE" />
+    <kind value="DIRECTORY" />
     <package value="github.com/brittonhayes/dnd" />
     <directory value="$PROJECT_DIR$" />
     <filePath value="$PROJECT_DIR$" />

@@ -17,7 +17,7 @@ var _ Spells = &SpellsService{}
 // The Spells interface shows all of the
 // available methods for the spells endpoint
 type Spells interface {
-	ListSpells() (*models.APIReference, error)
+	ListSpells() (*models.Resource, error)
 	FindSpell(name string) (*models.Spells, error)
 }
 
@@ -47,7 +47,7 @@ type SpellParams struct {
 }
 
 // ListSpells lists the available spells endpoints
-func (s *SpellsService) ListSpells() (*models.APIReference, error) {
+func (s *SpellsService) ListSpells() (*models.Resource, error) {
 	q, _ := query.Values(s.Options)
 	url := s.URL + SpellsURL
 	method := "GET"
@@ -64,7 +64,7 @@ func (s *SpellsService) ListSpells() (*models.APIReference, error) {
 	defer res.Body.Close()
 
 	body, _ := ioutil.ReadAll(res.Body)
-	spells := new(models.APIReference)
+	spells := new(models.Resource)
 	if err := json.Unmarshal(body, &spells); err != nil {
 		return nil, err
 	}

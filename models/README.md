@@ -47,6 +47,9 @@ models defines data types available in the dnd package
 - [type SpecialAbility](<#type-specialability>)
 - [type Speed](<#type-speed>)
 - [type Spells](<#type-spells>)
+  - [func (s *Spells) GetIndex() string](<#func-spells-getindex>)
+  - [func (s *Spells) GetName() string](<#func-spells-getname>)
+  - [func (s *Spells) GetURL() string](<#func-spells-geturl>)
 - [type StartingEquipment](<#type-startingequipment>)
 - [type StartingEquipmentItem](<#type-startingequipmentitem>)
 - [type SubRace](<#type-subrace>)
@@ -906,6 +909,75 @@ type Spells struct {
     URL string `json:"url"`
 }
 ```
+
+### func \(\*Spells\) GetIndex
+
+```go
+func (s *Spells) GetIndex() string
+```
+
+GetIndex returns the index of the spell
+
+<details><summary>Example</summary>
+<p>
+
+Get the index address of a spell
+
+```go
+{
+	s := Spells{Index: "example-index"}
+	s.GetIndex()
+}
+```
+
+</p>
+</details>
+
+### func \(\*Spells\) GetName
+
+```go
+func (s *Spells) GetName() string
+```
+
+GetName returns the name of the spell
+
+<details><summary>Example</summary>
+<p>
+
+Get the name of a spell
+
+```go
+{
+	s := Spells{Name: "example spell name"}
+	s.GetName()
+}
+```
+
+</p>
+</details>
+
+### func \(\*Spells\) GetURL
+
+```go
+func (s *Spells) GetURL() string
+```
+
+GetURL returns the URL of the spell
+
+<details><summary>Example</summary>
+<p>
+
+Get the URL of a spell
+
+```go
+{
+	s := Spells{Name: "example spell URL"}
+	s.GetURL()
+}
+```
+
+</p>
+</details>
 
 ## type StartingEquipment
 

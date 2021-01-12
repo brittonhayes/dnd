@@ -120,3 +120,42 @@ func TestNewCustomSpellsService(t *testing.T) {
 		})
 	}
 }
+
+// Find a specific spell
+func ExampleSpellsService_FindSpell() {
+	c := NewClient()
+	spell, _ := c.Spells.FindSpell("animate-objects")
+	fmt.Printf("The spell %s has a range of %s", spell.Name, spell.Range)
+}
+
+// Count the number of available spells listed
+func ExampleSpellsService_ListSpells_Count() {
+	s := NewSpellsService()
+	s.Options = &SpellParams{
+		Level:  "5",
+		School: "",
+	}
+
+	spells, _ := s.ListSpells()
+	fmt.Printf("There are %d spells available", spells.Count)
+}
+
+// Create a new spells service and apply custom query params
+func ExampleNewSpellsService() {
+	s := NewSpellsService()
+	s.Options = &SpellParams{
+		Level:  "5",
+		School: "",
+	}
+}
+
+// Create a new custom spells service
+func ExampleNewCustomSpellsService() {
+	s := NewCustomSpellsService(BaseURL, &SpellParams{
+		Level:  "2",
+		School: "",
+	})
+
+	spells, _ := s.ListSpells()
+	fmt.Println("Results: ", spells.Results)
+}

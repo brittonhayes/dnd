@@ -75,3 +75,18 @@ type Spells struct {
 	// URL is the URL reference of this resource
 	URL string `json:"url"`
 }
+
+// GetName returns the name of the spell
+func (s *Spells) GetName() string {
+	return s.Name
+}
+
+// GetURL returns the URL of the spell
+func (s *Spells) GetURL() string {
+	return s.URL
+}
+
+// GetIndex returns the index of the spell
+func (s *Spells) GetIndex() string {
+	return s.Index
+}
