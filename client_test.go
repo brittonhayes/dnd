@@ -28,6 +28,8 @@ func TestNewClient(t *testing.T) {
 func TestNewCustomClient(t *testing.T) {
 	type args struct {
 		url string
+		sp  *SpellParams
+		mp  *MonstersParams
 	}
 	tests := []struct {
 		name string
@@ -47,7 +49,7 @@ func TestNewCustomClient(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NewCustomClient(tt.args.url); !reflect.DeepEqual(got, tt.want) {
+			if got := NewCustomClient(tt.args.url, tt.args.sp, tt.args.mp); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("NewCustomClient() = %v, want %v", got, tt.want)
 			}
 		})

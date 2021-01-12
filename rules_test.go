@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/brittonhayes/dnd/mocks"
-	"github.com/brittonhayes/dnd/models"
 	"github.com/jarcoal/httpmock"
 	"github.com/kinbiko/jsonassert"
 	"github.com/sirupsen/logrus"
@@ -33,26 +32,22 @@ func TestRulesService_FindRule(t *testing.T) {
 		name    string
 		args    args
 		mock    mocks.Mock
-		want    *models.Rules
 		wantErr bool
 	}{
-		{name: "Find rule", args: args{name: "adventuring"}, mock: mocks.RulesMock, want: &models.Rules{Name: "Adventuring", Index: "adventuring", Desc: "# Adventuring\n", Subsections: []models.RulesSubsection{{Name: "Time", Index: "time", URL: "/api/rule-sections/time"}, {Name: "Movement", Index: "movement", URL: "/api/rule-sections/movement"}, {Name: "The Environment", Index: "the-environment", URL: "/api/rule-sections/the-environment"}, {Name: "Resting", Index: "resting", URL: "/api/rule-sections/resting"}, {Name: "Between Adventures", Index: "between-adventures", URL: "/api/rule-sections/between-adventures"}}, URL: "/api/rules/adventuring"}},
+		{name: "Find rule", args: args{name: "adventuring"}, mock: mocks.RulesMock},
 	}
 
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 
 	for _, tt := range tests {
-		httpmock.RegisterResponder("GET", fmt.Sprintf("%s/%s", BaseURL+RulesURL, tt.want.Index), httpmock.NewStringResponder(200, string(tt.mock)))
+		httpmock.RegisterResponder("GET", fmt.Sprintf("%s/%s", BaseURL+RulesURL, tt.args.name), httpmock.NewStringResponder(200, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			c := &Client{}
-			got, err := c.Rules.FindRule(tt.args.name)
+			c := NewRulesService()
+			got, err := c.FindRule(tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("FindRule() error = %v, wantErr %v", err, tt.wantErr)
 				return
-			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("FindRule() got = %v, want %v", got, tt.want)
 			}
 
 			j, err := json.Marshal(&got)
@@ -100,7 +95,7 @@ func TestRulesService_FindSection(t *testing.T) {
 	for _, tt := range tests {
 		httpmock.RegisterResponder("GET", fmt.Sprintf("%s/%s", BaseURL+RuleSectionsURL, tt.args.name), httpmock.NewStringResponder(200, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			c := &Client{}
+			c := NewClient()
 			got, err := c.Rules.FindSection(tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("FindSection() error = %v, wantErr %v", err, tt.wantErr)
@@ -123,28 +118,35 @@ func TestRulesService_FindSection(t *testing.T) {
 func TestRulesService_ListRules(t *testing.T) {
 	tests := []struct {
 		name    string
+		url     string
 		mock    mocks.Mock
-		want    *models.APIReference
+		status  int
 		wantErr bool
 	}{
-		{"List rules", mocks.RulesListMock, &models.APIReference{}, false},
+		{"List rules", fmt.Sprintf("%s%s", BaseURL, RulesURL), mocks.RulesListMock, 200, false},
 	}
 
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 
 	for _, tt := range tests {
-		httpmock.RegisterResponder("GET", BaseURL+RulesURL, httpmock.NewStringResponder(200, string(tt.mock)))
+		httpmock.RegisterResponder("GET", tt.url, httpmock.NewStringResponder(tt.status, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			c := &Client{}
-			got, err := c.Rules.ListRules()
+			c := NewRulesService()
+			got, err := c.ListRules()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ListRules() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("ListRules() got = %v, want %v", got, tt.want)
+
+			j, err := json.Marshal(&got)
+			if err != nil {
+				t.Errorf("failed to marshall json, %v", err)
 			}
+
+			ja := jsonassert.New(t)
+			ja.Assertf(string(j), string(tt.mock))
+
 		})
 	}
 	info := httpmock.GetCallCountInfo()
@@ -154,11 +156,12 @@ func TestRulesService_ListRules(t *testing.T) {
 func TestRulesService_ListSections(t *testing.T) {
 	tests := []struct {
 		name    string
+		url     string
 		mock    mocks.Mock
-		want    *models.APIReference
+		status  int
 		wantErr bool
 	}{
-		{"List rules", mocks.RulesSectionsListMock, &models.APIReference{}, false},
+		{"List rules sections", fmt.Sprintf("%s%s", BaseURL, RuleSectionsURL), mocks.RulesSectionsListMock, 200, false},
 	}
 
 	httpmock.Activate()
@@ -167,15 +170,20 @@ func TestRulesService_ListSections(t *testing.T) {
 	for _, tt := range tests {
 		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s", BaseURL, RuleSectionsURL), httpmock.NewStringResponder(200, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			c := &Client{}
+			c := NewClient()
 			got, err := c.Rules.ListSections()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ListSections() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("ListSections() got = %v, want %v", got, tt.want)
+
+			j, err := json.Marshal(&got)
+			if err != nil {
+				t.Errorf("failed to marshall json, %v", err)
 			}
+
+			ja := jsonassert.New(t)
+			ja.Assertf(string(j), string(tt.mock))
 		})
 	}
 

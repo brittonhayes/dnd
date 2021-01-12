@@ -49,7 +49,7 @@ type MonstersParams struct {
 func (s *MonstersService) ListMonsters() (*models.APIReference, error) {
 
 	q, _ := query.Values(s.Options)
-	url := BaseURL + MonstersURL
+	url := s.URL + MonstersURL
 	method := "GET"
 
 	if s.Options.ChallengeRating != "" {
@@ -84,7 +84,7 @@ func (s *MonstersService) FindMonster(name string) (*models.Monster, error) {
 
 	n := strings.TrimSpace(name)
 	q, _ := query.Values(s.Options)
-	url := BaseURL + MonstersURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
+	url := s.URL + MonstersURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
 	method := "GET"
 	if s.Options.ChallengeRating != "" {
 		url = fmt.Sprintf("%s?%s", url, q.Encode())

@@ -50,7 +50,7 @@ Social image by Ashley Mcnamara https://twitter.com/ashleymcnamara 💖
 - [Constants](<#constants>)
 - [type Client](<#type-client>)
   - [func NewClient() *Client](<#func-newclient>)
-  - [func NewCustomClient(url string) *Client](<#func-newcustomclient>)
+  - [func NewCustomClient(url string, sp *SpellParams, mp *MonstersParams) *Client](<#func-newcustomclient>)
 - [type Monsters](<#type-monsters>)
 - [type MonstersParams](<#type-monstersparams>)
 - [type MonstersService](<#type-monstersservice>)
@@ -58,6 +58,14 @@ Social image by Ashley Mcnamara https://twitter.com/ashleymcnamara 💖
   - [func NewMonstersService() *MonstersService](<#func-newmonstersservice>)
   - [func (s *MonstersService) FindMonster(name string) (*models.Monster, error)](<#func-monstersservice-findmonster>)
   - [func (s *MonstersService) ListMonsters() (*models.APIReference, error)](<#func-monstersservice-listmonsters>)
+- [type Races](<#type-races>)
+- [type RacesService](<#type-racesservice>)
+  - [func NewCustomRacesService(url string) *RacesService](<#func-newcustomracesservice>)
+  - [func NewRacesService() *RacesService](<#func-newracesservice>)
+  - [func (s *RacesService) FindRace(name string) (*models.Race, error)](<#func-racesservice-findrace>)
+  - [func (s *RacesService) FindSubRace(name string) (*models.SubRace, error)](<#func-racesservice-findsubrace>)
+  - [func (s *RacesService) ListRaces() (*models.Resource, error)](<#func-racesservice-listraces>)
+  - [func (s *RacesService) ListSubRaces() (*models.Resource, error)](<#func-racesservice-listsubraces>)
 - [type Rules](<#type-rules>)
 - [type RulesService](<#type-rulesservice>)
   - [func NewCustomRulesService(url string) *RulesService](<#func-newcustomrulesservice>)
@@ -127,7 +135,7 @@ NewClient creates a new instance of the DnD REST API client
 ### func NewCustomClient
 
 ```go
-func NewCustomClient(url string) *Client
+func NewCustomClient(url string, sp *SpellParams, mp *MonstersParams) *Client
 ```
 
 NewCustomClient creates a new instance of the DnD REST API client
@@ -192,6 +200,68 @@ func (s *MonstersService) ListMonsters() (*models.APIReference, error)
 ```
 
 ListMonsters available in the API
+
+## type Races
+
+The Races interface shows all of the available methods for the monsters endpoint
+
+```go
+type Races interface {
+    ListRaces() (*models.Resource, error)
+    ListSubRaces() (*models.Resource, error)
+    FindRace(name string) (*models.Race, error)
+    FindSubRace(name string) (*models.SubRace, error)
+}
+```
+
+## type RacesService
+
+```go
+type RacesService struct {
+    // URL is the base URL of the service
+    URL string `default:"https://www.dnd5eapi.co/api"`
+}
+```
+
+### func NewCustomRacesService
+
+```go
+func NewCustomRacesService(url string) *RacesService
+```
+
+NewCustomRacesService creates a custom instance of the races service
+
+### func NewRacesService
+
+```go
+func NewRacesService() *RacesService
+```
+
+NewRacesService creates a new instance of the races service
+
+### func \(\*RacesService\) FindRace
+
+```go
+func (s *RacesService) FindRace(name string) (*models.Race, error)
+```
+
+### func \(\*RacesService\) FindSubRace
+
+```go
+func (s *RacesService) FindSubRace(name string) (*models.SubRace, error)
+```
+
+### func \(\*RacesService\) ListRaces
+
+```go
+func (s *RacesService) ListRaces() (*models.Resource, error)
+```
+
+### func \(\*RacesService\) ListSubRaces
+
+```go
+func (s *RacesService) ListSubRaces() (*models.Resource, error)
+```
 
 ## type Rules
 

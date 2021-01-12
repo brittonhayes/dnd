@@ -68,6 +68,5 @@ type AbilityBonus struct {
 	Bonus int `json:"bonus"`
 
 	// AbilityScore for this bonus.
-	AbilityScore []APIReference `json:"ability_score"`
+	AbilityScore APIReference `json:"ability_score"`
 }
-
