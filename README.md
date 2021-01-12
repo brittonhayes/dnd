@@ -70,10 +70,10 @@ Social image by Ashley Mcnamara https://twitter.com/ashleymcnamara 💖
 - [type RulesService](<#type-rulesservice>)
   - [func NewCustomRulesService(url string) *RulesService](<#func-newcustomrulesservice>)
   - [func NewRulesService() *RulesService](<#func-newrulesservice>)
-  - [func (r *RulesService) FindRule(name string) (*models.Rules, error)](<#func-rulesservice-findrule>)
-  - [func (r *RulesService) FindSection(name string) (*models.RulesSubsection, error)](<#func-rulesservice-findsection>)
-  - [func (r *RulesService) ListRules() (*models.APIReference, error)](<#func-rulesservice-listrules>)
-  - [func (r *RulesService) ListSections() (*models.APIReference, error)](<#func-rulesservice-listsections>)
+  - [func (s *RulesService) FindRule(name string) (*models.Rules, error)](<#func-rulesservice-findrule>)
+  - [func (s *RulesService) FindSection(name string) (*models.RulesSubsection, error)](<#func-rulesservice-findsection>)
+  - [func (s *RulesService) ListRules() (*models.Resource, error)](<#func-rulesservice-listrules>)
+  - [func (s *RulesService) ListSections() (*models.Resource, error)](<#func-rulesservice-listsections>)
 - [type SpellParams](<#type-spellparams>)
 - [type Spells](<#type-spells>)
 - [type SpellsService](<#type-spellsservice>)
@@ -269,8 +269,8 @@ The Rules interface shows all of the available methods for the rules endpoint
 
 ```go
 type Rules interface {
-    ListRules() (*models.APIReference, error)
-    ListSections() (*models.APIReference, error)
+    ListRules() (*models.Resource, error)
+    ListSections() (*models.Resource, error)
     FindRule(name string) (*models.Rules, error)
     FindSection(name string) (*models.RulesSubsection, error)
 }
@@ -304,7 +304,7 @@ NewRulesService creates a default instance of the rules service
 ### func \(\*RulesService\) FindRule
 
 ```go
-func (r *RulesService) FindRule(name string) (*models.Rules, error)
+func (s *RulesService) FindRule(name string) (*models.Rules, error)
 ```
 
 FindRule allows you to search for specific rules based on their name
@@ -332,7 +332,7 @@ Basic example of printing a rule as JSON
 ### func \(\*RulesService\) FindSection
 
 ```go
-func (r *RulesService) FindSection(name string) (*models.RulesSubsection, error)
+func (s *RulesService) FindSection(name string) (*models.RulesSubsection, error)
 ```
 
 FindSection allows you to search for a specific ruleset subsection based on its name
@@ -360,7 +360,7 @@ Basic example of printing a rules section as JSON
 ### func \(\*RulesService\) ListRules
 
 ```go
-func (r *RulesService) ListRules() (*models.APIReference, error)
+func (s *RulesService) ListRules() (*models.Resource, error)
 ```
 
 ListRules lists the available DnD 5e rules in the API
@@ -368,7 +368,7 @@ ListRules lists the available DnD 5e rules in the API
 ### func \(\*RulesService\) ListSections
 
 ```go
-func (r *RulesService) ListSections() (*models.APIReference, error)
+func (s *RulesService) ListSections() (*models.Resource, error)
 ```
 
 ListSections lists the available DnD 5e rule subsections in the API
