@@ -41,8 +41,8 @@ type RulesService struct {
 }
 
 // ListRules lists the available DnD 5e rules in the API
-func (r *RulesService) ListRules() (*models.APIReference, error) {
-	url := BaseURL + RulesURL
+func (s *RulesService) ListRules() (*models.APIReference, error) {
+	url := s.URL + RulesURL
 	method := "GET"
 
 	client := &http.Client{}
@@ -65,8 +65,8 @@ func (r *RulesService) ListRules() (*models.APIReference, error) {
 }
 
 // ListSections lists the available DnD 5e rule subsections in the API
-func (r *RulesService) ListSections() (*models.APIReference, error) {
-	url := BaseURL + RuleSectionsURL
+func (s *RulesService) ListSections() (*models.APIReference, error) {
+	url := s.URL + RuleSectionsURL
 	method := "GET"
 
 	client := &http.Client{}
@@ -89,13 +89,13 @@ func (r *RulesService) ListSections() (*models.APIReference, error) {
 }
 
 // FindRule allows you to search for specific rules based on their name
-func (r *RulesService) FindRule(name string) (*models.Rules, error) {
+func (s *RulesService) FindRule(name string) (*models.Rules, error) {
 	if name == "" {
 		return nil, fmt.Errorf("missing name argument")
 	}
 
 	n := strings.TrimSpace(name)
-	url := BaseURL + RulesURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
+	url := s.URL + RulesURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
 	method := "GET"
 
 	client := &http.Client{}
@@ -117,13 +117,13 @@ func (r *RulesService) FindRule(name string) (*models.Rules, error) {
 }
 
 // FindSection allows you to search for a specific ruleset subsection based on its name
-func (r *RulesService) FindSection(name string) (*models.RulesSubsection, error) {
+func (s *RulesService) FindSection(name string) (*models.RulesSubsection, error) {
 	if name == "" {
 		return nil, fmt.Errorf("missing name argument")
 	}
 
 	n := strings.TrimSpace(name)
-	url := BaseURL + RuleSectionsURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
+	url := s.URL + RuleSectionsURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
 	method := "GET"
 
 	client := &http.Client{}
