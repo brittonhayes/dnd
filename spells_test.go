@@ -53,6 +53,7 @@ func TestSpellsService_FindSpell(t *testing.T) {
 	info := httpmock.GetCallCountInfo()
 	logrus.Info(info)
 }
+
 func TestSpellsService_ListSpells(t *testing.T) {
 
 	tests := []struct {

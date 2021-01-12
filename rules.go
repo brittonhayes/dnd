@@ -15,8 +15,8 @@ var _ Rules = &RulesService{}
 // The Rules interface shows all of the
 // available methods for the rules endpoint
 type Rules interface {
-	ListRules() (*models.APIReference, error)
-	ListSections() (*models.APIReference, error)
+	ListRules() (*models.Resource, error)
+	ListSections() (*models.Resource, error)
 	FindRule(name string) (*models.Rules, error)
 	FindSection(name string) (*models.RulesSubsection, error)
 }
@@ -41,7 +41,7 @@ type RulesService struct {
 }
 
 // ListRules lists the available DnD 5e rules in the API
-func (s *RulesService) ListRules() (*models.APIReference, error) {
+func (s *RulesService) ListRules() (*models.Resource, error) {
 	url := s.URL + RulesURL
 	method := "GET"
 
@@ -56,7 +56,7 @@ func (s *RulesService) ListRules() (*models.APIReference, error) {
 
 	body, _ := ioutil.ReadAll(res.Body)
 
-	rules := new(models.APIReference)
+	rules := new(models.Resource)
 	if err := json.Unmarshal(body, &rules); err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ func (s *RulesService) ListRules() (*models.APIReference, error) {
 }
 
 // ListSections lists the available DnD 5e rule subsections in the API
-func (s *RulesService) ListSections() (*models.APIReference, error) {
+func (s *RulesService) ListSections() (*models.Resource, error) {
 	url := s.URL + RuleSectionsURL
 	method := "GET"
 
@@ -80,7 +80,7 @@ func (s *RulesService) ListSections() (*models.APIReference, error) {
 
 	body, _ := ioutil.ReadAll(res.Body)
 
-	rules := new(models.APIReference)
+	rules := new(models.Resource)
 	if err := json.Unmarshal(body, &rules); err != nil {
 		return nil, err
 	}
