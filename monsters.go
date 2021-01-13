@@ -17,7 +17,7 @@ var _ Monsters = &MonstersService{}
 // The Monsters interface shows all of the
 // available methods for the monsters endpoint
 type Monsters interface {
-	ListMonsters() (*models.APIReference, error)
+	ListMonsters() (*models.Resource, error)
 	FindMonster(name string) (*models.Monster, error)
 }
 
@@ -46,7 +46,7 @@ type MonstersParams struct {
 }
 
 // ListMonsters available in the API
-func (s *MonstersService) ListMonsters() (*models.APIReference, error) {
+func (s *MonstersService) ListMonsters() (*models.Resource, error) {
 
 	q, _ := query.Values(s.Options)
 	url := s.URL + MonstersURL
@@ -68,7 +68,7 @@ func (s *MonstersService) ListMonsters() (*models.APIReference, error) {
 	defer res.Body.Close()
 
 	body, _ := ioutil.ReadAll(res.Body)
-	monsters := new(models.APIReference)
+	monsters := new(models.Resource)
 	if err := json.Unmarshal(body, &monsters); err != nil {
 		return nil, err
 	}

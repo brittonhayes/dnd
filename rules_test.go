@@ -11,19 +11,6 @@ import (
 	"testing"
 )
 
-// Basic example of printing a rule as JSON
-func ExampleRulesService_FindRule() {
-	// Create a client
-	c := NewClient()
-
-	// Search for a rule
-	r, _ := c.Rules.FindRule("adventuring")
-
-	// Read the results of that rule as JSON
-	j, _ := json.MarshalIndent(&r, "", "\t")
-	fmt.Println(string(j))
-}
-
 func TestRulesService_FindRule(t *testing.T) {
 	type args struct {
 		name string
@@ -61,19 +48,6 @@ func TestRulesService_FindRule(t *testing.T) {
 	}
 	info := httpmock.GetCallCountInfo()
 	logrus.Info(info)
-}
-
-// Basic example of printing a rules section as JSON
-func ExampleRulesService_FindSection() {
-	// Create a client
-	c := NewClient()
-
-	// Search for a rule
-	r, _ := c.Rules.FindSection("ability-checks")
-
-	// Read the results of that rule section as JSON
-	j, _ := json.MarshalIndent(&r, "", "\t")
-	fmt.Println(string(j))
 }
 
 func TestRulesService_FindSection(t *testing.T) {
@@ -225,4 +199,30 @@ func TestNewCustomRulesService(t *testing.T) {
 			}
 		})
 	}
+}
+
+// Basic example of printing a rule as JSON
+func ExampleRulesService_FindRule() {
+	// Create a client
+	c := NewClient()
+
+	// Search for a rule
+	r, _ := c.Rules.FindRule("adventuring")
+
+	// Read the results of that rule as JSON
+	j, _ := json.MarshalIndent(&r, "", "\t")
+	fmt.Println(string(j))
+}
+
+// Basic example of printing a rules section as JSON
+func ExampleRulesService_FindSection() {
+	// Create a client
+	c := NewClient()
+
+	// Search for a rule
+	r, _ := c.Rules.FindSection("ability-checks")
+
+	// Read the results of that rule section as JSON
+	j, _ := json.MarshalIndent(&r, "", "\t")
+	fmt.Println(string(j))
 }
