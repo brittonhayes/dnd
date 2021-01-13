@@ -11,12 +11,21 @@ models defines data types available in the dnd package
 ## Index
 
 - [type APIReference](<#type-apireference>)
+  - [func (a *APIReference) GetIndex() string](<#func-apireference-getindex>)
+  - [func (a *APIReference) GetName() string](<#func-apireference-getname>)
+  - [func (a *APIReference) GetURL() string](<#func-apireference-geturl>)
 - [type AbilityBonus](<#type-abilitybonus>)
 - [type AbilityScore](<#type-abilityscore>)
 - [type Action](<#type-action>)
 - [type ActionDamage](<#type-actiondamage>)
 - [type AdventuringGear](<#type-adventuringgear>)
+  - [func (a *AdventuringGear) GetIndex() string](<#func-adventuringgear-getindex>)
+  - [func (a *AdventuringGear) GetName() string](<#func-adventuringgear-getname>)
+  - [func (a *AdventuringGear) GetURL() string](<#func-adventuringgear-geturl>)
 - [type Armor](<#type-armor>)
+  - [func (a *Armor) GetIndex() string](<#func-armor-getindex>)
+  - [func (a *Armor) GetName() string](<#func-armor-getname>)
+  - [func (a *Armor) GetURL() string](<#func-armor-geturl>)
 - [type ArmorClass](<#type-armorclass>)
 - [type Choice](<#type-choice>)
 - [type Class](<#type-class>)
@@ -26,10 +35,17 @@ models defines data types available in the dnd package
 - [type DC](<#type-dc>)
 - [type DamageType](<#type-damagetype>)
 - [type EquipmentPack](<#type-equipmentpack>)
+  - [func (e *EquipmentPack) GetIndex() string](<#func-equipmentpack-getindex>)
+  - [func (e *EquipmentPack) GetName() string](<#func-equipmentpack-getname>)
+  - [func (e *EquipmentPack) GetURL() string](<#func-equipmentpack-geturl>)
 - [type Features](<#type-features>)
+- [type Getter](<#type-getter>)
 - [type Language](<#type-language>)
 - [type LegendaryAction](<#type-legendaryaction>)
 - [type MagicItem](<#type-magicitem>)
+  - [func (m *MagicItem) GetIndex() string](<#func-magicitem-getindex>)
+  - [func (m *MagicItem) GetName() string](<#func-magicitem-getname>)
+  - [func (m *MagicItem) GetURL() string](<#func-magicitem-geturl>)
 - [type MagicSchool](<#type-magicschool>)
 - [type Monster](<#type-monster>)
 - [type MonsterProficiency](<#type-monsterproficiency>)
@@ -41,6 +57,9 @@ models defines data types available in the dnd package
 - [type Reaction](<#type-reaction>)
 - [type Resource](<#type-resource>)
 - [type Rules](<#type-rules>)
+  - [func (r *Rules) GetIndex() string](<#func-rules-getindex>)
+  - [func (r *Rules) GetName() string](<#func-rules-getname>)
+  - [func (r *Rules) GetURL() string](<#func-rules-geturl>)
 - [type RulesSubsection](<#type-rulessubsection>)
 - [type Sense](<#type-sense>)
 - [type Skill](<#type-skill>)
@@ -56,6 +75,9 @@ models defines data types available in the dnd package
 - [type Subclass](<#type-subclass>)
 - [type Traits](<#type-traits>)
 - [type Weapon](<#type-weapon>)
+  - [func (w *Weapon) GetIndex() string](<#func-weapon-getindex>)
+  - [func (w *Weapon) GetName() string](<#func-weapon-getname>)
+  - [func (w *Weapon) GetURL() string](<#func-weapon-geturl>)
 - [type WeaponProperties](<#type-weaponproperties>)
 
 
@@ -75,6 +97,30 @@ type APIReference struct {
     URL string `json:"url"`
 }
 ```
+
+### func \(\*APIReference\) GetIndex
+
+```go
+func (a *APIReference) GetIndex() string
+```
+
+GetIndex returns the index of the APIReference
+
+### func \(\*APIReference\) GetName
+
+```go
+func (a *APIReference) GetName() string
+```
+
+GetName returns the name of the APIReference
+
+### func \(\*APIReference\) GetURL
+
+```go
+func (a *APIReference) GetURL() string
+```
+
+GetIndex returns the url of the APIReference
 
 ## type AbilityBonus
 
@@ -170,6 +216,30 @@ type AdventuringGear struct {
 }
 ```
 
+### func \(\*AdventuringGear\) GetIndex
+
+```go
+func (a *AdventuringGear) GetIndex() string
+```
+
+GetName returns the index of the gear
+
+### func \(\*AdventuringGear\) GetName
+
+```go
+func (a *AdventuringGear) GetName() string
+```
+
+GetName returns the name of the gear
+
+### func \(\*AdventuringGear\) GetURL
+
+```go
+func (a *AdventuringGear) GetURL() string
+```
+
+GetURL returns the URL of the gear
+
 ## type Armor
 
 Armor is the structure for armor obtained in the dungeons you explore\.
@@ -207,6 +277,30 @@ type Armor struct {
     URL string `json:"url"`
 }
 ```
+
+### func \(\*Armor\) GetIndex
+
+```go
+func (a *Armor) GetIndex() string
+```
+
+GetName returns the index of the gear
+
+### func \(\*Armor\) GetName
+
+```go
+func (a *Armor) GetName() string
+```
+
+GetName returns the name of the gear
+
+### func \(\*Armor\) GetURL
+
+```go
+func (a *Armor) GetURL() string
+```
+
+GetURL returns the URL of the gear
 
 ## type ArmorClass
 
@@ -385,6 +479,30 @@ type EquipmentPack struct {
 }
 ```
 
+### func \(\*EquipmentPack\) GetIndex
+
+```go
+func (e *EquipmentPack) GetIndex() string
+```
+
+GetName returns the index of the equipment
+
+### func \(\*EquipmentPack\) GetName
+
+```go
+func (e *EquipmentPack) GetName() string
+```
+
+GetName returns the name of the equipment
+
+### func \(\*EquipmentPack\) GetURL
+
+```go
+func (e *EquipmentPack) GetURL() string
+```
+
+GetURL returns the URL of the equipment
+
 ## type Features
 
 Features are the features of a class
@@ -412,6 +530,18 @@ type Features struct {
 
     // The URL reference of this resource
     URL string `json:"url"`
+}
+```
+
+## type Getter
+
+Getter is the common interface for pulling fields out of a model
+
+```go
+type Getter interface {
+    GetName() string
+    GetIndex() string
+    GetURL() string
 }
 ```
 
@@ -474,6 +604,30 @@ type MagicItem struct {
     URL string `json:"url"`
 }
 ```
+
+### func \(\*MagicItem\) GetIndex
+
+```go
+func (m *MagicItem) GetIndex() string
+```
+
+GetIndex gets the index of the magic item
+
+### func \(\*MagicItem\) GetName
+
+```go
+func (m *MagicItem) GetName() string
+```
+
+GetName gets the name of the magic item
+
+### func \(\*MagicItem\) GetURL
+
+```go
+func (m *MagicItem) GetURL() string
+```
+
+GetURL gets the url of the magic item
 
 ## type MagicSchool
 
@@ -757,6 +911,30 @@ type Rules struct {
     URL         string            `json:"url"`
 }
 ```
+
+### func \(\*Rules\) GetIndex
+
+```go
+func (r *Rules) GetIndex() string
+```
+
+GetName returns the index of the rule
+
+### func \(\*Rules\) GetName
+
+```go
+func (r *Rules) GetName() string
+```
+
+GetName returns the name of the rule
+
+### func \(\*Rules\) GetURL
+
+```go
+func (r *Rules) GetURL() string
+```
+
+GetURL returns the URL of the rule
 
 ## type RulesSubsection
 
@@ -1174,6 +1352,30 @@ type Weapon struct {
     URL string `json:"url"`
 }
 ```
+
+### func \(\*Weapon\) GetIndex
+
+```go
+func (w *Weapon) GetIndex() string
+```
+
+GetName returns the index of the weapon
+
+### func \(\*Weapon\) GetName
+
+```go
+func (w *Weapon) GetName() string
+```
+
+GetName returns the name of the weapon
+
+### func \(\*Weapon\) GetURL
+
+```go
+func (w *Weapon) GetURL() string
+```
+
+GetURL returns the URL of the weapon
 
 ## type WeaponProperties
 

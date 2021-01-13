@@ -45,6 +45,16 @@ func main() {
 
 Social image by Ashley Mcnamara https://twitter.com/ashleymcnamara 💖
 
+### Development
+
+If you'd like to contribute to DnD\, make sure you've got mage installed: https://magefile.org
+
+```
+# Download dependencies and run tests
+mage download
+mage test
+```
+
 ## Index
 
 - [Constants](<#constants>)
@@ -57,7 +67,7 @@ Social image by Ashley Mcnamara https://twitter.com/ashleymcnamara 💖
   - [func NewCustomMonstersService(url string, params *MonstersParams) *MonstersService](<#func-newcustommonstersservice>)
   - [func NewMonstersService() *MonstersService](<#func-newmonstersservice>)
   - [func (s *MonstersService) FindMonster(name string) (*models.Monster, error)](<#func-monstersservice-findmonster>)
-  - [func (s *MonstersService) ListMonsters() (*models.APIReference, error)](<#func-monstersservice-listmonsters>)
+  - [func (s *MonstersService) ListMonsters() (*models.Resource, error)](<#func-monstersservice-listmonsters>)
 - [type Races](<#type-races>)
 - [type RacesService](<#type-racesservice>)
   - [func NewCustomRacesService(url string) *RacesService](<#func-newcustomracesservice>)
@@ -146,7 +156,7 @@ The Monsters interface shows all of the available methods for the monsters endpo
 
 ```go
 type Monsters interface {
-    ListMonsters() (*models.APIReference, error)
+    ListMonsters() (*models.Resource, error)
     FindMonster(name string) (*models.Monster, error)
 }
 ```
@@ -177,6 +187,25 @@ func NewCustomMonstersService(url string, params *MonstersParams) *MonstersServi
 
 NewMonstersService creates a custom instance of the monsters service
 
+<details><summary>Example</summary>
+<p>
+
+Create a new custom monsters service
+
+```go
+{
+	s := NewCustomMonstersService(BaseURL, &MonstersParams{
+		ChallengeRating: "5",
+	})
+
+	monsters, _ := s.ListMonsters()
+	fmt.Println("Results: ", monsters.Results)
+}
+```
+
+</p>
+</details>
+
 ### func NewMonstersService
 
 ```go
@@ -184,6 +213,23 @@ func NewMonstersService() *MonstersService
 ```
 
 NewMonstersService creates a new instance of the monsters service
+
+<details><summary>Example</summary>
+<p>
+
+Create a new monsters service and apply custom query params
+
+```go
+{
+	s := NewMonstersService()
+	s.Options = &MonstersParams{
+		ChallengeRating: "5",
+	}
+}
+```
+
+</p>
+</details>
 
 ### func \(\*MonstersService\) FindMonster
 
@@ -193,13 +239,49 @@ func (s *MonstersService) FindMonster(name string) (*models.Monster, error)
 
 FindMonster fetches a monster's details by name
 
+<details><summary>Example</summary>
+<p>
+
+Find a specific monster
+
+```go
+{
+	c := NewClient()
+	monster, _ := c.Monsters.FindMonster("aboleth")
+	fmt.Printf("The monster %s has a challenge rating of %d", monster.Name, monster.ChallengeRating)
+}
+```
+
+</p>
+</details>
+
 ### func \(\*MonstersService\) ListMonsters
 
 ```go
-func (s *MonstersService) ListMonsters() (*models.APIReference, error)
+func (s *MonstersService) ListMonsters() (*models.Resource, error)
 ```
 
 ListMonsters available in the API
+
+<details><summary>Example</summary>
+<p>
+
+Count the number of available monsters listed
+
+```go
+{
+	s := NewMonstersService()
+	s.Options = &MonstersParams{
+		ChallengeRating: "3",
+	}
+
+	monsters, _ := s.ListMonsters()
+	fmt.Printf("There are %d monsters available", monsters.Count)
+}
+```
+
+</p>
+</details>
 
 ## type Races
 
@@ -223,6 +305,23 @@ type RacesService struct {
 }
 ```
 
+<details><summary>Example (,ist Racers_ Count)</summary>
+<p>
+
+Count the number of available races listed
+
+```go
+{
+	s := NewRacesService()
+
+	races, _ := s.ListRaces()
+	fmt.Printf("There are %d races available", races.Count)
+}
+```
+
+</p>
+</details>
+
 ### func NewCustomRacesService
 
 ```go
@@ -230,6 +329,23 @@ func NewCustomRacesService(url string) *RacesService
 ```
 
 NewCustomRacesService creates a custom instance of the races service
+
+<details><summary>Example</summary>
+<p>
+
+Create a new custom races service
+
+```go
+{
+	s := NewCustomRacesService(BaseURL)
+
+	races, _ := s.ListRaces()
+	fmt.Println("Results: ", races.Results)
+}
+```
+
+</p>
+</details>
 
 ### func NewRacesService
 
@@ -244,6 +360,21 @@ NewRacesService creates a new instance of the races service
 ```go
 func (s *RacesService) FindRace(name string) (*models.Race, error)
 ```
+
+<details><summary>Example</summary>
+<p>
+
+Create a new races service and apply custom query params
+
+```go
+{
+	s := NewRacesService()
+	s.FindRace("dwarf")
+}
+```
+
+</p>
+</details>
 
 ### func \(\*RacesService\) FindSubRace
 
