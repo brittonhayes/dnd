@@ -22,7 +22,9 @@ jobs:
 
       - name: Test
         run: |
-          go test -race -v ./... -coverprofile coverage.txt
+          go get -u github.com/dave/courtney
+          go get -t -v ./...
+          courtney -t="-race" -v github.com/brittonhayes/dnd github.com/brittonhayes/dnd/models
           bash <(curl -s https://codecov.io/bash)
 
       - name: Coverage
