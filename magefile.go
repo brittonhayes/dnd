@@ -22,9 +22,14 @@ func Lint() error {
 	return linter.Command(`run`).Run()
 }
 
-// Test tests library with coverage
+// Test tests packages
 func Test() error {
-	return shellcmd.Command(`go test -coverprofile=coverage.out ./...`).Run()
+	return shellcmd.Command(`go test -v ./...`).Run()
+}
+
+// Test tests the packages with coverage
+func Cover() error {
+	return shellcmd.Command(`courtney -t="-race" -v github.com/brittonhayes/dnd github.com/brittonhayes/dnd/models`).Run()
 }
 
 // Download downloads the library dependencies

@@ -18,3 +18,18 @@ type MagicItem struct {
 	// URL is the URL reference of this resource
 	URL string `json:"url"`
 }
+
+// GetName gets the name of the magic item
+func (m *MagicItem) GetName() string {
+	return m.Name
+}
+
+// GetIndex gets the index of the magic item
+func (m *MagicItem) GetIndex() string {
+	return m.Index
+}
+
+// GetURL gets the url of the magic item
+func (m *MagicItem) GetURL() string {
+	return m.URL
+}

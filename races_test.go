@@ -192,3 +192,25 @@ func TestRacesService_ListRaces(t *testing.T) {
 		})
 	}
 }
+
+// Count the number of available races listed
+func ExampleRacesService_ListRacers_Count() {
+	s := NewRacesService()
+
+	races, _ := s.ListRaces()
+	fmt.Printf("There are %d races available", races.Count)
+}
+
+// Create a new races service and apply custom query params
+func ExampleRacesService_FindRace() {
+	s := NewRacesService()
+	s.FindRace("dwarf")
+}
+
+// Create a new custom races service
+func ExampleNewCustomRacesService() {
+	s := NewCustomRacesService(BaseURL)
+
+	races, _ := s.ListRaces()
+	fmt.Println("Results: ", races.Results)
+}

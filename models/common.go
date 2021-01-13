@@ -1,5 +1,13 @@
 package models
 
+// Getter is the common interface
+// for pulling fields out of a model
+type Getter interface {
+	GetName() string
+	GetIndex() string
+	GetURL() string
+}
+
 // Results is used for any API endpoint without
 // a resource index or name. It return a list of
 // available resources for that API
@@ -24,6 +32,21 @@ type APIReference struct {
 
 	// URL of the referenced resource.
 	URL string `json:"url"`
+}
+
+// GetName returns the name of the APIReference
+func (a *APIReference) GetName() string {
+	return a.Name
+}
+
+// GetIndex returns the index of the APIReference
+func (a *APIReference) GetIndex() string {
+	return a.Index
+}
+
+// GetIndex returns the url of the APIReference
+func (a *APIReference) GetURL() string {
+	return a.URL
 }
 
 // ClassAPIResource is very similar to APIReference but

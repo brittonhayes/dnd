@@ -147,3 +147,39 @@ func TestNewMonstersService(t *testing.T) {
 		})
 	}
 }
+
+// Find a specific monster
+func ExampleMonstersService_FindMonster() {
+	c := NewClient()
+	monster, _ := c.Monsters.FindMonster("aboleth")
+	fmt.Printf("The monster %s has a challenge rating of %d", monster.Name, monster.ChallengeRating)
+}
+
+// Count the number of available monsters listed
+func ExampleMonstersService_ListMonsters_Count() {
+	s := NewMonstersService()
+	s.Options = &MonstersParams{
+		ChallengeRating: "3",
+	}
+
+	monsters, _ := s.ListMonsters()
+	fmt.Printf("There are %d monsters available", monsters.Count)
+}
+
+// Create a new monsters service and apply custom query params
+func ExampleNewMonstersService() {
+	s := NewMonstersService()
+	s.Options = &MonstersParams{
+		ChallengeRating: "5",
+	}
+}
+
+// Create a new custom monsters service
+func ExampleNewCustomMonstersService() {
+	s := NewCustomMonstersService(BaseURL, &MonstersParams{
+		ChallengeRating: "5",
+	})
+
+	monsters, _ := s.ListMonsters()
+	fmt.Println("Results: ", monsters.Results)
+}

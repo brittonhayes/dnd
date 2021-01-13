@@ -36,4 +36,12 @@
 //
 // Social image by Ashley Mcnamara https://twitter.com/ashleymcnamara 💖
 //
+// Development
+//
+// If you'd like to contribute to DnD, make sure you've got mage installed: https://magefile.org
+//
+//	# Download dependencies and run tests
+//	mage download
+//	mage test
+//
 package dnd

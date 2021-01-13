@@ -1,5 +1,10 @@
 package models
 
+var _ Getter = &Weapon{}
+var _ Getter = &Armor{}
+var _ Getter = &AdventuringGear{}
+var _ Getter = &EquipmentPack{}
+
 // Weapon is the structure for weapons obtained
 // in the dungeons you explore.
 type Weapon struct {
@@ -50,6 +55,21 @@ type Range struct {
 	Long   int `json:"long"`
 }
 
+// GetName returns the name of the weapon
+func (w *Weapon) GetName() string {
+	return w.Name
+}
+
+// GetName returns the index of the weapon
+func (w *Weapon) GetIndex() string {
+	return w.Index
+}
+
+// GetURL returns the URL of the weapon
+func (w *Weapon) GetURL() string {
+	return w.URL
+}
+
 // Armor is the structure for armor obtained
 // in the dungeons you explore.
 type Armor struct {
@@ -84,6 +104,21 @@ type Armor struct {
 	URL string `json:"url"`
 }
 
+// GetName returns the name of the gear
+func (a *Armor) GetName() string {
+	return a.Name
+}
+
+// GetName returns the index of the gear
+func (a *Armor) GetIndex() string {
+	return a.Index
+}
+
+// GetURL returns the URL of the gear
+func (a *Armor) GetURL() string {
+	return a.URL
+}
+
 // ArmorClass is the details on how to calculate armor class.
 type ArmorClass struct {
 	Base     int  `json:"base"`
@@ -114,6 +149,21 @@ type AdventuringGear struct {
 
 	// URL is the URL reference of this resource
 	URL string `json:"url"`
+}
+
+// GetName returns the name of the gear
+func (a *AdventuringGear) GetName() string {
+	return a.Name
+}
+
+// GetName returns the index of the gear
+func (a *AdventuringGear) GetIndex() string {
+	return a.Index
+}
+
+// GetURL returns the URL of the gear
+func (a *AdventuringGear) GetURL() string {
+	return a.URL
 }
 
 // EquipmentPack is the structure for an equipment pack obtained
@@ -151,6 +201,21 @@ type PackContents struct {
 	// Quantity is the numerical amount of
 	// this item present
 	Quantity int `json:"quantity"`
+}
+
+// GetName returns the name of the equipment
+func (e *EquipmentPack) GetName() string {
+	return e.Name
+}
+
+// GetName returns the index of the equipment
+func (e *EquipmentPack) GetIndex() string {
+	return e.Index
+}
+
+// GetURL returns the URL of the equipment
+func (e *EquipmentPack) GetURL() string {
+	return e.URL
 }
 
 // WeaponProperties is the structure for a weapon's properties
