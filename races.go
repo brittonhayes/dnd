@@ -45,13 +45,10 @@ func (s *RacesService) FindSubRace(name string) (*models.SubRace, error) {
 		return nil, fmt.Errorf("missing name argument")
 	}
 
-	if strings.Contains(name, " ") {
-		strings.ToLower(name)
-		strings.ReplaceAll(name, " ", "-")
-	}
+	name = strings.ToLower(name)
+	name = strings.ReplaceAll(name, " ", "-")
 
-	n := strings.TrimSpace(name)
-	url := s.URL + SubracesURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
+	url := s.URL + SubracesURL + fmt.Sprintf("/%s", strings.TrimPrefix(name, "/"))
 	method := "GET"
 
 	client := &http.Client{}
@@ -122,10 +119,8 @@ func (s *RacesService) FindRace(name string) (*models.Race, error) {
 		return nil, fmt.Errorf("missing name argument")
 	}
 
-	if strings.Contains(name, " ") {
-		strings.ToLower(name)
-		strings.ReplaceAll(name, " ", "-")
-	}
+	name = strings.ToLower(name)
+	name = strings.ReplaceAll(name, " ", "-")
 
 	n := strings.TrimSpace(name)
 	url := s.URL + RacesURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))

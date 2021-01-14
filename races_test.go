@@ -98,6 +98,7 @@ func TestRacesService_FindSubRace(t *testing.T) {
 		wantErr bool
 	}{
 		{"Find subrace high elf", args{"high-elf"}, mocks.SubracesFindHighElfMock, 200, false},
+		{"Find subrace high elf with a space", args{"high-elf"}, mocks.SubracesFindHighElfMock, 200, false},
 	}
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
