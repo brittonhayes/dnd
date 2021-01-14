@@ -21,6 +21,16 @@ type Resource struct {
 	Results []APIReference `json:"results"`
 }
 
+// Names returns the list of names from
+// the resource results
+func (r *Resource) ResultsNames() []string {
+	var s []string
+	for _, res := range r.Results {
+		s = append(s, res.Name)
+	}
+	return s
+}
+
 // APIReference is the basic structure that defines
 // where this resource resides and what it is called
 type APIReference struct {

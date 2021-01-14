@@ -90,7 +90,10 @@ func (s *MonstersService) FindMonster(name string) (*models.Monster, error) {
 		url = fmt.Sprintf("%s?%s", url, q.Encode())
 	}
 
-	logrus.Debug(url)
+	if strings.Contains(name, " ") {
+		strings.ToLower(name)
+		strings.ReplaceAll(name, " ", "-")
+	}
 
 	client := &http.Client{}
 	req, _ := http.NewRequest(method, url, nil)

@@ -98,6 +98,7 @@ func TestRacesService_FindSubRace(t *testing.T) {
 		wantErr bool
 	}{
 		{"Find subrace high elf", args{"high-elf"}, mocks.SubracesFindHighElfMock, 200, false},
+		{"Find subrace high elf with a space", args{"high-elf"}, mocks.SubracesFindHighElfMock, 200, false},
 	}
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
@@ -132,7 +133,7 @@ func TestRacesService_ListSubRaces(t *testing.T) {
 		status  int
 		wantErr bool
 	}{
-		{"List subraces", mocks.SubracesListSubraces, 200, false},
+		{"List subraces", mocks.SubracesListMock, 200, false},
 	}
 
 	httpmock.Activate()
@@ -167,7 +168,7 @@ func TestRacesService_ListRaces(t *testing.T) {
 		status  int
 		wantErr bool
 	}{
-		{"List races", fmt.Sprintf("%s%s", BaseURL, RacesURL), mocks.RacesListRaces, 200, false},
+		{"List races", fmt.Sprintf("%s%s", BaseURL, RacesURL), mocks.RacesListRacesMock, 200, false},
 	}
 
 	httpmock.Activate()

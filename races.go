@@ -45,8 +45,10 @@ func (s *RacesService) FindSubRace(name string) (*models.SubRace, error) {
 		return nil, fmt.Errorf("missing name argument")
 	}
 
-	n := strings.TrimSpace(name)
-	url := s.URL + SubracesURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
+	name = strings.ToLower(name)
+	name = strings.ReplaceAll(name, " ", "-")
+
+	url := s.URL + SubracesURL + fmt.Sprintf("/%s", strings.TrimPrefix(name, "/"))
 	method := "GET"
 
 	client := &http.Client{}
@@ -116,6 +118,9 @@ func (s *RacesService) FindRace(name string) (*models.Race, error) {
 	if name == "" {
 		return nil, fmt.Errorf("missing name argument")
 	}
+
+	name = strings.ToLower(name)
+	name = strings.ReplaceAll(name, " ", "-")
 
 	n := strings.TrimSpace(name)
 	url := s.URL + RacesURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))

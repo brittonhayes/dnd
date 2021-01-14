@@ -23,7 +23,7 @@ func TestSpellsService_FindSpell(t *testing.T) {
 		status  int
 		wantErr bool
 	}{
-		{"Find spells", args{"acid-arrow"}, fmt.Sprintf("%s%s/", BaseURL, SpellsURL), &SpellParams{"", ""}, mocks.SpellsAcidArrowMock, 200, false},
+		{"Find spells", args{"acid-arrow"}, fmt.Sprintf("%s%s/", BaseURL, SpellsURL), &SpellParams{"", ""}, mocks.SpellsFindAcidArrowMock, 200, false},
 	}
 
 	httpmock.Activate()
@@ -65,7 +65,7 @@ func TestSpellsService_ListSpells(t *testing.T) {
 		wantErr bool
 	}{
 		{"List spells", &SpellParams{"", ""}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListMock, 200, false},
-		{"List spells filtered", &SpellParams{"1", "evo"}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListFilterMock, 200, false},
+		{"List spells filtered", &SpellParams{"1", "evo"}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListFilteredMock, 200, false},
 	}
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
