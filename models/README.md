@@ -56,6 +56,7 @@ models defines data types available in the dnd package
 - [type Range](<#type-range>)
 - [type Reaction](<#type-reaction>)
 - [type Resource](<#type-resource>)
+  - [func (r *Resource) ResultsNames() []string](<#func-resource-resultsnames>)
 - [type Rules](<#type-rules>)
   - [func (r *Rules) GetIndex() string](<#func-rules-getindex>)
   - [func (r *Rules) GetName() string](<#func-rules-getname>)
@@ -899,6 +900,14 @@ type Resource struct {
     Results []APIReference `json:"results"`
 }
 ```
+
+### func \(\*Resource\) ResultsNames
+
+```go
+func (r *Resource) ResultsNames() []string
+```
+
+Names returns the list of names from the resource results
 
 ## type Rules
 
