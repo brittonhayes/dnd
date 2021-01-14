@@ -1,6 +1,9 @@
 package models
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestAPIReference_GetIndex(t *testing.T) {
 	type fields struct {
@@ -66,6 +69,31 @@ func TestAPIReference_GetURL(t *testing.T) {
 			}
 			if got := a.GetURL(); got != tt.want {
 				t.Errorf("GetURL() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestResource_ResultsNames(t *testing.T) {
+	type fields struct {
+		Count   int
+		Results []APIReference
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   []string
+	}{
+		{"Get resource result names", fields{Results: []APIReference{{Name: "first"}, {Name: "second"}}}, []string{"first", "second"}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			r := &Resource{
+				Count:   tt.fields.Count,
+				Results: tt.fields.Results,
+			}
+			if got := r.ResultsNames(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("ResultsNames() = %v, want %v", got, tt.want)
 			}
 		})
 	}
