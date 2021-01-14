@@ -3,6 +3,7 @@
 package main
 
 import (
+	"github.com/brittonhayes/dnd/internal"
 	"github.com/magefile/mage/sh"
 	"github.com/princjef/mageutil/bintool"
 	"github.com/princjef/mageutil/shellcmd"
@@ -40,4 +41,8 @@ func Download() error {
 // Generate runs all generation tasks
 func Generate() error {
 	return shellcmd.Command(`go generate .`).Run()
+}
+
+func Mocks() error {
+	return internal.GenerateMocks()
 }

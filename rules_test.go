@@ -21,7 +21,7 @@ func TestRulesService_FindRule(t *testing.T) {
 		mock    mocks.Mock
 		wantErr bool
 	}{
-		{name: "Find rule", args: args{name: "adventuring"}, mock: mocks.RulesMock},
+		{name: "Find rule", args: args{name: "adventuring"}, mock: mocks.RulesFindAdventuringMock},
 	}
 
 	httpmock.Activate()
