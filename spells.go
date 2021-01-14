@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/brittonhayes/dnd/models"
 	"github.com/google/go-querystring/query"
-	"github.com/sirupsen/logrus"
 	"gopkg.in/mcuadros/go-defaults.v1"
 	"io/ioutil"
 	"net/http"
@@ -50,14 +49,11 @@ type SpellParams struct {
 func (s *SpellsService) ListSpells() (*models.Resource, error) {
 	q, _ := query.Values(s.Options)
 	url := s.URL + SpellsURL
-	method := "GET"
 	if s.Options.Level != "" || s.Options.School != "" {
 		url = fmt.Sprintf("%s?%s", url, q.Encode())
 	}
-	logrus.Debug(url)
-	client := &http.Client{}
-	req, _ := http.NewRequest(method, url, nil)
-	res, err := client.Do(req)
+
+	res, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}
@@ -78,19 +74,12 @@ func (s *SpellsService) FindSpell(name string) (*models.Spells, error) {
 		return nil, fmt.Errorf("missing name argument")
 	}
 
-	if strings.Contains(name, " ") {
-		strings.ToLower(name)
-		strings.ReplaceAll(name, " ", "-")
-	}
+	n := strings.ToLower(name)
+	n = strings.ReplaceAll(name, " ", "-")
+	n = strings.TrimSpace(name)
 
-	n := strings.TrimSpace(name)
 	url := s.URL + SpellsURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
-	method := "GET"
-
-	client := &http.Client{}
-	req, _ := http.NewRequest(method, url, nil)
-
-	res, err := client.Do(req)
+	res, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}

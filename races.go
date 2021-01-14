@@ -49,12 +49,7 @@ func (s *RacesService) FindSubRace(name string) (*models.SubRace, error) {
 	name = strings.ReplaceAll(name, " ", "-")
 
 	url := s.URL + SubracesURL + fmt.Sprintf("/%s", strings.TrimPrefix(name, "/"))
-	method := "GET"
-
-	client := &http.Client{}
-	req, _ := http.NewRequest(method, url, nil)
-
-	res, err := client.Do(req)
+	res, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}
@@ -69,14 +64,8 @@ func (s *RacesService) FindSubRace(name string) (*models.SubRace, error) {
 }
 
 func (s *RacesService) ListRaces() (*models.Resource, error) {
-
 	url := s.URL + RacesURL
-	method := "GET"
-	client := &http.Client{}
-
-	req, _ := http.NewRequest(method, url, nil)
-
-	res, err := client.Do(req)
+	res, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}
@@ -124,12 +113,7 @@ func (s *RacesService) FindRace(name string) (*models.Race, error) {
 
 	n := strings.TrimSpace(name)
 	url := s.URL + RacesURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
-	method := "GET"
-
-	client := &http.Client{}
-	req, _ := http.NewRequest(method, url, nil)
-
-	res, err := client.Do(req)
+	res, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}

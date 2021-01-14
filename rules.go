@@ -43,19 +43,13 @@ type RulesService struct {
 // ListRules lists the available DnD 5e rules in the API
 func (s *RulesService) ListRules() (*models.Resource, error) {
 	url := s.URL + RulesURL
-	method := "GET"
-
-	client := &http.Client{}
-	req, _ := http.NewRequest(method, url, nil)
-
-	res, err := client.Do(req)
+	res, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}
 	defer res.Body.Close()
 
 	body, _ := ioutil.ReadAll(res.Body)
-
 	rules := new(models.Resource)
 	if err := json.Unmarshal(body, &rules); err != nil {
 		return nil, err
@@ -67,17 +61,11 @@ func (s *RulesService) ListRules() (*models.Resource, error) {
 // ListSections lists the available DnD 5e rule subsections in the API
 func (s *RulesService) ListSections() (*models.Resource, error) {
 	url := s.URL + RuleSectionsURL
-	method := "GET"
-
-	client := &http.Client{}
-	req, _ := http.NewRequest(method, url, nil)
-
-	res, err := client.Do(req)
+	res, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}
 	defer res.Body.Close()
-
 	body, _ := ioutil.ReadAll(res.Body)
 
 	rules := new(models.Resource)
@@ -96,11 +84,8 @@ func (s *RulesService) FindRule(name string) (*models.Rules, error) {
 
 	n := strings.TrimSpace(name)
 	url := s.URL + RulesURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
-	method := "GET"
 
-	client := &http.Client{}
-	req, _ := http.NewRequest(method, url, nil)
-	res, err := client.Do(req)
+	res, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}
@@ -124,11 +109,7 @@ func (s *RulesService) FindSection(name string) (*models.RulesSubsection, error)
 
 	n := strings.TrimSpace(name)
 	url := s.URL + RuleSectionsURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
-	method := "GET"
-
-	client := &http.Client{}
-	req, _ := http.NewRequest(method, url, nil)
-	res, err := client.Do(req)
+	res, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}
