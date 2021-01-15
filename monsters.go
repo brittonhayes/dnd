@@ -78,10 +78,8 @@ func (s *MonstersService) FindMonster(name string) (*models.Monster, error) {
 	url := s.URL + MonstersURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
 	url = fmt.Sprintf("%s?%s", url, q.Encode())
 
-	if strings.Contains(name, " ") {
-		strings.ToLower(name)
-		strings.ReplaceAll(name, " ", "-")
-	}
+	name = strings.ToLower(name)
+	name = strings.ReplaceAll(name, " ", "-")
 
 	res, err := http.Get(url)
 	if err != nil {
