@@ -74,11 +74,11 @@ func (s *SpellsService) FindSpell(name string) (*models.Spells, error) {
 		return nil, fmt.Errorf("missing name argument")
 	}
 
-	n := strings.ToLower(name)
-	n = strings.ReplaceAll(name, " ", "-")
-	n = strings.TrimSpace(name)
+	name = strings.ToLower(name)
+	name = strings.ReplaceAll(name, " ", "-")
+	name = strings.TrimSpace(name)
 
-	url := s.URL + SpellsURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
+	url := s.URL + SpellsURL + fmt.Sprintf("/%s", strings.TrimPrefix(name, "/"))
 	res, err := http.Get(url)
 	if err != nil {
 		return nil, err

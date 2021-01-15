@@ -129,7 +129,7 @@ func ExampleSpellsService_FindSpell() {
 }
 
 // Count the number of available spells listed
-func ExampleSpellsService_ListSpells_Count() {
+func ExampleSpellsService_ListSpells_count() {
 	s := NewSpellsService()
 	s.Options = &SpellParams{
 		Level:  "5",

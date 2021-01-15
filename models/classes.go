@@ -45,7 +45,7 @@ type Subclass struct {
 	Index string `json:"index"`
 
 	// Class is the parent class for this subclass
-	Class string `json:"index"`
+	Class string `json:"class"`
 
 	// Name is the name for this class resource.
 	Name string `json:"name"`

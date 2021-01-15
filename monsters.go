@@ -73,15 +73,12 @@ func (s *MonstersService) FindMonster(name string) (*models.Monster, error) {
 		return nil, fmt.Errorf("missing name argument")
 	}
 
-	n := strings.TrimSpace(name)
-	q, _ := query.Values(s.Options)
-	url := s.URL + MonstersURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
-	url = fmt.Sprintf("%s?%s", url, q.Encode())
+	name = strings.ToLower(name)
+	name = strings.ReplaceAll(name, " ", "-")
 
-	if strings.Contains(name, " ") {
-		strings.ToLower(name)
-		strings.ReplaceAll(name, " ", "-")
-	}
+	q, _ := query.Values(s.Options)
+	url := s.URL + MonstersURL + fmt.Sprintf("/%s", strings.TrimPrefix(name, "/"))
+	url = fmt.Sprintf("%s?%s", url, q.Encode())
 
 	res, err := http.Get(url)
 	if err != nil {

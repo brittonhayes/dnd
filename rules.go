@@ -84,7 +84,6 @@ func (s *RulesService) FindRule(name string) (*models.Rules, error) {
 
 	n := strings.TrimSpace(name)
 	url := s.URL + RulesURL + fmt.Sprintf("/%s", strings.TrimPrefix(n, "/"))
-
 	res, err := http.Get(url)
 	if err != nil {
 		return nil, err

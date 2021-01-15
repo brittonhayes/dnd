@@ -195,17 +195,21 @@ func TestRacesService_ListRaces(t *testing.T) {
 }
 
 // Count the number of available races listed
-func ExampleRacesService_ListRacers_Count() {
+func ExampleRacesService_ListRaces_count() {
 	s := NewRacesService()
 
 	races, _ := s.ListRaces()
 	fmt.Printf("There are %d races available", races.Count)
 }
 
-// Create a new races service and apply custom query params
+// Create a new races service and finds a race
 func ExampleRacesService_FindRace() {
 	s := NewRacesService()
-	s.FindRace("dwarf")
+	r, err := s.FindRace("dwarf")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Race traits: ", r.Traits)
 }
 
 // Create a new custom races service

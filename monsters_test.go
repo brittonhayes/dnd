@@ -156,7 +156,7 @@ func ExampleMonstersService_FindMonster() {
 }
 
 // Count the number of available monsters listed
-func ExampleMonstersService_ListMonsters_Count() {
+func ExampleMonstersService_ListMonsters_count() {
 	s := NewMonstersService()
 	s.Options = &MonstersParams{
 		ChallengeRating: "3",
