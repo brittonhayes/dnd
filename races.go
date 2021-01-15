@@ -47,7 +47,7 @@ func (s *RacesService) FindSubRace(name string) (*models.SubRace, error) {
 	}
 
 	n := stringy.New()
-	n.Lower().Trim().ReplaceAll(" ", "-")
+	name = n.Lower().Trim().ReplaceAll(" ", "-").String()
 
 	url := s.URL + SubracesURL + fmt.Sprintf("/%s", strings.TrimPrefix(name, "/"))
 	res, err := http.Get(url)
