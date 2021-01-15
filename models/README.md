@@ -1158,7 +1158,7 @@ Get the URL of a spell
 
 ```go
 {
-	s := Spells{Name: "example spell URL"}
+	s := Spells{URL: "example spell URL"}
 	s.GetURL()
 }
 ```
@@ -1255,7 +1255,7 @@ type Subclass struct {
     Index string `json:"index"`
 
     // Class is the parent class for this subclass
-    Class string `json:"index"`
+    Class string `json:"class"`
 
     // Name is the name for this class resource.
     Name string `json:"name"`

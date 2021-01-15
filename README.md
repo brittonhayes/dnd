@@ -305,23 +305,6 @@ type RacesService struct {
 }
 ```
 
-<details><summary>Example (,ist Racers_ Count)</summary>
-<p>
-
-Count the number of available races listed
-
-```go
-{
-	s := NewRacesService()
-
-	races, _ := s.ListRaces()
-	fmt.Printf("There are %d races available", races.Count)
-}
-```
-
-</p>
-</details>
-
 ### func NewCustomRacesService
 
 ```go
@@ -364,12 +347,16 @@ func (s *RacesService) FindRace(name string) (*models.Race, error)
 <details><summary>Example</summary>
 <p>
 
-Create a new races service and apply custom query params
+Create a new races service and finds a race
 
 ```go
 {
 	s := NewRacesService()
-	s.FindRace("dwarf")
+	r, err := s.FindRace("dwarf")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Race traits: ", r.Traits)
 }
 ```
 
@@ -387,6 +374,23 @@ func (s *RacesService) FindSubRace(name string) (*models.SubRace, error)
 ```go
 func (s *RacesService) ListRaces() (*models.Resource, error)
 ```
+
+<details><summary>Example</summary>
+<p>
+
+Count the number of available races listed
+
+```go
+{
+	s := NewRacesService()
+
+	races, _ := s.ListRaces()
+	fmt.Printf("There are %d races available", races.Count)
+}
+```
+
+</p>
+</details>
 
 ### func \(\*RacesService\) ListSubRaces
 
