@@ -83,9 +83,8 @@ func ExampleSpells_GetName() {
 	s.GetName()
 }
 
-// TODO fix this to assign the URL field
 // Get the URL of a spell
 func ExampleSpells_GetURL() {
-	s := Spells{Name: "example spell URL"}
+	s := Spells{URL: "example spell URL"}
 	s.GetURL()
 }
