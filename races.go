@@ -3,7 +3,6 @@ package dnd
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/brittonhayes/dnd/internal/stringy"
 	"github.com/brittonhayes/dnd/models"
 	"gopkg.in/mcuadros/go-defaults.v1"
 	"io/ioutil"
@@ -46,8 +45,8 @@ func (s *RacesService) FindSubRace(name string) (*models.SubRace, error) {
 		return nil, fmt.Errorf("missing name argument")
 	}
 
-	n := stringy.New()
-	name = n.Lower().Trim().ReplaceAll(" ", "-").String()
+	name = strings.ToLower(name)
+	name = strings.ReplaceAll(name, " ", "-")
 
 	url := s.URL + SubracesURL + fmt.Sprintf("/%s", strings.TrimPrefix(name, "/"))
 	res, err := http.Get(url)

@@ -3,7 +3,6 @@ package dnd
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/brittonhayes/dnd/internal/stringy"
 	"github.com/brittonhayes/dnd/models"
 	"github.com/google/go-querystring/query"
 	"gopkg.in/mcuadros/go-defaults.v1"
@@ -74,8 +73,8 @@ func (s *MonstersService) FindMonster(name string) (*models.Monster, error) {
 		return nil, fmt.Errorf("missing name argument")
 	}
 
-	n := stringy.New()
-	name = n.Lower().Trim().ReplaceAll(" ", "-").String()
+	name = strings.ToLower(name)
+	name = strings.ReplaceAll(name, " ", "-")
 
 	q, _ := query.Values(s.Options)
 	url := s.URL + MonstersURL + fmt.Sprintf("/%s", strings.TrimPrefix(name, "/"))
