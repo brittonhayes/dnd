@@ -1154,11 +1154,11 @@ GetURL returns the URL of the spell
 <details><summary>Example</summary>
 <p>
 
-TODO fix this to assign the URL field Get the URL of a spell
+Get the URL of a spell
 
 ```go
 {
-	s := Spells{Name: "example spell URL"}
+	s := Spells{URL: "example spell URL"}
 	s.GetURL()
 }
 ```
