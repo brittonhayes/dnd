@@ -1,4 +1,4 @@
-package internal
+package gen
 
 import (
 	"github.com/brittonhayes/dnd"

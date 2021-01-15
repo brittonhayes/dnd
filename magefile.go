@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/brittonhayes/dnd/internal"
+	"github.com/brittonhayes/dnd/internal/gen"
 	"github.com/magefile/mage/sh"
 	"github.com/princjef/mageutil/bintool"
 	"github.com/princjef/mageutil/shellcmd"
@@ -44,5 +44,5 @@ func Generate() error {
 }
 
 func Mocks() error {
-	return internal.GenerateMocks()
+	return gen.GenerateMocks()
 }

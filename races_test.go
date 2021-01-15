@@ -195,7 +195,7 @@ func TestRacesService_ListRaces(t *testing.T) {
 }
 
 // Count the number of available races listed
-func ExampleRacesService_ListRacers_count() {
+func ExampleRacesService_ListRaces_count() {
 	s := NewRacesService()
 
 	races, _ := s.ListRaces()
