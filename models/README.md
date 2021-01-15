@@ -1154,7 +1154,7 @@ GetURL returns the URL of the spell
 <details><summary>Example</summary>
 <p>
 
-Get the URL of a spell
+TODO fix this to assign the URL field Get the URL of a spell
 
 ```go
 {
@@ -1255,7 +1255,7 @@ type Subclass struct {
     Index string `json:"index"`
 
     // Class is the parent class for this subclass
-    Class string `json:"index"`
+    Class string `json:"class"`
 
     // Name is the name for this class resource.
     Name string `json:"name"`
