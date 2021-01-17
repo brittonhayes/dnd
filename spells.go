@@ -41,6 +41,7 @@ func NewSpellsService() *SpellsService {
 }
 
 type SpellParams struct {
+	Name   string `url:"name"`
 	Level  string `url:"level"`
 	School string `url:"school"`
 }
@@ -49,7 +50,7 @@ type SpellParams struct {
 func (s *SpellsService) ListSpells() (*models.Resource, error) {
 	q, _ := query.Values(s.Options)
 	url := s.URL + SpellsURL
-	if s.Options.Level != "" || s.Options.School != "" {
+	if s.Options.Level != "" || s.Options.School != "" || s.Options.Name != "" {
 		url = fmt.Sprintf("%s?%s", url, q.Encode())
 	}
 
