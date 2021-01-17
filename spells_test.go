@@ -23,7 +23,7 @@ func TestSpellsService_FindSpell(t *testing.T) {
 		status  int
 		wantErr bool
 	}{
-		{"Find spells", args{"acid-arrow"}, fmt.Sprintf("%s%s/", BaseURL, SpellsURL), &SpellParams{"", ""}, mocks.SpellsFindAcidArrowMock, 200, false},
+		{"Find spells", args{"acid-arrow"}, fmt.Sprintf("%s%s/", BaseURL, SpellsURL), &SpellParams{"", "", ""}, mocks.SpellsFindAcidArrowMock, 200, false},
 	}
 
 	httpmock.Activate()
@@ -64,8 +64,8 @@ func TestSpellsService_ListSpells(t *testing.T) {
 		status  int
 		wantErr bool
 	}{
-		{"List spells", &SpellParams{"", ""}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListMock, 200, false},
-		{"List spells filtered", &SpellParams{"1", "evo"}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListFilteredMock, 200, false},
+		{"List spells", &SpellParams{"", "", ""}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListMock, 200, false},
+		{"List spells filtered", &SpellParams{"", "1", "evo"}, fmt.Sprintf("%s%s", BaseURL, SpellsURL), mocks.SpellsListFilteredMock, 200, false},
 	}
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
@@ -124,7 +124,7 @@ func TestNewCustomSpellsService(t *testing.T) {
 // Find a specific spell
 func ExampleSpellsService_FindSpell() {
 	c := NewClient()
-	spell, _ := c.Spells.FindSpell("animate-objects")
+	spell, _ := c.FindSpell("animate-objects")
 	fmt.Printf("The spell %s has a range of %s", spell.Name, spell.Range)
 }
 

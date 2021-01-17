@@ -11,9 +11,9 @@ func TestNewClient(t *testing.T) {
 		want *Client
 	}{
 		{"Create client", &Client{
-			Spells:   NewSpellsService(),
-			Monsters: NewMonstersService(),
-			Rules:    NewRulesService(),
+			SpellsService:   NewSpellsService(),
+			MonstersService: NewMonstersService(),
+			RulesService:    NewRulesService(),
 		}},
 	}
 	for _, tt := range tests {
@@ -37,14 +37,14 @@ func TestNewCustomClient(t *testing.T) {
 		want *Client
 	}{
 		{"Create custom client", args{url: BaseURL}, &Client{
-			Spells:   NewSpellsService(),
-			Monsters: NewMonstersService(),
-			Rules:    NewRulesService(),
+			SpellsService:   NewSpellsService(),
+			MonstersService: NewMonstersService(),
+			RulesService:    NewRulesService(),
 		}},
 		{"Create custom client and custom services", args{url: BaseURL}, &Client{
-			Spells:   NewCustomSpellsService(BaseURL, nil),
-			Monsters: NewCustomMonstersService(BaseURL, nil),
-			Rules:    NewCustomRulesService(BaseURL),
+			SpellsService:   NewCustomSpellsService(BaseURL, nil),
+			MonstersService: NewCustomMonstersService(BaseURL, nil),
+			RulesService:    NewCustomRulesService(BaseURL),
 		}},
 	}
 	for _, tt := range tests {

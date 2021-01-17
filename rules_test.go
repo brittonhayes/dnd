@@ -70,7 +70,7 @@ func TestRulesService_FindSection(t *testing.T) {
 		httpmock.RegisterResponder("GET", fmt.Sprintf("%s/%s", BaseURL+RuleSectionsURL, tt.args.name), httpmock.NewStringResponder(200, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
 			c := NewClient()
-			got, err := c.Rules.FindSection(tt.args.name)
+			got, err := c.FindSection(tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("FindSection() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -145,7 +145,7 @@ func TestRulesService_ListSections(t *testing.T) {
 		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s", BaseURL, RuleSectionsURL), httpmock.NewStringResponder(200, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
 			c := NewClient()
-			got, err := c.Rules.ListSections()
+			got, err := c.ListSections()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ListSections() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -207,7 +207,7 @@ func ExampleRulesService_FindRule() {
 	c := NewClient()
 
 	// Search for a rule
-	r, _ := c.Rules.FindRule("adventuring")
+	r, _ := c.FindRule("adventuring")
 
 	// Read the results of that rule as JSON
 	j, _ := json.MarshalIndent(&r, "", "\t")
@@ -220,7 +220,7 @@ func ExampleRulesService_FindSection() {
 	c := NewClient()
 
 	// Search for a rule
-	r, _ := c.Rules.FindSection("ability-checks")
+	r, _ := c.FindSection("ability-checks")
 
 	// Read the results of that rule section as JSON
 	j, _ := json.MarshalIndent(&r, "", "\t")

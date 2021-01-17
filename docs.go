@@ -11,6 +11,8 @@
 //
 // View the full docs on pkg.go.dev https://pkg.go.dev/github.com/brittonhayes/dnd
 //
+// View the API here https://www.dnd5eapi.co/
+//
 // Usage
 //
 // Using the package is as easy as create client, pick the endpoint, and run the method.
@@ -22,9 +24,9 @@
 //		c := dnd.NewClient()
 //
 //		// Fetch DnD rules about adventuring
-//		r, err := c.Rules.FindRule("adventuring")
+//		r, err := c.FindRule("adventuring")
 //		if err != nil {
-//			panic(err)
+//			// handle error
 //		}
 //
 //		// Print out the rule name
