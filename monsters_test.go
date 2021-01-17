@@ -151,7 +151,7 @@ func TestNewMonstersService(t *testing.T) {
 // Find a specific monster
 func ExampleMonstersService_FindMonster() {
 	c := NewClient()
-	monster, _ := c.Monsters.FindMonster("aboleth")
+	monster, _ := c.FindMonster("aboleth")
 	fmt.Printf("The monster %s has a challenge rating of %d", monster.Name, monster.ChallengeRating)
 }
 

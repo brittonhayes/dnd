@@ -124,7 +124,7 @@ func TestNewCustomSpellsService(t *testing.T) {
 // Find a specific spell
 func ExampleSpellsService_FindSpell() {
 	c := NewClient()
-	spell, _ := c.Spells.FindSpell("animate-objects")
+	spell, _ := c.FindSpell("animate-objects")
 	fmt.Printf("The spell %s has a range of %s", spell.Name, spell.Range)
 }
 
