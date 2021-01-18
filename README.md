@@ -20,6 +20,8 @@ go get github.com/brittonhayes/dnd
 
 View the full docs on pkg\.go\.dev https://pkg.go.dev/github.com/brittonhayes/dnd
 
+View the API here https://www.dnd5eapi.co/
+
 ### Usage
 
 Using the package is as easy as create client\, pick the endpoint\, and run the method\. This applies across every data type so it is consistent across the board\. Here's a simple example of how to fetch a rule from the DnD 5e ruleset\.
@@ -30,9 +32,9 @@ func main() {
 	c := dnd.NewClient()
 
 	// Fetch DnD rules about adventuring
-	r, err := c.Rules.FindRule("adventuring")
+	r, err := c.FindRule("adventuring")
 	if err != nil {
-		panic(err)
+		// handle error
 	}
 
 	// Print out the rule name
@@ -128,9 +130,9 @@ const (
 
 ```go
 type Client struct {
-    Rules    *RulesService
-    Spells   *SpellsService
-    Monsters *MonstersService
+    *RulesService
+    *SpellsService
+    *MonstersService
 }
 ```
 
@@ -247,7 +249,7 @@ Find a specific monster
 ```go
 {
 	c := NewClient()
-	monster, _ := c.Monsters.FindMonster("aboleth")
+	monster, _ := c.FindMonster("aboleth")
 	fmt.Printf("The monster %s has a challenge rating of %d", monster.Name, monster.ChallengeRating)
 }
 ```
@@ -454,7 +456,7 @@ Basic example of printing a rule as JSON
 
 	c := NewClient()
 
-	r, _ := c.Rules.FindRule("adventuring")
+	r, _ := c.FindRule("adventuring")
 
 	j, _ := json.MarshalIndent(&r, "", "\t")
 	fmt.Println(string(j))
@@ -482,7 +484,7 @@ Basic example of printing a rules section as JSON
 
 	c := NewClient()
 
-	r, _ := c.Rules.FindSection("ability-checks")
+	r, _ := c.FindSection("ability-checks")
 
 	j, _ := json.MarshalIndent(&r, "", "\t")
 	fmt.Println(string(j))
@@ -512,6 +514,7 @@ ListSections lists the available DnD 5e rule subsections in the API
 
 ```go
 type SpellParams struct {
+    Name   string `url:"name"`
     Level  string `url:"level"`
     School string `url:"school"`
 }
@@ -608,7 +611,7 @@ Find a specific spell
 ```go
 {
 	c := NewClient()
-	spell, _ := c.Spells.FindSpell("animate-objects")
+	spell, _ := c.FindSpell("animate-objects")
 	fmt.Printf("The spell %s has a range of %s", spell.Name, spell.Range)
 }
 ```

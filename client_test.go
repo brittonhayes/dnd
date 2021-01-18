@@ -36,11 +36,6 @@ func TestNewCustomClient(t *testing.T) {
 		args args
 		want *Client
 	}{
-		{"Create custom client", args{url: BaseURL}, &Client{
-			SpellsService:   NewSpellsService(),
-			MonstersService: NewMonstersService(),
-			RulesService:    NewRulesService(),
-		}},
 		{"Create custom client and custom services", args{url: BaseURL}, &Client{
 			SpellsService:   NewCustomSpellsService(BaseURL, nil),
 			MonstersService: NewCustomMonstersService(BaseURL, nil),

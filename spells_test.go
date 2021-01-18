@@ -89,7 +89,11 @@ func TestNewSpellsService(t *testing.T) {
 		name string
 		want *SpellsService
 	}{
-		{"Create spell service", &SpellsService{URL: BaseURL, Options: nil}},
+		{"Create spell service", &SpellsService{URL: BaseURL, Options: &SpellParams{
+			Name:   "",
+			Level:  "",
+			School: "",
+		}}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

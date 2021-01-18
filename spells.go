@@ -36,6 +36,11 @@ func NewCustomSpellsService(url string, params *SpellParams) *SpellsService {
 // spells service
 func NewSpellsService() *SpellsService {
 	s := new(SpellsService)
+	s.Options = &SpellParams{
+		Name:   "",
+		Level:  "",
+		School: "",
+	}
 	defaults.SetDefaults(s)
 	return s
 }
