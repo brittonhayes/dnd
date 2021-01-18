@@ -10,7 +10,7 @@ import (
 // Print out a spell with go text/template
 func main() {
 	// In your terminal, type:
-	// go main.go acid-arrow
+	// go run main.go acid-arrow
 	args := os.Args[1]
 	renderSpellTemplate(args)
 }
