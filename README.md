@@ -63,6 +63,16 @@ mage test
 - [type Client](<#type-client>)
   - [func NewClient() *Client](<#func-newclient>)
   - [func NewCustomClient(url string, sp *SpellParams, mp *MonstersParams) *Client](<#func-newcustomclient>)
+- [type Equipment](<#type-equipment>)
+- [type EquipmentParams](<#type-equipmentparams>)
+- [type EquipmentService](<#type-equipmentservice>)
+  - [func NewCustomEquipmentService(url string, params *EquipmentParams) *EquipmentService](<#func-newcustomequipmentservice>)
+  - [func NewEquipmentService() *EquipmentService](<#func-newequipmentservice>)
+  - [func (s *EquipmentService) FindAdventuringGear(name string) (*models.AdventuringGear, error)](<#func-equipmentservice-findadventuringgear>)
+  - [func (s *EquipmentService) FindArmor(name string) (*models.Armor, error)](<#func-equipmentservice-findarmor>)
+  - [func (s *EquipmentService) FindEquipmentPack(name string) (*models.EquipmentPack, error)](<#func-equipmentservice-findequipmentpack>)
+  - [func (s *EquipmentService) FindWeapon(name string) (*models.Weapon, error)](<#func-equipmentservice-findweapon>)
+  - [func (s *EquipmentService) ListEquipment() (*models.Resource, error)](<#func-equipmentservice-listequipment>)
 - [type Monsters](<#type-monsters>)
 - [type MonstersParams](<#type-monstersparams>)
 - [type MonstersService](<#type-monstersservice>)
@@ -133,6 +143,7 @@ type Client struct {
     *RulesService
     *SpellsService
     *MonstersService
+    *EquipmentService
 }
 ```
 
@@ -151,6 +162,93 @@ func NewCustomClient(url string, sp *SpellParams, mp *MonstersParams) *Client
 ```
 
 NewCustomClient creates a new instance of the DnD REST API client
+
+## type Equipment
+
+The Equipment interface shows all of the available methods for the Equipment endpoint
+
+```go
+type Equipment interface {
+    ListEquipment() (*models.Resource, error)
+    FindWeapon(name string) (*models.Weapon, error)
+    FindArmor(name string) (*models.Armor, error)
+    FindAdventuringGear(name string) (*models.AdventuringGear, error)
+    FindEquipmentPack(name string) (*models.EquipmentPack, error)
+}
+```
+
+## type EquipmentParams
+
+```go
+type EquipmentParams struct {
+}
+```
+
+## type EquipmentService
+
+```go
+type EquipmentService struct {
+    // URL is the base URL of the service
+    URL     string `default:"https://www.dnd5eapi.co/api"`
+    Options *EquipmentParams
+}
+```
+
+### func NewCustomEquipmentService
+
+```go
+func NewCustomEquipmentService(url string, params *EquipmentParams) *EquipmentService
+```
+
+NewEquipmentService creates a custom instance of the Equipment service
+
+### func NewEquipmentService
+
+```go
+func NewEquipmentService() *EquipmentService
+```
+
+NewEquipmentService creates a new instance of the Equipment service
+
+### func \(\*EquipmentService\) FindAdventuringGear
+
+```go
+func (s *EquipmentService) FindAdventuringGear(name string) (*models.AdventuringGear, error)
+```
+
+FindAdventuringGear fetches AdventuringGear's details by name
+
+### func \(\*EquipmentService\) FindArmor
+
+```go
+func (s *EquipmentService) FindArmor(name string) (*models.Armor, error)
+```
+
+FindArmor fetches Armor's details by name
+
+### func \(\*EquipmentService\) FindEquipmentPack
+
+```go
+func (s *EquipmentService) FindEquipmentPack(name string) (*models.EquipmentPack, error)
+```
+
+FindEquipmentPack fetches EquipmentPack's details by name
+
+### func \(\*EquipmentService\) FindWeapon
+
+```go
+func (s *EquipmentService) FindWeapon(name string) (*models.Weapon, error)
+```
+
+FindWeapon fetches a Weapon's details by name
+
+### func \(\*EquipmentService\) ListEquipment
+
+```go
+func (s *EquipmentService) ListEquipment() (*models.Resource, error)
+```
+
+ListEquipment available in the API
 
 ## type Monsters
 

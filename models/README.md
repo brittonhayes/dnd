@@ -257,7 +257,7 @@ type Armor struct {
     EquipmentCategory APIReference `json:"equipment_category"`
 
     // ArmorCategory is the category of armor this falls into
-    ArmorCategory APIReference `json:"armor_category"`
+    ArmorCategory string `json:"armor_category"`
 
     // ArmorCategory is the details on how to calculate armor class.
     ArmorClass ArmorClass `json:"armor_class"`
@@ -309,9 +309,9 @@ ArmorClass is the details on how to calculate armor class\.
 
 ```go
 type ArmorClass struct {
-    Base     int  `json:"base"`
-    DexBonus bool `json:"dex_bonus"`
-    MaxBonus bool `json:"max_bonus"`
+    Base     *int  `json:"base"`
+    DexBonus *bool `json:"dex_bonus"`
+    MaxBonus *bool `json:"max_bonus"`
 }
 ```
 
@@ -471,9 +471,6 @@ type EquipmentPack struct {
 
     // Cost is the financial worth of this equipment
     Cost Cost `json:"cost"`
-
-    // Weight is the numerical weight of this item
-    Weight int `json:"weight"`
 
     // URL is the URL reference of this resource
     URL string `json:"url"`
@@ -871,8 +868,8 @@ type Race struct {
 
 ```go
 type Range struct {
-    Normal int `json:"normal"`
-    Long   int `json:"long"`
+    Normal *int `json:"normal"`
+    Long   *int `json:"long"`
 }
 ```
 
@@ -1329,7 +1326,7 @@ type Weapon struct {
     EquipmentCategory APIReference `json:"equipment_category"`
 
     // WeaponCategory is the category of weapon this falls into
-    WeaponCategory APIReference `json:"weapon_category"`
+    WeaponCategory string `json:"weapon_category"`
 
     // WeaponRange is whether this is a Melee or Ranged weapon.
     WeaponRange string `json:"weapon_range"`
@@ -1345,11 +1342,11 @@ type Weapon struct {
 
     // TwoHandedDamage when wielded with two hands.
     // It includes data on dice, bonus, and damage type.
-    TwoHandedDamage ActionDamage `json:"two_handed_damage"`
+    TwoHandedDamage *ActionDamage `json:"two_handed_damage,omitempty"`
 
     // Range Includes the normal and long range for a weapon,
     // only pertains to Ranged weapons
-    Range Range `json:"range"`
+    Range *Range `json:"range"`
 
     // Weight is the numerical weight of this item
     Weight int `json:"weight"`
