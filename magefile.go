@@ -7,6 +7,7 @@ import (
 	"github.com/magefile/mage/sh"
 	"github.com/princjef/mageutil/bintool"
 	"github.com/princjef/mageutil/shellcmd"
+	"os"
 )
 
 var linter = bintool.Must(bintool.New(
@@ -45,4 +46,16 @@ func Generate() error {
 
 func Mocks() error {
 	return gen.GenerateMocks()
+}
+
+// Create a new service with mage service [resource] [model]
+func Service() error {
+	args := os.Args
+	return gen.GenerateService(args[2], args[3])
+}
+
+// Create a new model with mage model [name]
+func Model() error {
+	args := os.Args
+	return gen.GenerateModel(args[2])
 }

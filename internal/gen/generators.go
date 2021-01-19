@@ -1,10 +1,12 @@
 package gen
 
 import (
+	"fmt"
 	"github.com/brittonhayes/dnd"
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strings"
 	"text/template"
 	"time"
 )
@@ -15,6 +17,11 @@ type endpoint struct {
 	Response string `json:"response"`
 }
 
+type service struct {
+	Resource string
+	Model    string
+}
+
 func GenerateMocks() error {
 	var tpl *template.Template
 	m := []endpoint{
@@ -22,6 +29,10 @@ func GenerateMocks() error {
 		{Name: "Classes", URL: dnd.BaseURL + dnd.ClassesURL},
 		{Name: "Conditions", URL: dnd.BaseURL + dnd.ConditionsURL},
 		{Name: "DamageTypes", URL: dnd.BaseURL + dnd.DamageTypesURL},
+		{Name: "EquipmentWeapon", URL: dnd.BaseURL + dnd.EquipmentURL + "/club"},
+		{Name: "EquipmentArmor", URL: dnd.BaseURL + dnd.EquipmentURL + "/padded"},
+		{Name: "EquipmentAdventuringGear", URL: dnd.BaseURL + dnd.EquipmentURL + "/abacus"},
+		{Name: "EquipmentPackBurglars", URL: dnd.BaseURL + dnd.EquipmentURL + "/burglars-pack"},
 		{Name: "MonstersFindAboleth", URL: dnd.BaseURL + dnd.MonstersURL + "/aboleth"},
 		{Name: "MonstersList", URL: dnd.BaseURL + dnd.MonstersURL},
 		{Name: "RacesFindDwarf", URL: dnd.BaseURL + dnd.RacesURL + "/dwarf"},
@@ -65,7 +76,42 @@ func GenerateMocks() error {
 	}
 	defer f.Close()
 
-	tpl = template.Must(template.ParseGlob("templates/*.tmpl"))
+	tpl = template.Must(template.ParseGlob("templates/mock.tmpl"))
 	_ = tpl.ExecuteTemplate(f, "mock.tmpl", m)
 	return nil
+}
+
+func GenerateService(resource string, model string) error {
+	if resource == "" || model == "" {
+		return fmt.Errorf("missing required arguments")
+	}
+
+	file := strings.ToLower(resource) + ".go"
+	f, err := os.Create(file)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	s := &service{strings.Title(resource), strings.Title(model)}
+	tpl := template.Must(template.ParseGlob("templates/service.tmpl"))
+	return tpl.ExecuteTemplate(f, "service.tmpl", s)
+}
+
+func GenerateModel(model string) error {
+	file := fmt.Sprintf("models/%s", strings.ToLower(model)+".go")
+	f, err := os.Create(file)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	m := strings.Title(model)
+	t, err := template.New("model").Parse(`package models
+type {{.Model}} struct {}`)
+	if err != nil {
+		return err
+	}
+
+	return t.ExecuteTemplate(f, "model", &service{Model: m})
 }

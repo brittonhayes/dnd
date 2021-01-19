@@ -4,15 +4,17 @@ type Client struct {
 	*RulesService
 	*SpellsService
 	*MonstersService
+	*EquipmentService
 }
 
 // NewClient creates a new instance
 // of the DnD REST API client
 func NewClient() *Client {
 	return &Client{
-		RulesService:    NewRulesService(),
-		SpellsService:   NewSpellsService(),
-		MonstersService: NewMonstersService(),
+		RulesService:     NewRulesService(),
+		SpellsService:    NewSpellsService(),
+		MonstersService:  NewMonstersService(),
+		EquipmentService: NewEquipmentService(),
 	}
 }
 
@@ -20,8 +22,9 @@ func NewClient() *Client {
 // of the DnD REST API client
 func NewCustomClient(url string, sp *SpellParams, mp *MonstersParams) *Client {
 	return &Client{
-		RulesService:    NewCustomRulesService(url),
-		SpellsService:   NewCustomSpellsService(url, sp),
-		MonstersService: NewCustomMonstersService(url, mp),
+		RulesService:     NewCustomRulesService(url),
+		SpellsService:    NewCustomSpellsService(url, sp),
+		MonstersService:  NewCustomMonstersService(url, mp),
+		EquipmentService: NewEquipmentService(),
 	}
 }
