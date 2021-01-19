@@ -1,0 +1,102 @@
+package dnd
+
+import (
+    "encoding/json"
+    "fmt"
+    "github.com/brittonhayes/dnd/models"
+    "github.com/google/go-querystring/query"
+    "gopkg.in/mcuadros/go-defaults.v1"
+    "io/ioutil"
+    "net/http"
+    "strings"
+)
+
+// TODO add endpoint URL to endpoints.go
+const (
+    {{.Resource}}URL = "/api/{{.Resource}}"
+)
+
+var _ {{.Resource}} = &{{.Resource}}Service{}
+
+// The {{.Resource}} interface shows all of the
+// available methods for the {{.Resource}} endpoint
+type {{.Resource}} interface {
+    List{{.Resource}}() (*models.Resource, error)
+    Find{{.Model}}(name string) (*models.{{.Model}}, error)
+}
+
+type {{.Resource}}Service struct {
+    // URL is the base URL of the service
+    URL     string `default:"https://www.dnd5eapi.co/api"`
+    Options *{{.Resource}}Params
+}
+
+type {{.Resource}}Params struct {
+    // TODO implement all parameters available for the {{.Resource}} service
+}
+
+// New{{.Resource}}Service creates a new instance of the
+// {{.Resource}} service
+func New{{.Resource}}Service() *{{.Resource}}Service {
+    m := new({{.Resource}}Service)
+    defaults.SetDefaults(m)
+    return m
+}
+
+
+// New{{.Resource}}Service creates a custom instance of the
+// {{.Resource}} service
+func NewCustom{{.Resource}}Service(url string, params *{{.Resource}}Params) *{{.Resource}}Service {
+    return &{{.Resource}}Service{URL: url, Options: params}
+}
+
+// List{{.Resource}} available in the API
+func (s *{{.Resource}}Service) List{{.Resource}}() (*models.Resource, error) {
+    q, _ := query.Values(s.Options)
+    url := s.URL + {{.Resource}}URL
+    url = fmt.Sprintf("%s?%s", url, q.Encode())
+
+    res, err := http.Get(url)
+    if err != nil {
+        return nil, err
+    }
+
+    defer res.Body.Close()
+
+    body, _ := ioutil.ReadAll(res.Body)
+    {{.Resource}} := new(models.Resource)
+    if err := json.Unmarshal(body, &{{.Resource}}); err != nil {
+        return nil, err
+    }
+
+    return {{.Resource}}, nil
+}
+
+
+// Find{{.Model}} fetches a {{.Model}}'s details by name
+func (s *{{.Resource}}Service) Find{{.Model}}(name string) (*models.{{.Model}}, error) {
+    if name == "" {
+        return nil, fmt.Errorf("missing name argument")
+    }
+
+    name = strings.ToLower(name)
+    name = strings.ReplaceAll(name, " ", "-")
+
+    q, _ := query.Values(s.Options)
+    url := s.URL + {{.Resource}}URL + fmt.Sprintf("/%s", strings.TrimPrefix(name, "/"))
+    url = fmt.Sprintf("%s?%s", url, q.Encode())
+
+    res, err := http.Get(url)
+    if err != nil {
+        return nil, err
+    }
+    defer res.Body.Close()
+
+    body, _ := ioutil.ReadAll(res.Body)
+    {{.Model}} := new(models.{{.Model}})
+    if err := json.Unmarshal(body, &{{.Model}}); err != nil {
+        return nil, err
+    }
+
+    return {{.Model}}, nil
+}
