@@ -1,5 +1,15 @@
 package models
 
+import "encoding/json"
+
+var (
+	_ Sheriff = &Class{}
+	_ Sheriff = &Subclass{}
+	_ Sheriff = &Features{}
+	_ Sheriff = &StartingEquipment{}
+	_ Sheriff = &StartingEquipmentItem{}
+)
+
 // Class is a fundamental part of the identity and nature of characters in the Dungeons & Dragons role-playing game.
 // A character's capabilities, strengths, and weaknesses are largely defined by its class.
 // A character's class affects a character's available skills and abilities.
@@ -39,6 +49,10 @@ type Class struct {
 	URL string `json:"url"`
 }
 
+func (c *Class) JSON(data []byte) error {
+	return json.Unmarshal(data, &c)
+}
+
 // Subclass reflects the different paths a class may take as levels are gained
 type Subclass struct {
 	// Index is the class index for shorthand searching.
@@ -68,6 +82,10 @@ type Subclass struct {
 	URL string `json:"url"`
 }
 
+func (c *Subclass) JSON(data []byte) error {
+	return json.Unmarshal(data, &c)
+}
+
 // Features are the features of a class
 type Features struct {
 	// Index is the feature index for shorthand searching.
@@ -93,6 +111,10 @@ type Features struct {
 	URL string `json:"url"`
 }
 
+func (f *Features) JSON(data []byte) error {
+	return json.Unmarshal(data, &f)
+}
+
 // StartingEquipment are the starting equipment of a class
 type StartingEquipment struct {
 	// Index is the class index for shorthand searching
@@ -112,9 +134,17 @@ type StartingEquipment struct {
 	URL string `json:"url"`
 }
 
+func (s *StartingEquipment) JSON(data []byte) error {
+	return json.Unmarshal(data, &s)
+}
+
 // StartingEquipmentItem is a single item in
 // a list of starting equipment
 type StartingEquipmentItem struct {
 	Equipment APIReference `json:"equipment"`
 	Quantity  int          `json:"quantity"`
+}
+
+func (c *StartingEquipmentItem) JSON(data []byte) error {
+	return json.Unmarshal(data, &c)
 }

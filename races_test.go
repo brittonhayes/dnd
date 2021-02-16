@@ -3,11 +3,14 @@ package dnd
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/brittonhayes/dnd/mocks"
-	"github.com/jarcoal/httpmock"
-	"github.com/kinbiko/jsonassert"
 	"reflect"
 	"testing"
+
+	"github.com/brittonhayes/dnd/endpoints"
+	"github.com/brittonhayes/dnd/internal/mocks"
+	"github.com/brittonhayes/dnd/internal/utils"
+	"github.com/jarcoal/httpmock"
+	"github.com/kinbiko/jsonassert"
 )
 
 func TestNewCustomRacesService(t *testing.T) {
@@ -19,7 +22,7 @@ func TestNewCustomRacesService(t *testing.T) {
 		args args
 		want *RacesService
 	}{
-		{"New races service", args{url: BaseURL}, &RacesService{URL: BaseURL}},
+		{"New races service", args{url: endpoints.BaseURL.String()}, &RacesService{URL: endpoints.BaseURL.String()}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -35,7 +38,7 @@ func TestNewRacesService(t *testing.T) {
 		name string
 		want *RacesService
 	}{
-		{"New races service", &RacesService{URL: BaseURL}},
+		{"New races service", &RacesService{URL: endpoints.BaseURL.String()}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -64,7 +67,7 @@ func TestRacesService_FindRace(t *testing.T) {
 	defer httpmock.DeactivateAndReset()
 
 	for _, tt := range tests {
-		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s/%s", BaseURL, RacesURL, tt.args.name), httpmock.NewStringResponder(tt.status, string(tt.mock)))
+		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s/%s", endpoints.BaseURL.String(), endpoints.RacesURL, tt.args.name), httpmock.NewStringResponder(tt.status, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
 			s := NewRacesService()
 			got, err := s.FindRace(tt.args.name)
@@ -104,7 +107,7 @@ func TestRacesService_FindSubRace(t *testing.T) {
 	defer httpmock.DeactivateAndReset()
 
 	for _, tt := range tests {
-		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s/%s", BaseURL, SubracesURL, tt.args.name), httpmock.NewStringResponder(tt.status, string(tt.mock)))
+		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s/%s", endpoints.BaseURL.String(), endpoints.SubracesURL, tt.args.name), httpmock.NewStringResponder(tt.status, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
 			s := NewRacesService()
 			got, err := s.FindSubRace(tt.args.name)
@@ -139,7 +142,7 @@ func TestRacesService_ListSubRaces(t *testing.T) {
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 	for _, tt := range tests {
-		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s", BaseURL, SubracesURL), httpmock.NewStringResponder(tt.status, string(tt.mock)))
+		httpmock.RegisterResponder("GET", utils.URL(endpoints.BaseURL.String(), endpoints.SubracesURL.String(), ""), httpmock.NewStringResponder(tt.status, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
 
 			s := NewRacesService()
@@ -168,13 +171,13 @@ func TestRacesService_ListRaces(t *testing.T) {
 		status  int
 		wantErr bool
 	}{
-		{"List races", fmt.Sprintf("%s%s", BaseURL, RacesURL), mocks.RacesListRacesMock, 200, false},
+		{"List races", utils.URL(endpoints.BaseURL.String(), endpoints.RacesURL.String(), ""), mocks.RacesListRacesMock, 200, false},
 	}
 
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 	for _, tt := range tests {
-		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s", BaseURL, RacesURL), httpmock.NewStringResponder(tt.status, string(tt.mock)))
+		httpmock.RegisterResponder("GET", utils.URL(endpoints.BaseURL.String(), endpoints.RacesURL.String(), ""), httpmock.NewStringResponder(tt.status, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
 			s := NewRacesService()
 			got, err := s.ListRaces()
@@ -214,7 +217,7 @@ func ExampleRacesService_FindRace() {
 
 // Create a new custom races service
 func ExampleNewCustomRacesService() {
-	s := NewCustomRacesService(BaseURL)
+	s := NewCustomRacesService(endpoints.BaseURL.String())
 
 	races, _ := s.ListRaces()
 	fmt.Println("Results: ", races.Results)

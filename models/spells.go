@@ -1,5 +1,7 @@
 package models
 
+import "encoding/json"
+
 // Spells are the spells of D&D
 type Spells struct {
 	// Index of the spell for shorthand searching
@@ -74,6 +76,10 @@ type Spells struct {
 
 	// URL is the URL reference of this resource
 	URL string `json:"url"`
+}
+
+func (s *Spells) JSON(data []byte) error {
+	return json.Unmarshal(data, &s)
 }
 
 // GetName returns the name of the spell

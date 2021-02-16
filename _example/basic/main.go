@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/brittonhayes/dnd"
 	"os"
 	"text/template"
+
+	"github.com/brittonhayes/dnd"
 )
 
 // Print out a spell with go text/template
@@ -22,7 +23,7 @@ func renderSpellTemplate(name string) {
 	c := dnd.NewClient()
 
 	// Search for a spell
-	spell, err := c.FindSpell(name)
+	spell, err := c.Spells.Find(name)
 	if err != nil {
 		panic(err)
 	}

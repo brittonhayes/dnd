@@ -1,5 +1,12 @@
 package models
 
+import "encoding/json"
+
+var (
+	_ Sheriff = &Rules{}
+	_ Sheriff = &RulesSubsection{}
+)
+
 type Rules struct {
 	Name        string            `json:"name"`
 	Index       string            `json:"index"`
@@ -8,11 +15,19 @@ type Rules struct {
 	URL         string            `json:"url"`
 }
 
+func (r *Rules) JSON(data []byte) error {
+	return json.Unmarshal(data, &r)
+}
+
 type RulesSubsection struct {
 	Name  string `json:"name"`
 	Index string `json:"index"`
 	URL   string `json:"url"`
 	Desc  string `json:"desc,omitempty"`
+}
+
+func (r *RulesSubsection) JSON(data []byte) error {
+	return json.Unmarshal(data, &r)
 }
 
 // GetName returns the name of the rule

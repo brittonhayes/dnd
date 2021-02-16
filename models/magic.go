@@ -1,5 +1,9 @@
 package models
 
+import "encoding/json"
+
+var _ Sheriff = &MagicItem{}
+
 // MagicItem is the structure for a magic item obtained
 // in the dungeons you explore.
 type MagicItem struct {
@@ -17,6 +21,10 @@ type MagicItem struct {
 
 	// URL is the URL reference of this resource
 	URL string `json:"url"`
+}
+
+func (m *MagicItem) JSON(data []byte) error {
+	return json.Unmarshal(data, &m)
 }
 
 // GetName gets the name of the magic item

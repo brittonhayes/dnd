@@ -1,13 +1,14 @@
-//+build mage
+// +build mage
 
 package main
 
 import (
+	"os"
+
 	"github.com/brittonhayes/dnd/internal/gen"
 	"github.com/magefile/mage/sh"
 	"github.com/princjef/mageutil/bintool"
 	"github.com/princjef/mageutil/shellcmd"
-	"os"
 )
 
 var linter = bintool.Must(bintool.New(
@@ -48,10 +49,9 @@ func Mocks() error {
 	return gen.GenerateMocks()
 }
 
-// Create a new service with mage service [resource] [model]
-func Service() error {
-	args := os.Args
-	return gen.GenerateService(args[2], args[3])
+// Create a new service with mage services
+func Services() error {
+	return gen.GenerateServices(gen.Services)
 }
 
 // Create a new model with mage model [name]

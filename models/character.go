@@ -1,5 +1,14 @@
 package models
 
+import "encoding/json"
+
+var (
+	_ Sheriff = &Skill{}
+	_ Sheriff = &AbilityScore{}
+	_ Sheriff = &Proficiency{}
+	_ Sheriff = &Language{}
+)
+
 // Skill represents a skill that a character possesses
 type Skill struct {
 	// Index is the skill index for shorthand searching.
@@ -18,6 +27,10 @@ type Skill struct {
 
 	// URL is the URL of the referenced resource
 	URL string `json:"url"`
+}
+
+func (s *Skill) JSON(data []byte) error {
+	return json.Unmarshal(data, &s)
 }
 
 // AbilityScore is a number that defines the magnitude of each creature’s abilities.
@@ -47,6 +60,10 @@ type AbilityScore struct {
 	URL string `json:"url"`
 }
 
+func (a *AbilityScore) JSON(data []byte) error {
+	return json.Unmarshal(data, &a)
+}
+
 // Proficiency By virtue of your race, your character can speak, read, and write certain Proficiencies.
 type Proficiency struct {
 	// Index is the proficiency index for shorthand searching.
@@ -58,7 +75,7 @@ type Proficiency struct {
 	// Name is the name of this proficiency resource
 	Name string `json:"name"`
 
-	//Classes that start with this proficiency.
+	// Classes that start with this proficiency.
 	Classes []APIReference `json:"classes"`
 
 	// Races that start with this proficiency.
@@ -69,6 +86,10 @@ type Proficiency struct {
 
 	// References is a list of references
 	References []APIReference `json:"references"`
+}
+
+func (p *Proficiency) JSON(data []byte) error {
+	return json.Unmarshal(data, &p)
 }
 
 // Language By virtue of your race, your character can speak, read, and write certain languages.
@@ -82,7 +103,7 @@ type Language struct {
 	// Type is whether the language is standard or exotic.
 	Type string `json:"type"`
 
-	//TypicalSpeakers are races that tend to speak this language.
+	// TypicalSpeakers are races that tend to speak this language.
 	TypicalSpeakers []string `json:"typical_speakers"`
 
 	// Script is the script used for writing in this language.
@@ -90,4 +111,8 @@ type Language struct {
 
 	// URL of the referenced resource.
 	URL string `json:"url"`
+}
+
+func (l *Language) JSON(data []byte) error {
+	return json.Unmarshal(data, &l)
 }

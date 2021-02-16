@@ -31,20 +31,20 @@ type, so it is consistent across the board. Here's a simple example of how to fe
 
 ```go
 func main() {
-// Create a dnd client
-c := dnd.NewClient()
-
-// Fetch DnD rules about adventuring
-r, _ := c.FindRule("adventuring")
-
-// Print out the rule's name
-fmt.Println("Name", r.Name)
+    // Create a dnd client
+    c := dnd.NewClient()
+    
+    // Fetch DnD rules about adventuring
+    r, _ := c.Rules.Find("adventuring")
+    
+    // Print out the rule's name
+    fmt.Println("Name", r.Name)
 }
 ```
 
 ## Examples
 
-For example uses of the package, check out the [example](./example) directory
+For example uses of the package, check out the [example](_example) directory
 
 ## Development
 
@@ -52,8 +52,8 @@ If you'd like to contribute to DnD\, make sure you have mage installed: https://
 
 ```shell
 # Download dependencies and run tests
-mage download
-mage test
+go run main.go download
+go test ./...
 ```
 
 ---

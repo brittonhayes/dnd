@@ -11,7 +11,7 @@ func TestSpells_GetIndex(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get spell index", fields{Index: "example"}, "example"},
+		{"Get spell index", fields{Index: "_example"}, "_example"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -34,7 +34,7 @@ func TestSpells_GetName(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get spell name", fields{Name: "example"}, "example"},
+		{"Get spell name", fields{Name: "_example"}, "_example"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -57,7 +57,7 @@ func TestSpells_GetURL(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get spell url", fields{URL: "example"}, "example"},
+		{"Get spell url", fields{URL: "_example"}, "_example"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -73,18 +73,18 @@ func TestSpells_GetURL(t *testing.T) {
 
 // Get the index address of a spell
 func ExampleSpells_GetIndex() {
-	s := Spells{Index: "example-index"}
+	s := Spells{Index: "_example-index"}
 	s.GetIndex()
 }
 
 // Get the name of a spell
 func ExampleSpells_GetName() {
-	s := Spells{Name: "example spell name"}
+	s := Spells{Name: "_example spell name"}
 	s.GetName()
 }
 
 // Get the URL of a spell
 func ExampleSpells_GetURL() {
-	s := Spells{URL: "example spell URL"}
+	s := Spells{URL: "_example spell URL"}
 	s.GetURL()
 }

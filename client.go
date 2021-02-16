@@ -1,30 +1,30 @@
 package dnd
 
 type Client struct {
-	*RulesService
-	*SpellsService
-	*MonstersService
-	*EquipmentService
+	Rules     *RulesService
+	Spells    *SpellsService
+	Monsters  *MonstersService
+	Equipment *EquipmentService
 }
 
 // NewClient creates a new instance
 // of the DnD REST API client
 func NewClient() *Client {
 	return &Client{
-		RulesService:     NewRulesService(),
-		SpellsService:    NewSpellsService(),
-		MonstersService:  NewMonstersService(),
-		EquipmentService: NewEquipmentService(),
+		Rules:     NewRulesService(),
+		Spells:    NewSpellsService(),
+		Monsters:  NewMonstersService(),
+		Equipment: NewEquipmentService(),
 	}
 }
 
 // NewCustomClient creates a new instance
 // of the DnD REST API client
-func NewCustomClient(url string, sp *SpellParams, mp *MonstersParams) *Client {
+func NewCustomClient(url string, sp *SpellsParams, mp *MonstersParams) *Client {
 	return &Client{
-		RulesService:     NewCustomRulesService(url),
-		SpellsService:    NewCustomSpellsService(url, sp),
-		MonstersService:  NewCustomMonstersService(url, mp),
-		EquipmentService: NewEquipmentService(),
+		Rules:     NewCustomRulesService(url),
+		Spells:    NewCustomSpellsService(url, sp),
+		Monsters:  NewCustomMonstersService(url, mp),
+		Equipment: NewEquipmentService(),
 	}
 }

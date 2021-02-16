@@ -1,5 +1,9 @@
 package models
 
+import "encoding/json"
+
+var _ Sheriff = &Monster{}
+
 type Monster struct {
 	// Index is the monster index for shorthand searching.
 	Index string `json:"index"`
@@ -27,7 +31,7 @@ type Monster struct {
 	HitPoints int `json:"hit_points"`
 
 	// HitDice of a monster can be used to make a version of the same monster whose hit points are determined by the roll of the die.
-	// For example: A monster with 2d6 would have its hit points determine by rolling a 6 sided die twice.
+	// For _example: A monster with 2d6 would have its hit points determine by rolling a 6 sided die twice.
 	HitDice string `json:"hit_dice"`
 
 	// Forms applicable to Lycanthropes that have multiple forms. This links to the other related monster entries that are the same.
@@ -93,6 +97,10 @@ type Monster struct {
 
 	// URL of the referenced resource
 	URL string `json:"url"`
+}
+
+func (m *Monster) JSON(data []byte) error {
+	return json.Unmarshal(data, &m)
 }
 
 type ActionDamage struct {

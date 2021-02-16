@@ -1,9 +1,20 @@
 package models
 
-var _ Getter = &Weapon{}
-var _ Getter = &Armor{}
-var _ Getter = &AdventuringGear{}
-var _ Getter = &EquipmentPack{}
+import "encoding/json"
+
+var (
+	_ Getter  = &AdventuringGear{}
+	_ Getter  = &Armor{}
+	_ Getter  = &EquipmentPack{}
+	_ Getter  = &Weapon{}
+	_ Sheriff = &AdventuringGear{}
+	_ Sheriff = &ArmorClass{}
+	_ Sheriff = &Armor{}
+	_ Sheriff = &EquipmentPack{}
+	_ Sheriff = &PackContents{}
+	_ Sheriff = &WeaponProperties{}
+	_ Sheriff = &Weapon{}
+)
 
 // Weapon is the structure for weapons obtained
 // in the dungeons you explore.
@@ -48,6 +59,10 @@ type Weapon struct {
 
 	// URL is the URL reference of this resource
 	URL string `json:"url"`
+}
+
+func (w *Weapon) JSON(data []byte) error {
+	return json.Unmarshal(data, &w)
 }
 
 type Range struct {
@@ -104,6 +119,10 @@ type Armor struct {
 	URL string `json:"url"`
 }
 
+func (a *Armor) JSON(data []byte) error {
+	return json.Unmarshal(data, &a)
+}
+
 // GetName returns the name of the gear
 func (a *Armor) GetName() string {
 	return a.Name
@@ -124,6 +143,10 @@ type ArmorClass struct {
 	Base     *int  `json:"base"`
 	DexBonus *bool `json:"dex_bonus"`
 	MaxBonus *bool `json:"max_bonus"`
+}
+
+func (a *ArmorClass) JSON(data []byte) error {
+	return json.Unmarshal(data, &a)
 }
 
 // AdventuringGear is the structure for adventuring gear obtained
@@ -149,6 +172,10 @@ type AdventuringGear struct {
 
 	// URL is the URL reference of this resource
 	URL string `json:"url"`
+}
+
+func (a *AdventuringGear) JSON(data []byte) error {
+	return json.Unmarshal(data, &a)
 }
 
 // GetName returns the name of the gear
@@ -191,6 +218,10 @@ type EquipmentPack struct {
 	URL string `json:"url"`
 }
 
+func (e *EquipmentPack) JSON(data []byte) error {
+	return json.Unmarshal(data, &e)
+}
+
 type PackContents struct {
 	// Item is the of item index details
 	Item APIReference `json:"item"`
@@ -198,6 +229,10 @@ type PackContents struct {
 	// Quantity is the numerical amount of
 	// this item present
 	Quantity int `json:"quantity"`
+}
+
+func (p *PackContents) JSON(data []byte) error {
+	return json.Unmarshal(data, &p)
 }
 
 // GetName returns the name of the equipment
@@ -228,4 +263,8 @@ type WeaponProperties struct {
 
 	// URL is the URL reference of this resource
 	URL string `json:"url"`
+}
+
+func (w *WeaponProperties) JSON(data []byte) error {
+	return json.Unmarshal(data, &w)
 }

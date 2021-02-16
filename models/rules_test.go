@@ -11,7 +11,7 @@ func TestRules_GetIndex(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get Index", fields{Index: "example-index"}, "example-index"},
+		{"Get Index", fields{Index: "_example-index"}, "_example-index"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -34,7 +34,7 @@ func TestRules_GetName(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get name", fields{Name: "example name"}, "example name"},
+		{"Get name", fields{Name: "_example name"}, "_example name"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -57,7 +57,7 @@ func TestRules_GetURL(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get URL", fields{URL: "example.url"}, "example.url"},
+		{"Get URL", fields{URL: "_example.url"}, "_example.url"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
