@@ -12,12 +12,6 @@ import (
 	"time"
 )
 
-type endpointMock struct {
-	Name     string
-	URL      string
-	Response string `json:"response"`
-}
-
 type service struct {
 	Resource string
 	Model    string
