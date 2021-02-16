@@ -2,6 +2,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/go,osx,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=go,osx,windows
 
+.idea/
+
 ### Go ###
 # Binaries for programs and plugins
 *.exe
@@ -9,6 +11,7 @@
 *.dll
 *.so
 *.dylib
+bin/
 
 # Test binary, built with `go test -c`
 *.test

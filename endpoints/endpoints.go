@@ -1,4 +1,4 @@
-package dnd
+package endpoints
 
 const (
 	BaseURL                = "https://www.dnd5eapi.co/api"
