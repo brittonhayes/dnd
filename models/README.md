@@ -14,75 +14,109 @@ models defines data types available in the dnd package
   - [func (a *APIReference) GetIndex() string](<#func-apireference-getindex>)
   - [func (a *APIReference) GetName() string](<#func-apireference-getname>)
   - [func (a *APIReference) GetURL() string](<#func-apireference-geturl>)
+  - [func (a *APIReference) JSON(data []byte) error](<#func-apireference-json>)
 - [type AbilityBonus](<#type-abilitybonus>)
+  - [func (a *AbilityBonus) JSON(data []byte) error](<#func-abilitybonus-json>)
 - [type AbilityScore](<#type-abilityscore>)
+  - [func (a *AbilityScore) JSON(data []byte) error](<#func-abilityscore-json>)
 - [type Action](<#type-action>)
 - [type ActionDamage](<#type-actiondamage>)
 - [type AdventuringGear](<#type-adventuringgear>)
   - [func (a *AdventuringGear) GetIndex() string](<#func-adventuringgear-getindex>)
   - [func (a *AdventuringGear) GetName() string](<#func-adventuringgear-getname>)
   - [func (a *AdventuringGear) GetURL() string](<#func-adventuringgear-geturl>)
+  - [func (a *AdventuringGear) JSON(data []byte) error](<#func-adventuringgear-json>)
 - [type Armor](<#type-armor>)
   - [func (a *Armor) GetIndex() string](<#func-armor-getindex>)
   - [func (a *Armor) GetName() string](<#func-armor-getname>)
   - [func (a *Armor) GetURL() string](<#func-armor-geturl>)
+  - [func (a *Armor) JSON(data []byte) error](<#func-armor-json>)
 - [type ArmorClass](<#type-armorclass>)
+  - [func (a *ArmorClass) JSON(data []byte) error](<#func-armorclass-json>)
 - [type Choice](<#type-choice>)
+  - [func (c *Choice) JSON(data []byte) error](<#func-choice-json>)
 - [type Class](<#type-class>)
+  - [func (c *Class) JSON(data []byte) error](<#func-class-json>)
 - [type ClassAPIResource](<#type-classapiresource>)
+  - [func (c *ClassAPIResource) JSON(data []byte) error](<#func-classapiresource-json>)
 - [type Conditions](<#type-conditions>)
+  - [func (c *Conditions) JSON(data []byte) error](<#func-conditions-json>)
 - [type Cost](<#type-cost>)
+  - [func (c *Cost) JSON(data []byte) error](<#func-cost-json>)
 - [type DC](<#type-dc>)
 - [type DamageType](<#type-damagetype>)
+  - [func (d *DamageType) JSON(data []byte) error](<#func-damagetype-json>)
 - [type EquipmentPack](<#type-equipmentpack>)
   - [func (e *EquipmentPack) GetIndex() string](<#func-equipmentpack-getindex>)
   - [func (e *EquipmentPack) GetName() string](<#func-equipmentpack-getname>)
   - [func (e *EquipmentPack) GetURL() string](<#func-equipmentpack-geturl>)
+  - [func (e *EquipmentPack) JSON(data []byte) error](<#func-equipmentpack-json>)
 - [type Features](<#type-features>)
+  - [func (f *Features) JSON(data []byte) error](<#func-features-json>)
 - [type Getter](<#type-getter>)
 - [type Language](<#type-language>)
+  - [func (l *Language) JSON(data []byte) error](<#func-language-json>)
 - [type LegendaryAction](<#type-legendaryaction>)
 - [type MagicItem](<#type-magicitem>)
   - [func (m *MagicItem) GetIndex() string](<#func-magicitem-getindex>)
   - [func (m *MagicItem) GetName() string](<#func-magicitem-getname>)
   - [func (m *MagicItem) GetURL() string](<#func-magicitem-geturl>)
+  - [func (m *MagicItem) JSON(data []byte) error](<#func-magicitem-json>)
 - [type MagicSchool](<#type-magicschool>)
+  - [func (m *MagicSchool) JSON(data []byte) error](<#func-magicschool-json>)
 - [type Monster](<#type-monster>)
+  - [func (m *Monster) JSON(data []byte) error](<#func-monster-json>)
 - [type MonsterProficiency](<#type-monsterproficiency>)
 - [type Options](<#type-options>)
 - [type PackContents](<#type-packcontents>)
+  - [func (p *PackContents) JSON(data []byte) error](<#func-packcontents-json>)
 - [type Proficiency](<#type-proficiency>)
+  - [func (p *Proficiency) JSON(data []byte) error](<#func-proficiency-json>)
 - [type Race](<#type-race>)
+  - [func (r *Race) JSON(data []byte) error](<#func-race-json>)
 - [type Range](<#type-range>)
 - [type Reaction](<#type-reaction>)
 - [type Resource](<#type-resource>)
+  - [func (r *Resource) JSON(data []byte) error](<#func-resource-json>)
   - [func (r *Resource) ResultsNames() []string](<#func-resource-resultsnames>)
 - [type Rules](<#type-rules>)
   - [func (r *Rules) GetIndex() string](<#func-rules-getindex>)
   - [func (r *Rules) GetName() string](<#func-rules-getname>)
   - [func (r *Rules) GetURL() string](<#func-rules-geturl>)
+  - [func (r *Rules) JSON(data []byte) error](<#func-rules-json>)
 - [type RulesSubsection](<#type-rulessubsection>)
+  - [func (r *RulesSubsection) JSON(data []byte) error](<#func-rulessubsection-json>)
 - [type Sense](<#type-sense>)
+- [type Sheriff](<#type-sheriff>)
 - [type Skill](<#type-skill>)
+  - [func (s *Skill) JSON(data []byte) error](<#func-skill-json>)
 - [type SpecialAbility](<#type-specialability>)
 - [type Speed](<#type-speed>)
 - [type Spells](<#type-spells>)
   - [func (s *Spells) GetIndex() string](<#func-spells-getindex>)
   - [func (s *Spells) GetName() string](<#func-spells-getname>)
   - [func (s *Spells) GetURL() string](<#func-spells-geturl>)
+  - [func (s *Spells) JSON(data []byte) error](<#func-spells-json>)
 - [type StartingEquipment](<#type-startingequipment>)
+  - [func (s *StartingEquipment) JSON(data []byte) error](<#func-startingequipment-json>)
 - [type StartingEquipmentItem](<#type-startingequipmentitem>)
+  - [func (c *StartingEquipmentItem) JSON(data []byte) error](<#func-startingequipmentitem-json>)
 - [type SubRace](<#type-subrace>)
+  - [func (r *SubRace) JSON(data []byte) error](<#func-subrace-json>)
 - [type Subclass](<#type-subclass>)
+  - [func (c *Subclass) JSON(data []byte) error](<#func-subclass-json>)
 - [type Traits](<#type-traits>)
+  - [func (t *Traits) JSON(data []byte) error](<#func-traits-json>)
 - [type Weapon](<#type-weapon>)
   - [func (w *Weapon) GetIndex() string](<#func-weapon-getindex>)
   - [func (w *Weapon) GetName() string](<#func-weapon-getname>)
   - [func (w *Weapon) GetURL() string](<#func-weapon-geturl>)
+  - [func (w *Weapon) JSON(data []byte) error](<#func-weapon-json>)
 - [type WeaponProperties](<#type-weaponproperties>)
+  - [func (w *WeaponProperties) JSON(data []byte) error](<#func-weaponproperties-json>)
 
 
-## type APIReference
+## type [APIReference](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L55-L64>)
 
 APIReference is the basic structure that defines where this resource resides and what it is called
 
@@ -99,7 +133,7 @@ type APIReference struct {
 }
 ```
 
-### func \(\*APIReference\) GetIndex
+### func \(\*APIReference\) [GetIndex](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L76>)
 
 ```go
 func (a *APIReference) GetIndex() string
@@ -107,7 +141,7 @@ func (a *APIReference) GetIndex() string
 
 GetIndex returns the index of the APIReference
 
-### func \(\*APIReference\) GetName
+### func \(\*APIReference\) [GetName](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L71>)
 
 ```go
 func (a *APIReference) GetName() string
@@ -115,7 +149,7 @@ func (a *APIReference) GetName() string
 
 GetName returns the name of the APIReference
 
-### func \(\*APIReference\) GetURL
+### func \(\*APIReference\) [GetURL](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L81>)
 
 ```go
 func (a *APIReference) GetURL() string
@@ -123,7 +157,13 @@ func (a *APIReference) GetURL() string
 
 GetIndex returns the url of the APIReference
 
-## type AbilityBonus
+### func \(\*APIReference\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L66>)
+
+```go
+func (a *APIReference) JSON(data []byte) error
+```
+
+## type [AbilityBonus](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L134-L140>)
 
 AbilityBonus is the bonus modifier for an ability and its associated references
 
@@ -137,7 +177,13 @@ type AbilityBonus struct {
 }
 ```
 
-## type AbilityScore
+### func \(\*AbilityBonus\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L142>)
+
+```go
+func (a *AbilityBonus) JSON(data []byte) error
+```
+
+## type [AbilityScore](<https://github.com/brittonhayes/dnd/blob/main/models/character.go#L39-L61>)
 
 AbilityScore is a number that defines the magnitude of each creature’s abilities\. An ability score is not just a measure of innate capabilities\, but also encompasses a creature’s training and competence in activities related to that ability\.
 
@@ -167,7 +213,13 @@ type AbilityScore struct {
 }
 ```
 
-## type Action
+### func \(\*AbilityScore\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/character.go#L63>)
+
+```go
+func (a *AbilityScore) JSON(data []byte) error
+```
+
+## type [Action](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L111-L117>)
 
 ```go
 type Action struct {
@@ -179,7 +231,7 @@ type Action struct {
 }
 ```
 
-## type ActionDamage
+## type [ActionDamage](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L106-L109>)
 
 ```go
 type ActionDamage struct {
@@ -188,7 +240,7 @@ type ActionDamage struct {
 }
 ```
 
-## type AdventuringGear
+## type [AdventuringGear](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L154-L175>)
 
 AdventuringGear is the structure for adventuring gear obtained in the dungeons you explore\.
 
@@ -217,7 +269,7 @@ type AdventuringGear struct {
 }
 ```
 
-### func \(\*AdventuringGear\) GetIndex
+### func \(\*AdventuringGear\) [GetIndex](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L187>)
 
 ```go
 func (a *AdventuringGear) GetIndex() string
@@ -225,7 +277,7 @@ func (a *AdventuringGear) GetIndex() string
 
 GetName returns the index of the gear
 
-### func \(\*AdventuringGear\) GetName
+### func \(\*AdventuringGear\) [GetName](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L182>)
 
 ```go
 func (a *AdventuringGear) GetName() string
@@ -233,7 +285,7 @@ func (a *AdventuringGear) GetName() string
 
 GetName returns the name of the gear
 
-### func \(\*AdventuringGear\) GetURL
+### func \(\*AdventuringGear\) [GetURL](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L192>)
 
 ```go
 func (a *AdventuringGear) GetURL() string
@@ -241,7 +293,13 @@ func (a *AdventuringGear) GetURL() string
 
 GetURL returns the URL of the gear
 
-## type Armor
+### func \(\*AdventuringGear\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L177>)
+
+```go
+func (a *AdventuringGear) JSON(data []byte) error
+```
+
+## type [Armor](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L90-L120>)
 
 Armor is the structure for armor obtained in the dungeons you explore\.
 
@@ -279,7 +337,7 @@ type Armor struct {
 }
 ```
 
-### func \(\*Armor\) GetIndex
+### func \(\*Armor\) [GetIndex](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L132>)
 
 ```go
 func (a *Armor) GetIndex() string
@@ -287,7 +345,7 @@ func (a *Armor) GetIndex() string
 
 GetName returns the index of the gear
 
-### func \(\*Armor\) GetName
+### func \(\*Armor\) [GetName](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L127>)
 
 ```go
 func (a *Armor) GetName() string
@@ -295,7 +353,7 @@ func (a *Armor) GetName() string
 
 GetName returns the name of the gear
 
-### func \(\*Armor\) GetURL
+### func \(\*Armor\) [GetURL](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L137>)
 
 ```go
 func (a *Armor) GetURL() string
@@ -303,7 +361,13 @@ func (a *Armor) GetURL() string
 
 GetURL returns the URL of the gear
 
-## type ArmorClass
+### func \(\*Armor\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L122>)
+
+```go
+func (a *Armor) JSON(data []byte) error
+```
+
+## type [ArmorClass](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L142-L146>)
 
 ArmorClass is the details on how to calculate armor class\.
 
@@ -315,7 +379,13 @@ type ArmorClass struct {
 }
 ```
 
-## type Choice
+### func \(\*ArmorClass\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L148>)
+
+```go
+func (a *ArmorClass) JSON(data []byte) error
+```
+
+## type [Choice](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L103-L112>)
 
 Choice provides a set of options related to a resource
 
@@ -332,7 +402,13 @@ type Choice struct {
 }
 ```
 
-## type Class
+### func \(\*Choice\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L114>)
+
+```go
+func (c *Choice) JSON(data []byte) error
+```
+
+## type [Class](<https://github.com/brittonhayes/dnd/blob/main/models/classes.go#L16-L50>)
 
 Class is a fundamental part of the identity and nature of characters in the Dungeons & Dragons role\-playing game\. A character's capabilities\, strengths\, and weaknesses are largely defined by its class\. A character's class affects a character's available skills and abilities\.
 
@@ -374,7 +450,13 @@ type Class struct {
 }
 ```
 
-## type ClassAPIResource
+### func \(\*Class\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/classes.go#L52>)
+
+```go
+func (c *Class) JSON(data []byte) error
+```
+
+## type [ClassAPIResource](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L87-L96>)
 
 ClassAPIResource is very similar to APIReference but returns a class name rather than just a name
 
@@ -391,7 +473,13 @@ type ClassAPIResource struct {
 }
 ```
 
-## type Conditions
+### func \(\*ClassAPIResource\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L98>)
+
+```go
+func (c *ClassAPIResource) JSON(data []byte) error
+```
+
+## type [Conditions](<https://github.com/brittonhayes/dnd/blob/main/models/mechanics.go#L15-L28>)
 
 Conditions alter a creature’s capabilities in a variety of ways and can arise as a result of a spell\, a class feature\, a monster’s attack\, or other effect\. Most conditions\, such as blinded\, are impairments\, but a few\, such as invisible\, can be advantageous\.
 
@@ -412,7 +500,13 @@ type Conditions struct {
 }
 ```
 
-## type Cost
+### func \(\*Conditions\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/mechanics.go#L30>)
+
+```go
+func (c *Conditions) JSON(data []byte) error
+```
+
+## type [Cost](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L120-L126>)
 
 Cost is the basic structure of defining an item's financial worth in D&D
 
@@ -426,7 +520,13 @@ type Cost struct {
 }
 ```
 
-## type DC
+### func \(\*Cost\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L128>)
+
+```go
+func (c *Cost) JSON(data []byte) error
+```
+
+## type [DC](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L155-L159>)
 
 ```go
 type DC struct {
@@ -436,7 +536,7 @@ type DC struct {
 }
 ```
 
-## type DamageType
+## type [DamageType](<https://github.com/brittonhayes/dnd/blob/main/models/mechanics.go#L36-L40>)
 
 DamageType defines the unique identifiers for this kind of damage
 
@@ -448,7 +548,13 @@ type DamageType struct {
 }
 ```
 
-## type EquipmentPack
+### func \(\*DamageType\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/mechanics.go#L42>)
+
+```go
+func (d *DamageType) JSON(data []byte) error
+```
+
+## type [EquipmentPack](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L198-L219>)
 
 EquipmentPack is the structure for an equipment pack obtained in the dungeons you explore\.
 
@@ -477,7 +583,7 @@ type EquipmentPack struct {
 }
 ```
 
-### func \(\*EquipmentPack\) GetIndex
+### func \(\*EquipmentPack\) [GetIndex](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L244>)
 
 ```go
 func (e *EquipmentPack) GetIndex() string
@@ -485,7 +591,7 @@ func (e *EquipmentPack) GetIndex() string
 
 GetName returns the index of the equipment
 
-### func \(\*EquipmentPack\) GetName
+### func \(\*EquipmentPack\) [GetName](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L239>)
 
 ```go
 func (e *EquipmentPack) GetName() string
@@ -493,7 +599,7 @@ func (e *EquipmentPack) GetName() string
 
 GetName returns the name of the equipment
 
-### func \(\*EquipmentPack\) GetURL
+### func \(\*EquipmentPack\) [GetURL](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L249>)
 
 ```go
 func (e *EquipmentPack) GetURL() string
@@ -501,7 +607,13 @@ func (e *EquipmentPack) GetURL() string
 
 GetURL returns the URL of the equipment
 
-## type Features
+### func \(\*EquipmentPack\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L221>)
+
+```go
+func (e *EquipmentPack) JSON(data []byte) error
+```
+
+## type [Features](<https://github.com/brittonhayes/dnd/blob/main/models/classes.go#L90-L112>)
 
 Features are the features of a class
 
@@ -531,7 +643,13 @@ type Features struct {
 }
 ```
 
-## type Getter
+### func \(\*Features\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/classes.go#L114>)
+
+```go
+func (f *Features) JSON(data []byte) error
+```
+
+## type [Getter](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L16-L20>)
 
 Getter is the common interface for pulling fields out of a model
 
@@ -543,7 +661,7 @@ type Getter interface {
 }
 ```
 
-## type Language
+## type [Language](<https://github.com/brittonhayes/dnd/blob/main/models/character.go#L96-L114>)
 
 Language By virtue of your race\, your character can speak\, read\, and write certain languages\.
 
@@ -558,7 +676,7 @@ type Language struct {
     // Type is whether the language is standard or exotic.
     Type string `json:"type"`
 
-    //TypicalSpeakers are races that tend to speak this language.
+    // TypicalSpeakers are races that tend to speak this language.
     TypicalSpeakers []string `json:"typical_speakers"`
 
     // Script is the script used for writing in this language.
@@ -569,7 +687,13 @@ type Language struct {
 }
 ```
 
-## type LegendaryAction
+### func \(\*Language\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/character.go#L116>)
+
+```go
+func (l *Language) JSON(data []byte) error
+```
+
+## type [LegendaryAction](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L124-L129>)
 
 ```go
 type LegendaryAction struct {
@@ -580,7 +704,7 @@ type LegendaryAction struct {
 }
 ```
 
-## type MagicItem
+## type [MagicItem](<https://github.com/brittonhayes/dnd/blob/main/models/magic.go#L9-L24>)
 
 MagicItem is the structure for a magic item obtained in the dungeons you explore\.
 
@@ -603,7 +727,7 @@ type MagicItem struct {
 }
 ```
 
-### func \(\*MagicItem\) GetIndex
+### func \(\*MagicItem\) [GetIndex](<https://github.com/brittonhayes/dnd/blob/main/models/magic.go#L36>)
 
 ```go
 func (m *MagicItem) GetIndex() string
@@ -611,7 +735,7 @@ func (m *MagicItem) GetIndex() string
 
 GetIndex gets the index of the magic item
 
-### func \(\*MagicItem\) GetName
+### func \(\*MagicItem\) [GetName](<https://github.com/brittonhayes/dnd/blob/main/models/magic.go#L31>)
 
 ```go
 func (m *MagicItem) GetName() string
@@ -619,7 +743,7 @@ func (m *MagicItem) GetName() string
 
 GetName gets the name of the magic item
 
-### func \(\*MagicItem\) GetURL
+### func \(\*MagicItem\) [GetURL](<https://github.com/brittonhayes/dnd/blob/main/models/magic.go#L41>)
 
 ```go
 func (m *MagicItem) GetURL() string
@@ -627,9 +751,15 @@ func (m *MagicItem) GetURL() string
 
 GetURL gets the url of the magic item
 
-## type MagicSchool
+### func \(\*MagicItem\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/magic.go#L26>)
 
-MagicSchool defines the unique identifiers for this kind of damage
+```go
+func (m *MagicItem) JSON(data []byte) error
+```
+
+## type [MagicSchool](<https://github.com/brittonhayes/dnd/blob/main/models/mechanics.go#L48-L59>)
+
+MagicSchool defines the unique identifiers for this school of magic
 
 ```go
 type MagicSchool struct {
@@ -646,7 +776,13 @@ type MagicSchool struct {
 }
 ```
 
-## type Monster
+### func \(\*MagicSchool\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/mechanics.go#L61>)
+
+```go
+func (m *MagicSchool) JSON(data []byte) error
+```
+
+## type [Monster](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L7-L100>)
 
 ```go
 type Monster struct {
@@ -745,7 +881,13 @@ type Monster struct {
 }
 ```
 
-## type MonsterProficiency
+### func \(\*Monster\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L102>)
+
+```go
+func (m *Monster) JSON(data []byte) error
+```
+
+## type [MonsterProficiency](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L131-L134>)
 
 ```go
 type MonsterProficiency struct {
@@ -754,7 +896,7 @@ type MonsterProficiency struct {
 }
 ```
 
-## type Options
+## type [Options](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L119-L122>)
 
 ```go
 type Options struct {
@@ -763,7 +905,7 @@ type Options struct {
 }
 ```
 
-## type PackContents
+## type [PackContents](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L225-L232>)
 
 ```go
 type PackContents struct {
@@ -776,7 +918,13 @@ type PackContents struct {
 }
 ```
 
-## type Proficiency
+### func \(\*PackContents\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L234>)
+
+```go
+func (p *PackContents) JSON(data []byte) error
+```
+
+## type [Proficiency](<https://github.com/brittonhayes/dnd/blob/main/models/character.go#L68-L89>)
 
 Proficiency By virtue of your race\, your character can speak\, read\, and write certain Proficiencies\.
 
@@ -791,7 +939,7 @@ type Proficiency struct {
     // Name is the name of this proficiency resource
     Name string `json:"name"`
 
-    //Classes that start with this proficiency.
+    // Classes that start with this proficiency.
     Classes []APIReference `json:"classes"`
 
     // Races that start with this proficiency.
@@ -805,7 +953,13 @@ type Proficiency struct {
 }
 ```
 
-## type Race
+### func \(\*Proficiency\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/character.go#L91>)
+
+```go
+func (p *Proficiency) JSON(data []byte) error
+```
+
+## type [Race](<https://github.com/brittonhayes/dnd/blob/main/models/races.go#L12-L63>)
 
 Race Each race grants your character ability and skill bonuses as well as racial traits\.
 
@@ -864,7 +1018,13 @@ type Race struct {
 }
 ```
 
-## type Range
+### func \(\*Race\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/races.go#L65>)
+
+```go
+func (r *Race) JSON(data []byte) error
+```
+
+## type [Range](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L68-L71>)
 
 ```go
 type Range struct {
@@ -873,7 +1033,7 @@ type Range struct {
 }
 ```
 
-## type Reaction
+## type [Reaction](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L136-L139>)
 
 ```go
 type Reaction struct {
@@ -882,7 +1042,7 @@ type Reaction struct {
 }
 ```
 
-## type Resource
+## type [Resource](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L29-L37>)
 
 Results is used for any API endpoint without a resource index or name\. It return a list of available resources for that API
 
@@ -898,7 +1058,13 @@ type Resource struct {
 }
 ```
 
-### func \(\*Resource\) ResultsNames
+### func \(\*Resource\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L39>)
+
+```go
+func (r *Resource) JSON(data []byte) error
+```
+
+### func \(\*Resource\) [ResultsNames](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L45>)
 
 ```go
 func (r *Resource) ResultsNames() []string
@@ -906,7 +1072,7 @@ func (r *Resource) ResultsNames() []string
 
 Names returns the list of names from the resource results
 
-## type Rules
+## type [Rules](<https://github.com/brittonhayes/dnd/blob/main/models/rules.go#L10-L16>)
 
 ```go
 type Rules struct {
@@ -918,7 +1084,7 @@ type Rules struct {
 }
 ```
 
-### func \(\*Rules\) GetIndex
+### func \(\*Rules\) [GetIndex](<https://github.com/brittonhayes/dnd/blob/main/models/rules.go#L39>)
 
 ```go
 func (r *Rules) GetIndex() string
@@ -926,7 +1092,7 @@ func (r *Rules) GetIndex() string
 
 GetName returns the index of the rule
 
-### func \(\*Rules\) GetName
+### func \(\*Rules\) [GetName](<https://github.com/brittonhayes/dnd/blob/main/models/rules.go#L34>)
 
 ```go
 func (r *Rules) GetName() string
@@ -934,7 +1100,7 @@ func (r *Rules) GetName() string
 
 GetName returns the name of the rule
 
-### func \(\*Rules\) GetURL
+### func \(\*Rules\) [GetURL](<https://github.com/brittonhayes/dnd/blob/main/models/rules.go#L44>)
 
 ```go
 func (r *Rules) GetURL() string
@@ -942,7 +1108,13 @@ func (r *Rules) GetURL() string
 
 GetURL returns the URL of the rule
 
-## type RulesSubsection
+### func \(\*Rules\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/rules.go#L18>)
+
+```go
+func (r *Rules) JSON(data []byte) error
+```
+
+## type [RulesSubsection](<https://github.com/brittonhayes/dnd/blob/main/models/rules.go#L22-L27>)
 
 ```go
 type RulesSubsection struct {
@@ -953,7 +1125,13 @@ type RulesSubsection struct {
 }
 ```
 
-## type Sense
+### func \(\*RulesSubsection\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/rules.go#L29>)
+
+```go
+func (r *RulesSubsection) JSON(data []byte) error
+```
+
+## type [Sense](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L141-L147>)
 
 ```go
 type Sense struct {
@@ -965,7 +1143,15 @@ type Sense struct {
 }
 ```
 
-## type Skill
+## type [Sheriff](<https://github.com/brittonhayes/dnd/blob/main/models/common.go#L22-L24>)
+
+```go
+type Sheriff interface {
+    JSON(data []byte) error
+}
+```
+
+## type [Skill](<https://github.com/brittonhayes/dnd/blob/main/models/character.go#L13-L30>)
 
 Skill represents a skill that a character possesses
 
@@ -990,7 +1176,13 @@ type Skill struct {
 }
 ```
 
-## type SpecialAbility
+### func \(\*Skill\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/character.go#L32>)
+
+```go
+func (s *Skill) JSON(data []byte) error
+```
+
+## type [SpecialAbility](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L149-L153>)
 
 ```go
 type SpecialAbility struct {
@@ -1000,7 +1192,7 @@ type SpecialAbility struct {
 }
 ```
 
-## type Speed
+## type [Speed](<https://github.com/brittonhayes/dnd/blob/main/models/monsters.go#L161-L168>)
 
 ```go
 type Speed struct {
@@ -1013,7 +1205,7 @@ type Speed struct {
 }
 ```
 
-## type Spells
+## type [Spells](<https://github.com/brittonhayes/dnd/blob/main/models/spells.go#L6-L79>)
 
 Spells are the spells of D&D
 
@@ -1094,7 +1286,7 @@ type Spells struct {
 }
 ```
 
-### func \(\*Spells\) GetIndex
+### func \(\*Spells\) [GetIndex](<https://github.com/brittonhayes/dnd/blob/main/models/spells.go#L96>)
 
 ```go
 func (s *Spells) GetIndex() string
@@ -1117,7 +1309,7 @@ Get the index address of a spell
 </p>
 </details>
 
-### func \(\*Spells\) GetName
+### func \(\*Spells\) [GetName](<https://github.com/brittonhayes/dnd/blob/main/models/spells.go#L86>)
 
 ```go
 func (s *Spells) GetName() string
@@ -1140,7 +1332,7 @@ Get the name of a spell
 </p>
 </details>
 
-### func \(\*Spells\) GetURL
+### func \(\*Spells\) [GetURL](<https://github.com/brittonhayes/dnd/blob/main/models/spells.go#L91>)
 
 ```go
 func (s *Spells) GetURL() string
@@ -1163,7 +1355,13 @@ Get the URL of a spell
 </p>
 </details>
 
-## type StartingEquipment
+### func \(\*Spells\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/spells.go#L81>)
+
+```go
+func (s *Spells) JSON(data []byte) error
+```
+
+## type [StartingEquipment](<https://github.com/brittonhayes/dnd/blob/main/models/classes.go#L119-L135>)
 
 StartingEquipment are the starting equipment of a class
 
@@ -1187,7 +1385,13 @@ type StartingEquipment struct {
 }
 ```
 
-## type StartingEquipmentItem
+### func \(\*StartingEquipment\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/classes.go#L137>)
+
+```go
+func (s *StartingEquipment) JSON(data []byte) error
+```
+
+## type [StartingEquipmentItem](<https://github.com/brittonhayes/dnd/blob/main/models/classes.go#L143-L146>)
 
 StartingEquipmentItem is a single item in a list of starting equipment
 
@@ -1198,7 +1402,13 @@ type StartingEquipmentItem struct {
 }
 ```
 
-## type SubRace
+### func \(\*StartingEquipmentItem\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/classes.go#L148>)
+
+```go
+func (c *StartingEquipmentItem) JSON(data []byte) error
+```
+
+## type [SubRace](<https://github.com/brittonhayes/dnd/blob/main/models/races.go#L71-L107>)
 
 SubRace contains the details for a parent race's associated subrace
 
@@ -1242,7 +1452,13 @@ type SubRace struct {
 }
 ```
 
-## type Subclass
+### func \(\*SubRace\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/races.go#L109>)
+
+```go
+func (r *SubRace) JSON(data []byte) error
+```
+
+## type [Subclass](<https://github.com/brittonhayes/dnd/blob/main/models/classes.go#L57-L83>)
 
 Subclass reflects the different paths a class may take as levels are gained
 
@@ -1276,7 +1492,13 @@ type Subclass struct {
 }
 ```
 
-## type Traits
+### func \(\*Subclass\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/classes.go#L85>)
+
+```go
+func (c *Subclass) JSON(data []byte) error
+```
+
+## type [Traits](<https://github.com/brittonhayes/dnd/blob/main/models/races.go#L114-L140>)
 
 Traits for races in D&D
 
@@ -1310,7 +1532,13 @@ type Traits struct {
 }
 ```
 
-## type Weapon
+### func \(\*Traits\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/races.go#L142>)
+
+```go
+func (t *Traits) JSON(data []byte) error
+```
+
+## type [Weapon](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L21-L62>)
 
 Weapon is the structure for weapons obtained in the dungeons you explore\.
 
@@ -1359,7 +1587,7 @@ type Weapon struct {
 }
 ```
 
-### func \(\*Weapon\) GetIndex
+### func \(\*Weapon\) [GetIndex](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L79>)
 
 ```go
 func (w *Weapon) GetIndex() string
@@ -1367,7 +1595,7 @@ func (w *Weapon) GetIndex() string
 
 GetName returns the index of the weapon
 
-### func \(\*Weapon\) GetName
+### func \(\*Weapon\) [GetName](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L74>)
 
 ```go
 func (w *Weapon) GetName() string
@@ -1375,7 +1603,7 @@ func (w *Weapon) GetName() string
 
 GetName returns the name of the weapon
 
-### func \(\*Weapon\) GetURL
+### func \(\*Weapon\) [GetURL](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L84>)
 
 ```go
 func (w *Weapon) GetURL() string
@@ -1383,7 +1611,13 @@ func (w *Weapon) GetURL() string
 
 GetURL returns the URL of the weapon
 
-## type WeaponProperties
+### func \(\*Weapon\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L64>)
+
+```go
+func (w *Weapon) JSON(data []byte) error
+```
+
+## type [WeaponProperties](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L254-L266>)
 
 WeaponProperties is the structure for a weapon's properties
 
@@ -1401,6 +1635,12 @@ type WeaponProperties struct {
     // URL is the URL reference of this resource
     URL string `json:"url"`
 }
+```
+
+### func \(\*WeaponProperties\) [JSON](<https://github.com/brittonhayes/dnd/blob/main/models/equipment.go#L268>)
+
+```go
+func (w *WeaponProperties) JSON(data []byte) error
 ```
 
 

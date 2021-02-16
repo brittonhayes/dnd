@@ -21,6 +21,7 @@ func TestAPIReference_GetIndex(t *testing.T) {
 			a := &APIReference{
 				Index: tt.fields.Index,
 			}
+
 			if got := a.GetIndex(); got != tt.want {
 				t.Errorf("GetIndex() = %v, want %v", got, tt.want)
 			}

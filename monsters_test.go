@@ -3,13 +3,14 @@ package dnd
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/brittonhayes/dnd/mocks"
+	"reflect"
+	"testing"
+
+	"github.com/brittonhayes/dnd/endpoints"
+	"github.com/brittonhayes/dnd/internal/mocks"
 	"github.com/google/go-querystring/query"
 	"github.com/jarcoal/httpmock"
 	"github.com/kinbiko/jsonassert"
-	"github.com/sirupsen/logrus"
-	"reflect"
-	"testing"
 )
 
 func TestMonstersService_ListMonsters(t *testing.T) {
@@ -21,7 +22,7 @@ func TestMonstersService_ListMonsters(t *testing.T) {
 		status  int
 		wantErr bool
 	}{
-		{"List monsters", fmt.Sprintf("%s%s", BaseURL, MonstersURL), &MonstersParams{""}, mocks.MonstersListMock, 200, false},
+		{"List monsters", fmt.Sprintf("%s%s/?challenge_rating=", endpoints.BaseURL, endpoints.MonstersURL), &MonstersParams{""}, mocks.MonstersListMock, 200, false},
 	}
 
 	httpmock.Activate()
@@ -29,16 +30,14 @@ func TestMonstersService_ListMonsters(t *testing.T) {
 	for _, tt := range tests {
 		httpmock.RegisterResponder("GET", tt.url, httpmock.NewStringResponder(tt.status, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			s := NewCustomMonstersService(BaseURL, tt.params)
-			_, err := s.ListMonsters()
+			s := NewCustomMonstersService(endpoints.BaseURL.String(), tt.params)
+			_, err := s.List()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ListMonsters() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 		})
 	}
-
-	logrus.Info(httpmock.GetCallCountInfo())
 }
 
 func TestMonstersService_FindMonster(t *testing.T) {
@@ -54,20 +53,20 @@ func TestMonstersService_FindMonster(t *testing.T) {
 		status  int
 		wantErr bool
 	}{
-		{"Find monster", args{"aboleth"}, fmt.Sprintf("%s%s", BaseURL, MonstersURL), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, false},
-		{"Missing name", args{""}, fmt.Sprintf("%s%s", BaseURL, MonstersURL), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, true},
-		{"Bad URL name", args{""}, fmt.Sprintf("%s%s/%s", BaseURL, MonstersURL, "thisdoesntexist"), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, true},
-		{"Bad query param", args{""}, fmt.Sprintf("%s%s", BaseURL, MonstersURL), &MonstersParams{"4"}, mocks.MonstersFindAbolethMock, 200, true},
+		{"Find monster", args{"aboleth"}, fmt.Sprintf("%s%s", endpoints.BaseURL, endpoints.MonstersURL), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, false},
+		{"Missing name", args{""}, fmt.Sprintf("%s%s", endpoints.BaseURL, endpoints.MonstersURL), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, true},
+		{"Bad URL name", args{""}, fmt.Sprintf("%s%s/%s", endpoints.BaseURL, endpoints.MonstersURL, "thisdoesntexist"), &MonstersParams{""}, mocks.MonstersFindAbolethMock, 200, true},
+		{"Bad query param", args{""}, fmt.Sprintf("%s%s", endpoints.BaseURL, endpoints.MonstersURL), &MonstersParams{"4"}, mocks.MonstersFindAbolethMock, 200, true},
 	}
 
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 
 	for _, tt := range tests {
-		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s/%s", BaseURL, MonstersURL, tt.args.name), httpmock.NewStringResponder(tt.status, string(tt.mock)))
+		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s/%s", endpoints.BaseURL, endpoints.MonstersURL, tt.args.name), httpmock.NewStringResponder(tt.status, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
-			s := NewCustomMonstersService(BaseURL, tt.params)
-			got, err := s.FindMonster(tt.args.name)
+			s := NewCustomMonstersService(endpoints.BaseURL.String(), tt.params)
+			got, err := s.Find(tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("FindMonster() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -93,8 +92,6 @@ func TestMonstersService_FindMonster(t *testing.T) {
 			}
 		})
 	}
-
-	logrus.Info(httpmock.GetCallCountInfo())
 }
 
 func TestNewCustomMonstersService(t *testing.T) {
@@ -107,9 +104,9 @@ func TestNewCustomMonstersService(t *testing.T) {
 		args args
 		want *MonstersService
 	}{
-		{"Create monster service with default url", args{url: BaseURL, params: nil},
+		{"Create monster service with default url", args{url: endpoints.BaseURL.String(), params: nil},
 			&MonstersService{
-				URL:     BaseURL,
+				URL:     endpoints.BaseURL.String(),
 				Options: nil,
 			},
 		},
@@ -135,7 +132,7 @@ func TestNewMonstersService(t *testing.T) {
 		want *MonstersService
 	}{
 		{"Create monster service with default url", &MonstersService{
-			URL:     BaseURL,
+			URL:     endpoints.BaseURL.String(),
 			Options: nil,
 		}},
 	}
@@ -149,20 +146,20 @@ func TestNewMonstersService(t *testing.T) {
 }
 
 // Find a specific monster
-func ExampleMonstersService_FindMonster() {
+func ExampleMonstersService_Find() {
 	c := NewClient()
-	monster, _ := c.FindMonster("aboleth")
+	monster, _ := c.Monsters.Find("aboleth")
 	fmt.Printf("The monster %s has a challenge rating of %d", monster.Name, monster.ChallengeRating)
 }
 
 // Count the number of available monsters listed
-func ExampleMonstersService_ListMonsters_count() {
+func ExampleMonstersService_List() {
 	s := NewMonstersService()
 	s.Options = &MonstersParams{
 		ChallengeRating: "3",
 	}
 
-	monsters, _ := s.ListMonsters()
+	monsters, _ := s.List()
 	fmt.Printf("There are %d monsters available", monsters.Count)
 }
 
@@ -176,10 +173,10 @@ func ExampleNewMonstersService() {
 
 // Create a new custom monsters service
 func ExampleNewCustomMonstersService() {
-	s := NewCustomMonstersService(BaseURL, &MonstersParams{
+	s := NewCustomMonstersService(endpoints.BaseURL.String(), &MonstersParams{
 		ChallengeRating: "5",
 	})
 
-	monsters, _ := s.ListMonsters()
-	fmt.Println("Results: ", monsters.Results)
+	monsters, _ := s.List()
+	fmt.Println("Results: ", monsters.Count)
 }

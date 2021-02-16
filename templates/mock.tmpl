@@ -3,6 +3,8 @@
 package mocks
 {{$M := "Mock"}}
 
+type Mock string
+
 const (
     {{ range . -}}
         {{.Name}}{{$M}} {{$M}} = `{{.Response}}`

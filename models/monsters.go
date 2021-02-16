@@ -1,5 +1,9 @@
 package models
 
+import "encoding/json"
+
+var _ Sheriff = &Monster{}
+
 type Monster struct {
 	// Index is the monster index for shorthand searching.
 	Index string `json:"index"`
@@ -93,6 +97,10 @@ type Monster struct {
 
 	// URL of the referenced resource
 	URL string `json:"url"`
+}
+
+func (m *Monster) JSON(data []byte) error {
+	return json.Unmarshal(data, &m)
 }
 
 type ActionDamage struct {

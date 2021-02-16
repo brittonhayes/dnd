@@ -83,7 +83,7 @@ func (s *{{.Resource}}Service) Find{{.Model}}(name string) (*models.{{.Model}}, 
     name = strings.ReplaceAll(name, " ", "-")
 
     q, _ := query.Values(s.Options)
-    url := s.URL + {{.Resource}}URL + fmt.Sprintf("/%s", strings.TrimPrefix(name, "/"))
+    url := s.URL + {{.Resource}}URL + fmt.Sprintf("/%s", name)
     url = fmt.Sprintf("%s?%s", url, q.Encode())
 
     res, err := http.Get(url)

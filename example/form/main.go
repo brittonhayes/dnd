@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/brittonhayes/dnd"
-	"log"
 )
 
 // monsterList returns a list of monster

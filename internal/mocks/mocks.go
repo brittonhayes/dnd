@@ -2,6 +2,8 @@
 
 package mocks
 
+type Mock string
+
 const (
 	AbilityScoresMock             Mock = `{"count":6,"results":[{"index":"cha","name":"CHA","url":"/api/ability-scores/cha"},{"index":"con","name":"CON","url":"/api/ability-scores/con"},{"index":"dex","name":"DEX","url":"/api/ability-scores/dex"},{"index":"int","name":"INT","url":"/api/ability-scores/int"},{"index":"str","name":"STR","url":"/api/ability-scores/str"},{"index":"wis","name":"WIS","url":"/api/ability-scores/wis"}]}`
 	ClassesMock                   Mock = `{"count":12,"results":[{"index":"barbarian","name":"Barbarian","url":"/api/classes/barbarian"},{"index":"bard","name":"Bard","url":"/api/classes/bard"},{"index":"cleric","name":"Cleric","url":"/api/classes/cleric"},{"index":"druid","name":"Druid","url":"/api/classes/druid"},{"index":"fighter","name":"Fighter","url":"/api/classes/fighter"},{"index":"monk","name":"Monk","url":"/api/classes/monk"},{"index":"paladin","name":"Paladin","url":"/api/classes/paladin"},{"index":"ranger","name":"Ranger","url":"/api/classes/ranger"},{"index":"rogue","name":"Rogue","url":"/api/classes/rogue"},{"index":"sorcerer","name":"Sorcerer","url":"/api/classes/sorcerer"},{"index":"warlock","name":"Warlock","url":"/api/classes/warlock"},{"index":"wizard","name":"Wizard","url":"/api/classes/wizard"}]}`

@@ -1,5 +1,13 @@
 package models
 
+import "encoding/json"
+
+var (
+	_ Sheriff = &Race{}
+	_ Sheriff = &SubRace{}
+	_ Sheriff = &Traits{}
+)
+
 // Race Each race grants your character ability and skill bonuses as well as racial traits.
 type Race struct {
 
@@ -54,6 +62,10 @@ type Race struct {
 	URL string `json:"url"`
 }
 
+func (r *Race) JSON(data []byte) error {
+	return json.Unmarshal(data, &r)
+}
+
 // SubRace contains the details for a parent race's associated
 // subrace
 type SubRace struct {
@@ -94,6 +106,10 @@ type SubRace struct {
 	URL string `json:"url"`
 }
 
+func (r *SubRace) JSON(data []byte) error {
+	return json.Unmarshal(data, &r)
+}
+
 // Traits for races in D&D
 type Traits struct {
 	// Index is the trait index for
@@ -121,4 +137,8 @@ type Traits struct {
 	// ProficiencyChoices are choices of proficiencies
 	// this trait grants.
 	ProficiencyChoices []Choice `json:"proficiency_choices"`
+}
+
+func (t *Traits) JSON(data []byte) error {
+	return json.Unmarshal(data, &t)
 }

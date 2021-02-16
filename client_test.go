@@ -3,6 +3,8 @@ package dnd
 import (
 	"reflect"
 	"testing"
+
+	"github.com/brittonhayes/dnd/endpoints"
 )
 
 func TestNewClient(t *testing.T) {
@@ -11,10 +13,10 @@ func TestNewClient(t *testing.T) {
 		want *Client
 	}{
 		{"Create client", &Client{
-			SpellsService:    NewSpellsService(),
-			MonstersService:  NewMonstersService(),
-			RulesService:     NewRulesService(),
-			EquipmentService: NewEquipmentService(),
+			Spells:    NewSpellsService(),
+			Monsters:  NewMonstersService(),
+			Rules:     NewRulesService(),
+			Equipment: NewEquipmentService(),
 		}},
 	}
 	for _, tt := range tests {
@@ -29,7 +31,7 @@ func TestNewClient(t *testing.T) {
 func TestNewCustomClient(t *testing.T) {
 	type args struct {
 		url string
-		sp  *SpellParams
+		sp  *SpellsParams
 		mp  *MonstersParams
 	}
 	tests := []struct {
@@ -37,11 +39,11 @@ func TestNewCustomClient(t *testing.T) {
 		args args
 		want *Client
 	}{
-		{"Create custom client and custom services", args{url: BaseURL}, &Client{
-			SpellsService:    NewCustomSpellsService(BaseURL, nil),
-			MonstersService:  NewCustomMonstersService(BaseURL, nil),
-			RulesService:     NewCustomRulesService(BaseURL),
-			EquipmentService: NewCustomEquipmentService(BaseURL, nil),
+		{"Create custom client and custom services", args{url: endpoints.BaseURL.String()}, &Client{
+			Spells:    NewCustomSpellsService(endpoints.BaseURL.String(), nil),
+			Monsters:  NewCustomMonstersService(endpoints.BaseURL.String(), nil),
+			Rules:     NewCustomRulesService(endpoints.BaseURL.String()),
+			Equipment: NewCustomEquipmentService(endpoints.BaseURL.String()),
 		}},
 	}
 	for _, tt := range tests {

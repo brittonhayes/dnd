@@ -1,11 +1,26 @@
 package models
 
+import "encoding/json"
+
+var (
+	_ Sheriff = &Resource{}
+	_ Sheriff = &APIReference{}
+	_ Sheriff = &ClassAPIResource{}
+	_ Sheriff = &Cost{}
+	_ Sheriff = &Choice{}
+	_ Sheriff = &AbilityBonus{}
+)
+
 // Getter is the common interface
 // for pulling fields out of a model
 type Getter interface {
 	GetName() string
 	GetIndex() string
 	GetURL() string
+}
+
+type Sheriff interface {
+	JSON(data []byte) error
 }
 
 // Results is used for any API endpoint without
@@ -19,6 +34,10 @@ type Resource struct {
 	// Results is the list of API references
 	// return by the request
 	Results []APIReference `json:"results"`
+}
+
+func (r *Resource) JSON(data []byte) error {
+	return json.Unmarshal(data, &r)
 }
 
 // Names returns the list of names from
@@ -42,6 +61,10 @@ type APIReference struct {
 
 	// URL of the referenced resource.
 	URL string `json:"url"`
+}
+
+func (a *APIReference) JSON(data []byte) error {
+	return json.Unmarshal(data, &a)
 }
 
 // GetName returns the name of the APIReference
@@ -72,6 +95,10 @@ type ClassAPIResource struct {
 	URL string `json:"url"`
 }
 
+func (c *ClassAPIResource) JSON(data []byte) error {
+	return json.Unmarshal(data, &c)
+}
+
 // Choice provides a set of options related to a resource
 type Choice struct {
 	// Choose is the number of items to pick from the list.
@@ -84,6 +111,10 @@ type Choice struct {
 	From []APIReference `json:"from"`
 }
 
+func (c *Choice) JSON(data []byte) error {
+	return json.Unmarshal(data, &c)
+}
+
 // Cost is the basic structure of defining
 // an item's financial worth in D&D
 type Cost struct {
@@ -94,6 +125,10 @@ type Cost struct {
 	Unit string `json:"unit"`
 }
 
+func (c *Cost) JSON(data []byte) error {
+	return json.Unmarshal(data, &c)
+}
+
 // AbilityBonus is the bonus modifier for
 // an ability and its associated references
 type AbilityBonus struct {
@@ -102,4 +137,8 @@ type AbilityBonus struct {
 
 	// AbilityScore for this bonus.
 	AbilityScore APIReference `json:"ability_score"`
+}
+
+func (a *AbilityBonus) JSON(data []byte) error {
+	return json.Unmarshal(data, &a)
 }

@@ -3,12 +3,15 @@ package dnd
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/brittonhayes/dnd/mocks"
+	"reflect"
+	"testing"
+
+	"github.com/brittonhayes/dnd/endpoints"
+	"github.com/brittonhayes/dnd/internal/mocks"
+	"github.com/brittonhayes/dnd/internal/utils"
 	"github.com/jarcoal/httpmock"
 	"github.com/kinbiko/jsonassert"
 	"github.com/sirupsen/logrus"
-	"reflect"
-	"testing"
 )
 
 func TestRulesService_FindRule(t *testing.T) {
@@ -28,7 +31,7 @@ func TestRulesService_FindRule(t *testing.T) {
 	defer httpmock.DeactivateAndReset()
 
 	for _, tt := range tests {
-		httpmock.RegisterResponder("GET", fmt.Sprintf("%s/%s", BaseURL+RulesURL, tt.args.name), httpmock.NewStringResponder(200, string(tt.mock)))
+		httpmock.RegisterResponder("GET", fmt.Sprintf("%s/%s", endpoints.BaseURL+endpoints.RulesURL, tt.args.name), httpmock.NewStringResponder(200, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
 			c := NewRulesService()
 			got, err := c.FindRule(tt.args.name)
@@ -67,10 +70,10 @@ func TestRulesService_FindSection(t *testing.T) {
 	defer httpmock.DeactivateAndReset()
 
 	for _, tt := range tests {
-		httpmock.RegisterResponder("GET", fmt.Sprintf("%s/%s", BaseURL+RuleSectionsURL, tt.args.name), httpmock.NewStringResponder(200, string(tt.mock)))
+		httpmock.RegisterResponder("GET", fmt.Sprintf("%s/%s", endpoints.BaseURL+endpoints.RuleSectionsURL, tt.args.name), httpmock.NewStringResponder(200, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
 			c := NewClient()
-			got, err := c.FindSection(tt.args.name)
+			got, err := c.Rules.FindSection(tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("FindSection() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -97,7 +100,7 @@ func TestRulesService_ListRules(t *testing.T) {
 		status  int
 		wantErr bool
 	}{
-		{"List rules", fmt.Sprintf("%s%s", BaseURL, RulesURL), mocks.RulesListMock, 200, false},
+		{"List rules", utils.URL(endpoints.BaseURL.String(), endpoints.RulesURL.String(), ""), mocks.RulesListMock, 200, false},
 	}
 
 	httpmock.Activate()
@@ -123,8 +126,6 @@ func TestRulesService_ListRules(t *testing.T) {
 
 		})
 	}
-	info := httpmock.GetCallCountInfo()
-	logrus.Info(info)
 }
 
 func TestRulesService_ListSections(t *testing.T) {
@@ -135,17 +136,17 @@ func TestRulesService_ListSections(t *testing.T) {
 		status  int
 		wantErr bool
 	}{
-		{"List rules sections", fmt.Sprintf("%s%s", BaseURL, RuleSectionsURL), mocks.RulesSectionsListMock, 200, false},
+		{"List rules sections", utils.URL(endpoints.BaseURL.String(), endpoints.RuleSectionsURL.String(), ""), mocks.RulesSectionsListMock, 200, false},
 	}
 
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 
 	for _, tt := range tests {
-		httpmock.RegisterResponder("GET", fmt.Sprintf("%s%s", BaseURL, RuleSectionsURL), httpmock.NewStringResponder(200, string(tt.mock)))
+		httpmock.RegisterResponder("GET", utils.URL(endpoints.BaseURL.String(), endpoints.RuleSectionsURL.String(), ""), httpmock.NewStringResponder(200, string(tt.mock)))
 		t.Run(tt.name, func(t *testing.T) {
 			c := NewClient()
-			got, err := c.ListSections()
+			got, err := c.Rules.ListSections()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ListSections() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -161,8 +162,6 @@ func TestRulesService_ListSections(t *testing.T) {
 		})
 	}
 
-	info := httpmock.GetCallCountInfo()
-	logrus.Info(info)
 }
 
 func TestNewRulesService(t *testing.T) {
@@ -170,7 +169,7 @@ func TestNewRulesService(t *testing.T) {
 		name string
 		want *RulesService
 	}{
-		{"Create custom rules service", &RulesService{URL: BaseURL}},
+		{"Create custom rules service", &RulesService{URL: endpoints.BaseURL.String()}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -190,7 +189,7 @@ func TestNewCustomRulesService(t *testing.T) {
 		args args
 		want *RulesService
 	}{
-		{"Create custom rules service", args{url: BaseURL}, &RulesService{URL: BaseURL}},
+		{"Create custom rules service", args{url: endpoints.BaseURL.String()}, &RulesService{URL: endpoints.BaseURL.String()}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -207,7 +206,7 @@ func ExampleRulesService_FindRule() {
 	c := NewClient()
 
 	// Search for a rule
-	r, _ := c.FindRule("adventuring")
+	r, _ := c.Rules.FindRule("adventuring")
 
 	// Read the results of that rule as JSON
 	j, _ := json.MarshalIndent(&r, "", "\t")
@@ -220,7 +219,7 @@ func ExampleRulesService_FindSection() {
 	c := NewClient()
 
 	// Search for a rule
-	r, _ := c.FindSection("ability-checks")
+	r, _ := c.Rules.FindSection("ability-checks")
 
 	// Read the results of that rule section as JSON
 	j, _ := json.MarshalIndent(&r, "", "\t")
