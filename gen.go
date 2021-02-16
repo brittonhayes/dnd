@@ -1,7 +1,6 @@
 package dnd
 
-//go:generate go run mage.go services
-//go:generate go run mage.go mocks
+//go:generate go run main.go services
 //go:generate goimports -w ./
 //go:generate go fmt ./...
 //go:generate gomarkdoc ./models/...
