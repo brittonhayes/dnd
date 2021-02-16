@@ -12,11 +12,6 @@ import (
 	"time"
 )
 
-type service struct {
-	Resource string
-	Model    string
-}
-
 func GenerateMocks() error {
 	for i, e := range Endpoints {
 		res, err := http.Get(e.URL)
@@ -48,24 +43,6 @@ func GenerateMocks() error {
 
 	tpl := template.Must(template.ParseGlob("templates/mock.tmpl"))
 	return tpl.ExecuteTemplate(f, "mock.tmpl", Endpoints)
-}
-
-func GenerateModel(model string) error {
-	file := fmt.Sprintf("models/%s", strings.ToLower(model)+".go")
-	f, err := os.Create(file)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	m := strings.Title(model)
-	t, err := template.New("model").Parse(`package models
-type {{.Model}} struct {}`)
-	if err != nil {
-		return err
-	}
-
-	return t.ExecuteTemplate(f, "model", &service{Model: m})
 }
 
 func GenerateServices(services []ServiceDefinition) error {

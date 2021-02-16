@@ -17,7 +17,7 @@
 //
 // Using the package is as easy as create client, pick the endpoint, and run the method.
 // This applies across every data type so it is consistent across the board.
-// Here's a simple example of how to fetch a rule from the DnD 5e ruleset.
+// Here's a simple _example of how to fetch a rule from the DnD 5e ruleset.
 //
 //	func main() {
 //		// Create a dnd client

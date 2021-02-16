@@ -11,7 +11,7 @@ func TestAdventuringGear_GetIndex(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get index", fields{Index: "example-index"}, "example-index"},
+		{"Get index", fields{Index: "_example-index"}, "_example-index"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -34,7 +34,7 @@ func TestAdventuringGear_GetName(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get name", fields{Name: "example name"}, "example name"},
+		{"Get name", fields{Name: "_example name"}, "_example name"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -57,7 +57,7 @@ func TestAdventuringGear_GetURL(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get URL", fields{URL: "example.url"}, "example.url"},
+		{"Get URL", fields{URL: "_example.url"}, "_example.url"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -80,7 +80,7 @@ func TestArmor_GetIndex(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get index", fields{Index: "example-index"}, "example-index"},
+		{"Get index", fields{Index: "_example-index"}, "_example-index"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -103,7 +103,7 @@ func TestArmor_GetName(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get name", fields{Name: "example name"}, "example name"},
+		{"Get name", fields{Name: "_example name"}, "_example name"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -126,7 +126,7 @@ func TestArmor_GetURL(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get URL", fields{URL: "example.url"}, "example.url"},
+		{"Get URL", fields{URL: "_example.url"}, "_example.url"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -149,7 +149,7 @@ func TestEquipmentPack_GetIndex(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get index", fields{Index: "example-index"}, "example-index"},
+		{"Get index", fields{Index: "_example-index"}, "_example-index"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -172,7 +172,7 @@ func TestEquipmentPack_GetName(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get name", fields{Name: "example name"}, "example name"},
+		{"Get name", fields{Name: "_example name"}, "_example name"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -195,7 +195,7 @@ func TestEquipmentPack_GetURL(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get URL", fields{URL: "example.url"}, "example.url"},
+		{"Get URL", fields{URL: "_example.url"}, "_example.url"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -218,7 +218,7 @@ func TestWeapon_GetIndex(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get index", fields{Index: "example-index"}, "example-index"},
+		{"Get index", fields{Index: "_example-index"}, "_example-index"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -241,7 +241,7 @@ func TestWeapon_GetName(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get name", fields{Name: "example name"}, "example name"},
+		{"Get name", fields{Name: "_example name"}, "_example name"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -264,7 +264,7 @@ func TestWeapon_GetURL(t *testing.T) {
 		fields fields
 		want   string
 	}{
-		{"Get URL", fields{URL: "example.url"}, "example.url"},
+		{"Get URL", fields{URL: "_example.url"}, "_example.url"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

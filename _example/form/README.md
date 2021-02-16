@@ -3,7 +3,7 @@
 # form
 
 ```go
-import "github.com/brittonhayes/dnd/example/form"
+import "github.com/brittonhayes/dnd/_example/form"
 ```
 
 ## Index

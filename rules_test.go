@@ -200,7 +200,7 @@ func TestNewCustomRulesService(t *testing.T) {
 	}
 }
 
-// Basic example of printing a rule as JSON
+// Basic _example of printing a rule as JSON
 func ExampleRulesService_FindRule() {
 	// Create a client
 	c := NewClient()
@@ -213,7 +213,7 @@ func ExampleRulesService_FindRule() {
 	fmt.Println(string(j))
 }
 
-// Basic example of printing a rules section as JSON
+// Basic _example of printing a rules section as JSON
 func ExampleRulesService_FindSection() {
 	// Create a client
 	c := NewClient()

@@ -118,7 +118,7 @@ func TestNewCustomSpellsService(t *testing.T) {
 		args args
 		want *SpellsService
 	}{
-		{"Create custom spell service", args{url: endpoints.BaseURL.String(), params: &SpellsParams{Level: "1", School: "example"}}, &SpellsService{URL: endpoints.BaseURL.String(), Options: &SpellsParams{Level: "1", School: "example"}}},
+		{"Create custom spell service", args{url: endpoints.BaseURL.String(), params: &SpellsParams{Level: "1", School: "_example"}}, &SpellsService{URL: endpoints.BaseURL.String(), Options: &SpellsParams{Level: "1", School: "_example"}}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

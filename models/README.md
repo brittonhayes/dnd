@@ -812,7 +812,7 @@ type Monster struct {
     HitPoints int `json:"hit_points"`
 
     // HitDice of a monster can be used to make a version of the same monster whose hit points are determined by the roll of the die.
-    // For example: A monster with 2d6 would have its hit points determine by rolling a 6 sided die twice.
+    // For _example: A monster with 2d6 would have its hit points determine by rolling a 6 sided die twice.
     HitDice string `json:"hit_dice"`
 
     // Forms applicable to Lycanthropes that have multiple forms. This links to the other related monster entries that are the same.
@@ -1301,7 +1301,7 @@ Get the index address of a spell
 
 ```go
 {
-	s := Spells{Index: "example-index"}
+	s := Spells{Index: "_example-index"}
 	s.GetIndex()
 }
 ```
@@ -1324,7 +1324,7 @@ Get the name of a spell
 
 ```go
 {
-	s := Spells{Name: "example spell name"}
+	s := Spells{Name: "_example spell name"}
 	s.GetName()
 }
 ```
@@ -1347,7 +1347,7 @@ Get the URL of a spell
 
 ```go
 {
-	s := Spells{URL: "example spell URL"}
+	s := Spells{URL: "_example spell URL"}
 	s.GetURL()
 }
 ```

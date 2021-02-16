@@ -3,7 +3,7 @@
 # basic
 
 ```go
-import "github.com/brittonhayes/example/basic"
+import "github.com/brittonhayes/_example/basic"
 ```
 
 ## Index
