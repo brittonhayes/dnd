@@ -3,8 +3,6 @@
 package main
 
 import (
-	"os"
-
 	"github.com/brittonhayes/dnd/internal/gen"
 	"github.com/magefile/mage/sh"
 	"github.com/princjef/mageutil/bintool"
@@ -52,10 +50,4 @@ func Mocks() error {
 // Create a new service with mage services
 func Services() error {
 	return gen.GenerateServices(gen.Services)
-}
-
-// Create a new model with mage model [name]
-func Model() error {
-	args := os.Args
-	return gen.GenerateModel(args[2])
 }

@@ -12,7 +12,7 @@ import (
 // names
 func monsterList() []string {
 	c := dnd.NewClient()
-	monsters, err := c.ListMonsters()
+	monsters, err := c.Monsters.List()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -24,7 +24,7 @@ func monsterList() []string {
 // names
 func spellList() []string {
 	c := dnd.NewClient()
-	spells, err := c.ListSpells()
+	spells, err := c.Spells.List()
 	if err != nil {
 		log.Fatal(err)
 	}

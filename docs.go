@@ -24,7 +24,7 @@
 //		c := dnd.NewClient()
 //
 //		// Fetch DnD rules about adventuring
-//		r, err := c.FindRule("adventuring")
+//		r, err := c.Rules.Find("adventuring")
 //		if err != nil {
 //			// handle error
 //		}
